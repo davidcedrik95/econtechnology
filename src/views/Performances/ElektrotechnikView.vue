@@ -1,7 +1,7 @@
 <template>
     <v-container>
-      <h1>Career</h1>
-      <p>This is the Career page.</p>
+      <h1>Elektrotechnik</h1>
+      <p>This is the Elektrotechnik page.</p>
     </v-container>
   </template>
   

@@ -1,26 +1,26 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
 
 // Importer Vuetify
-import { createVuetify } from 'vuetify'
-// import this after install `@mdi/font` package
+import { createVuetify } from 'vuetify';
+import '@mdi/font/css/materialdesignicons.css'; // Icônes Material Design
+import 'vuetify/styles'; // Styles de base de Vuetify
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
 
-import '@mdi/font/css/materialdesignicons.css'
-
-import 'vuetify/styles' // Importer les styles de base de Vuetify
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-
-
+// Créer une instance de Vuetify
 const vuetify = createVuetify({
-    components,
-    directives,
-  })
+  components,
+  directives,
+});
 
-const app = createApp(App)
+// Créer l'application Vue
+const app = createApp(App);
 
-app.use(router)
-app.use(vuetify)
+// Utiliser le routeur et Vuetify
+app.use(router);
+app.use(vuetify);
 
-app.mount('#app')
+// Monter l'application
+app.mount('#app');

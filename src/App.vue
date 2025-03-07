@@ -1,22 +1,22 @@
-<script setup>
-import { RouterView } from 'vue-router';
-import Navigator from './components/Navigator.vue';
-</script>
-
 <template>
   <v-app>
-    <v-app-bar color="primary" dark>
-      <v-app-bar-title>Mon Application</v-app-bar-title>
-    </v-app-bar>
+    <!-- Utilisation du composant Navigator -->
     <Navigator />
     <v-main>
       <v-container>
-        <RouterView />
+        <router-view></router-view>
       </v-container>
     </v-main>
   </v-app>
 </template>
 
-<style scoped>
-/* Styles personnalisés si nécessaire */
+<script setup>
+import Navigator from '@/components/Navigator.vue'; // Importez le composant Navigator
+</script>
+
+<style>
+/* Dans App.vue ou un fichier CSS global */
+.v-application {
+  background-color: #f5f5f5; /* Exemple de style de débogage */
+}
 </style>
