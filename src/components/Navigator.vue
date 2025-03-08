@@ -47,25 +47,6 @@
     <v-btn icon class="d-md-none" @click="drawer = !drawer">
       <v-icon>mdi-menu</v-icon>
     </v-btn>
-    
-    <!-- Menu déroulant pour la langue (Mobile) -->
-    <v-menu v-model="languageMenu" offset-y>
-      <template v-slot:activator="{ props }">
-        <v-btn icon v-bind="props">
-          <v-icon>mdi-language</v-icon>
-        </v-btn>
-      </template>
-      <v-list>
-        <v-list-item @click="changeLanguage('de')" class="d-flex align-center">
-          <v-icon left size="24" class="icon-color">mdi-flag-de</v-icon>
-          <span class="ml-2">Deutsch</span>
-        </v-list-item>
-        <v-list-item @click="changeLanguage('en')" class="d-flex align-center">
-          <v-icon left size="24" class="icon-color">mdi-flag-us</v-icon>
-          <span class="ml-2">English</span>
-        </v-list-item>
-      </v-list>
-    </v-menu>
   </v-app-bar>
 
   <!-- Menu Latéral Mobile -->
@@ -109,15 +90,24 @@
       </v-list-item>
 
       <!-- Langue dans le menu mobile -->
-      <v-list-item @click="changeLanguage('de')" class="d-flex align-center">
-  <v-img src="../images/flags/de.png" alt="German Flag" max-width="24" max-height="24"></v-img>
-  <span class="ml-2">Deutsch</span>
-</v-list-item>
-<v-list-item @click="changeLanguage('en')" class="d-flex align-center">
-  <v-img src="../images/flags/us.png" alt="US Flag" max-width="24" max-height="24"></v-img>
-  <span class="ml-2">English</span>
-</v-list-item>
+      <v-list-item @click="toggleLanguageMenu" class="d-flex align-center">
+        <v-icon left size="24" class="icon-color">mdi-earth</v-icon>
+        <span class="ml-2">Sprache</span>
+      </v-list-item>
 
+      <v-list v-if="isLanguageMenuOpen">
+        <!-- Allemand -->
+        <v-list-item @click="changeLanguage('de')" class="d-flex align-center">
+          <v-icon left size="24" class="mr-2">mdi-flag</v-icon> <!-- Icône pour l'Allemand -->
+          <span>Deutsch</span>
+        </v-list-item>
+
+            <!-- Anglais -->
+        <v-list-item @click="changeLanguage('en')" class="d-flex align-center">
+          <v-icon left size="24" class="mr-2">mdi-flag-outline</v-icon> <!-- Icône pour l'Anglais -->
+          <span>English</span>
+        </v-list-item>
+              </v-list>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -126,7 +116,7 @@
 import { ref } from 'vue';
 
 const drawer = ref(false);
-const languageMenu = ref(false);
+const isLanguageMenuOpen = ref(false);
 
 // Variable pour gérer la langue
 const currentLanguage = ref('en');
@@ -135,7 +125,12 @@ const currentLanguage = ref('en');
 const changeLanguage = (language) => {
   currentLanguage.value = language;
   // Vous pouvez utiliser ici un plugin comme vue-i18n pour gérer le changement de langue
-  alert(`Language changed to: ${language === 'en' ? 'English' : 'Deutsch'}`);
+  alert(`Langue changée en : ${language === 'en' ? 'Anglais' : 'Allemand'}`);
+};
+
+// Fonction pour basculer l'affichage du menu de langue
+const toggleLanguageMenu = () => {
+  isLanguageMenuOpen.value = !isLanguageMenuOpen.value;
 };
 </script>
 
@@ -148,6 +143,10 @@ const changeLanguage = (language) => {
 
   .v-btn {
     font-size: 14px; /* Ajuster la taille des boutons */
+  }
+
+  .v-btn.v-btn--icon {
+    margin-right: 16px; /* Ajouter de l'espace pour le menu de langue */
   }
 }
 
@@ -167,8 +166,8 @@ const changeLanguage = (language) => {
 
 .v-list-item-title {
   margin-left: 10px;
-
 }
+
 /* Couleur des icônes */
 .icon-color {
   color: #bac5ce;
@@ -177,5 +176,29 @@ const changeLanguage = (language) => {
 /* Spécifique pour les icônes blanches sur grand écran */
 .icon-color-white {
   color: white;
+}
+
+.v-list-item {
+  display: flex !important; /* Force l'affichage en ligne */
+  align-items: center !important; /* Alignement vertical */
+  flex-wrap: nowrap !important; /* Empêche le texte de passer à la ligne */
+}
+
+.v-img {
+  margin-right: 10px;
+}
+
+.v-list-item span {
+  margin-left: 8px;
+}
+
+/* Pour garantir que l'image et le texte soient alignés horizontalement */
+.v-list-item .d-flex {
+  display: flex;
+  align-items: center; /* Assurez-vous que l'image et le texte sont alignés correctement */
+}
+
+.v-list-item .v-img {
+  margin-right: 8px; /* Assurez-vous qu'il y a un petit espace entre l'icône et le texte */
 }
 </style>
