@@ -1,22 +1,16 @@
 <template>
   <v-app>
-    <!-- Utilisation du composant Navigator -->
     <Navigator />
     <v-main>
       <v-container>
         <router-view></router-view>
       </v-container>
     </v-main>
+    <Footer/> <!-- Ajout du footer ici -->
   </v-app>
 </template>
 
 <script setup>
-import Navigator from '@/components/Navigator.vue'; // Importez le composant Navigator
+import Navigator from '@/components/Navigator.vue';
+import Footer from '@/components/Footer.vue'; // Import du Footer
 </script>
-
-<style>
-/* Dans App.vue ou un fichier CSS global */
-.v-application {
-  background-color: #f5f5f5; /* Exemple de style de débogage */
-}
-</style>
