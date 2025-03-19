@@ -1,3 +1,4 @@
+// src/i18n.js
 import { createI18n } from 'vue-i18n';
 
 const messages = {
@@ -7,15 +8,17 @@ const messages = {
     career: 'Career',
     services: 'Services',
     imprint: 'Imprint',
-    leistungen: 'Performances',
+    leistungen: 'Services',
     elektrotechnik: 'Electrical Engineering',
     photovoltaik: 'Photovoltaics',
     industrietechnik: 'Industrial Technology',
     language: 'Language',
     deutsch: 'German',
     english: 'English',
-    this_is_home: 'This is the Home page.',
-    this_is_about: 'This is the About page.',
+    privacy_policy: 'Privacy Policy',
+    terms_of_service: 'Terms of Service',
+    footer_desc: 'Experts in electrical engineering, photovoltaics and industrial technology.',
+    rights_reserved: 'All rights reserved',
   },
   de: {
     home: 'Startseite',
@@ -30,13 +33,16 @@ const messages = {
     language: 'Sprache',
     deutsch: 'Deutsch',
     english: 'Englisch',
-    this_is_home: 'Dies ist die Startseite.',
-    this_is_about: 'Dies ist die Über-uns-Seite.',
+    privacy_policy: 'Datenschutzrichtlinie',
+    terms_of_service: 'Nutzungsbedingungen',
+    footer_desc: 'Spezialisten für Elektrotechnik, Photovoltaik und Industrietechnik.',
+    rights_reserved: 'Alle Rechte vorbehalten',
   },
 };
 
 const i18n = createI18n({
-  locale: 'en', // Langue par défaut
+  locale: 'de',
+  fallbackLocale: 'en',
   messages,
 });
 

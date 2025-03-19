@@ -1,118 +1,77 @@
+<!-- src/components/Navigator.vue -->
 <template>
-  <v-app-bar color="#abb8c3">
+  <v-app-bar color="#1A82C1">
     <v-app-bar-title>
       <v-img src="../images/logo.svg" alt="Logo" max-height="40" max-width="40"></v-img>
     </v-app-bar-title>
 
-    <v-spacer></v-spacer>
+    <v-spacer />
 
-    <!-- Menu Desktop -->
+    <!-- Desktop Menu -->
     <v-toolbar-items class="d-none d-md-flex">
-      <v-btn to="/" text class="d-flex align-center">
-        <v-icon left size="24" class="icon-color-white">mdi-home</v-icon>
-        <span class="ml-2">{{ $t('home') }}</span>
-      </v-btn>
+      <v-btn to="/" text><v-icon left class="icon-color-white">mdi-home</v-icon>{{ $t('home') }}</v-btn>
 
       <v-menu open-on-hover offset-y>
         <template v-slot:activator="{ props }">
-          <v-btn text v-bind="props" class="d-flex align-center">
-            <v-icon left size="24" class="icon-color-white">mdi-clipboard-list</v-icon>
-            <span class="ml-2">{{ $t('leistungen') }}</span>
-          </v-btn>
+          <v-btn text v-bind="props"><v-icon left>mdi-clipboard-list</v-icon>{{ $t('leistungen') }}</v-btn>
         </template>
         <v-list>
-          <v-list-item to="/performances/elektrotechnik" class="d-flex align-center">
-            <v-icon left size="24" class="icon-color-white">mdi-lightning-bolt</v-icon>
-            <span class="ml-2">{{ $t('elektrotechnik') }}</span>
-          </v-list-item>
-          <v-list-item to="/performances/photovoltaik" class="d-flex align-center">
-            <v-icon left size="24" class="icon-color-white">mdi-solar-power</v-icon>
-            <span class="ml-2">{{ $t('photovoltaik') }}</span>
-          </v-list-item>
-          <v-list-item to="/performances/industrietechnik" class="d-flex align-center">
-            <v-icon left size="24" class="icon-color-white">mdi-cog</v-icon>
-            <span class="ml-2">{{ $t('industrietechnik') }}</span>
-          </v-list-item>
+          <v-list-item to="/performances/elektrotechnik">{{ $t('elektrotechnik') }}</v-list-item>
+          <v-list-item to="/performances/photovoltaik">{{ $t('photovoltaik') }}</v-list-item>
+          <v-list-item to="/performances/industrietechnik">{{ $t('industrietechnik') }}</v-list-item>
         </v-list>
       </v-menu>
 
-      <v-btn to="/career" text class="d-flex align-center">
-        <v-icon left size="24" class="icon-color-white">mdi-briefcase</v-icon>
-        <span class="ml-2">{{ $t('career') }}</span>
-      </v-btn>
-      <v-btn to="/about" text class="d-flex align-center">
-        <v-icon left size="24" class="icon-color-white">mdi-information</v-icon>
-        <span class="ml-2">{{ $t('about') }}</span>
-      </v-btn>
-      <v-btn to="/imprint" text class="d-flex align-center">
-        <v-icon left size="24" class="icon-color-white">mdi-bookmark-outline</v-icon>
-        <span class="ml-2">{{ $t('imprint') }}</span>
-      </v-btn>
+      <v-btn to="/career" text><v-icon left>mdi-briefcase</v-icon>{{ $t('career') }}</v-btn>
+      <v-btn to="/about" text><v-icon left>mdi-information</v-icon>{{ $t('about') }}</v-btn>
+      <v-btn to="/imprint" text><v-icon left>mdi-bookmark-outline</v-icon>{{ $t('imprint') }}</v-btn>
+
+      <!-- Desktop Language Switcher -->
+      <v-menu open-on-hover offset-y>
+        <template v-slot:activator="{ props }">
+          <v-btn text v-bind="props"><v-icon left>mdi-earth</v-icon>{{ $t('language') }}</v-btn>
+        </template>
+        <v-list>
+          <v-list-item @click="changeLanguage('de')"><v-icon left>mdi-flag</v-icon>{{ $t('deutsch') }}</v-list-item>
+          <v-list-item @click="changeLanguage('en')"><v-icon left>mdi-flag-outline</v-icon>{{ $t('english') }}</v-list-item>
+        </v-list>
+      </v-menu>
     </v-toolbar-items>
 
-    <!-- Menu Mobile -->
-    <v-btn icon class="d-md-none" @click="drawer = !drawer">
-      <v-icon>mdi-menu</v-icon>
-    </v-btn>
+    <!-- Mobile Menu -->
+    <v-btn icon class="d-md-none" @click="drawer = !drawer"><v-icon>mdi-menu</v-icon></v-btn>
   </v-app-bar>
 
-  <!-- Drawer Mobile -->
   <v-navigation-drawer v-model="drawer" temporary>
     <v-list>
-      <v-list-item to="/" @click="drawer = false">
-        <v-icon left size="24">mdi-home</v-icon>
-        <span class="ml-2">{{ $t('home') }}</span>
-      </v-list-item>
+      <v-list-item to="/" @click="drawer = false"><v-icon>mdi-home</v-icon>{{ $t('home') }}</v-list-item>
 
       <v-list-group>
         <template v-slot:activator="{ props }">
-          <v-list-item v-bind="props">
-            <v-icon left size="24">mdi-clipboard-list</v-icon>
-            <span class="ml-2">{{ $t('leistungen') }}</span>
-          </v-list-item>
+          <v-list-item v-bind="props"><v-icon>mdi-clipboard-list</v-icon>{{ $t('leistungen') }}</v-list-item>
         </template>
-        <v-list-item to="/performances/elektrotechnik" @click="drawer = false">
-          <v-icon left size="24">mdi-lightning-bolt</v-icon>
-          <span class="ml-2">{{ $t('elektrotechnik') }}</span>
-        </v-list-item>
-        <v-list-item to="/performances/photovoltaik" @click="drawer = false">
-          <v-icon left size="24">mdi-solar-power-variant-outline </v-icon>
-          <span class="ml-2">{{ $t('photovoltaik') }}</span>
-        </v-list-item>
-        <v-list-item to="/performances/industrietechnik" @click="drawer = false">
-          <v-icon left size="24">mdi-robot-industrial</v-icon>
-          <span class="ml-2">{{ $t('industrietechnik') }}</span>
-        </v-list-item>
+        <v-list-item to="/performances/elektrotechnik" @click="drawer = false">{{ $t('elektrotechnik') }}</v-list-item>
+        <v-list-item to="/performances/photovoltaik" @click="drawer = false">{{ $t('photovoltaik') }}</v-list-item>
+        <v-list-item to="/performances/industrietechnik" @click="drawer = false">{{ $t('industrietechnik') }}</v-list-item>
       </v-list-group>
 
-      <v-list-item to="/career" @click="drawer = false">
-        <v-icon left size="24">mdi-briefcase</v-icon>
-        <span class="ml-2">{{ $t('career') }}</span>
-      </v-list-item>
+      <v-list-item to="/career" @click="drawer = false"><v-icon>mdi-briefcase</v-icon>{{ $t('career') }}</v-list-item>
+      <v-list-item to="/about" @click="drawer = false"><v-icon>mdi-information</v-icon>{{ $t('about') }}</v-list-item>
+      <v-list-item to="/imprint" @click="drawer = false"><v-icon>mdi-bookmark-outline</v-icon>{{ $t('imprint') }}</v-list-item>
 
       <v-list-group>
         <template v-slot:activator="{ props }">
-          <v-list-item v-bind="props">
-            <v-icon left size="24">mdi-earth</v-icon>
-            <span class="ml-2">{{ $t('language') }}</span>
-          </v-list-item>
+          <v-list-item v-bind="props"><v-icon>mdi-earth</v-icon>{{ $t('language') }}</v-list-item>
         </template>
-
-        <v-list-item @click="changeLanguage('de')">
-          <v-icon left size="24">mdi-flag</v-icon>
-          <span>{{ $t('deutsch') }}</span>
-        </v-list-item>
-        <v-list-item @click="changeLanguage('en')">
-          <v-icon left size="24">mdi-flag-outline</v-icon>
-          <span>{{ $t('english') }}</span>
-        </v-list-item>
+        <v-list-item @click="changeLanguage('de')">{{ $t('deutsch') }}</v-list-item>
+        <v-list-item @click="changeLanguage('en')">{{ $t('english') }}</v-list-item>
       </v-list-group>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const { locale } = useI18n();
@@ -120,5 +79,18 @@ const drawer = ref(false);
 
 const changeLanguage = (lang) => {
   locale.value = lang;
+  localStorage.setItem('lang', lang);
 };
+
+// Charger la langue sauvegardée
+const savedLang = localStorage.getItem('lang');
+if (savedLang) {
+  locale.value = savedLang;
+}
 </script>
+
+<style scoped>
+.icon-color-white {
+  color: white;
+}
+</style>
