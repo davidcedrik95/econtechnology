@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Navigator />
+    <AppNavbar/>
     <v-main>
       <v-container>
         <router-view></router-view>
@@ -11,6 +11,6 @@
 </template>
 
 <script setup>
-import Navigator from '@/components/Navigator.vue';
+import AppNavbar from '@/components/AppNavbar.vue';
 import Footer from '@/components/Footer.vue'; // Import du Footer
 </script>

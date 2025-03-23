@@ -1,29 +1,29 @@
 <template>
   <v-container class="pa-0">
 
-    <!-- Hero -->
+    <!-- Hero Section -->
     <v-parallax :src="heroImage" height="300">
       <v-container class="fill-height d-flex align-center justify-center text-center text-white hero-container">
         <div>
           <h1 class="text-h3 text-h5-sm font-weight-bold mb-4 hero-title" style="color: white;">
-            Innovative Energielösungen
+            {{ $t('innovative_energy_solutions') }}
           </h1>
           <p class="text-subtitle-1 text-body-1-sm hero-description" style="color: white;">
-            Econ Technology – Zukunft gestalten mit intelligenter Technik
+            {{ $t('econ_technology') }}
           </p>
         </div>
       </v-container>
     </v-parallax>
 
-    <!-- Promo -->
+    <!-- Promo Section -->
     <v-alert type="info" border="start" class="mt-10" prominent colored-border>
       <v-icon class="mr-2">mdi-information-outline</v-icon>
-      <strong>Sonderaktion:</strong> Jetzt kostenlose Beratung für Ihre PV-Anlage sichern!
+      <strong>{{ $t('special_offer') }}:</strong> {{ $t('free_consultation') }}
     </v-alert>
 
-    <!-- Services -->
+    <!-- Services Section -->
     <v-container class="py-12">
-      <h2 class="text-h4 font-weight-bold text-center mb-10">Unsere Dienstleistungen</h2>
+      <h2 class="text-h4 font-weight-bold text-center mb-10">{{ $t('our_services') }}</h2>
       <v-row justify="center" align="stretch" class="gap-6">
         <v-slide-y-transition group>
           <v-col
@@ -44,10 +44,10 @@
                 <v-avatar class="service-icon" size="64" color="primary">
                   <v-icon size="36" color="white">{{ service.icon }}</v-icon>
                 </v-avatar>
-                <div class="text-h6 font-weight-bold mt-4">{{ service.title }}</div>
-                <div class="mt-2 text-body-2 text-grey-darken-1">{{ service.description }}</div>
+                <div class="text-h6 font-weight-bold mt-4">{{ $t(service.title) }}</div>
+                <div class="mt-2 text-body-2 text-grey-darken-1">{{ $t(service.description) }}</div>
                 <v-btn class="mt-6" color="primary" variant="outlined" rounded @click="navigateTo(service.link)">
-                  Mehr erfahren
+                  {{ $t('learn_more') }}
                 </v-btn>
               </v-card>
             </v-hover>
@@ -56,50 +56,52 @@
       </v-row>
     </v-container>
 
-    <!-- Warum uns wählen -->
+    <!-- Why Choose Us Section -->
     <v-container class="py-12">
-      <h2 class="text-h5 font-weight-bold text-center mb-6">Warum Econ Technology?</h2>
+      <h2 class="text-h5 font-weight-bold text-center mb-6">{{ $t('why_econ_technology') }}</h2>
       <v-row justify="center" class="text-center">
         <v-col cols="12" sm="4">
           <v-icon size="36" color="primary">mdi-lightbulb-on-outline</v-icon>
-          <h3 class="text-subtitle-1 font-weight-bold mt-2">Innovation</h3>
-          <p>Lösungen mit neuster Technologie – heute schon an morgen denken.</p>
+          <h3 class="text-subtitle-1 font-weight-bold mt-2">{{ $t('innovation') }}</h3>
+          <p>{{ $t('innovation_description') }}</p>
         </v-col>
         <v-col cols="12" sm="4">
           <v-icon size="36" color="primary">mdi-account-group</v-icon>
-          <h3 class="text-subtitle-1 font-weight-bold mt-2">Kundennähe</h3>
-          <p>Individuelle Beratung und maßgeschneiderte Konzepte.</p>
+          <h3 class="text-subtitle-1 font-weight-bold mt-2">{{ $t('customer_proximity') }}</h3>
+          <p>{{ $t('customer_proximity_description') }}</p>
         </v-col>
         <v-col cols="12" sm="4">
           <v-icon size="36" color="primary">mdi-leaf</v-icon>
-          <h3 class="text-subtitle-1 font-weight-bold mt-2">Nachhaltigkeit</h3>
-          <p>Umweltschonende Technologien für eine grüne Zukunft.</p>
+          <h3 class="text-subtitle-1 font-weight-bold mt-2">{{ $t('sustainability') }}</h3>
+          <p>{{ $t('sustainability_description') }}</p>
         </v-col>
       </v-row>
     </v-container>
 
-    <!-- Blog / Actualités -->
+    <!-- Blog Section -->
     <v-container class="py-12">
-      <h2 class="text-h5 font-weight-bold text-center mb-6">Aktuelles & Neuigkeiten</h2>
+      <h2 class="text-h5 font-weight-bold text-center mb-6">{{ $t('news_and_updates') }}</h2>
       <v-row>
         <v-col v-for="(post, i) in blogPosts" :key="i" cols="12" md="4">
           <v-card class="pa-4">
             <v-img :src="post.image" height="160" class="mb-4" cover />
-            <h3 class="text-subtitle-1 font-weight-bold">{{ post.title }}</h3>
-            <p class="text-body-2">{{ post.snippet }}</p>
-            <v-btn variant="text" class="mt-2 custom-btn" color="primary" @click="navigateTo(post.link)">Mehr lesen</v-btn>
+            <h3 class="text-subtitle-1 font-weight-bold">{{ $t(post.title) }}</h3>
+            <p class="text-body-2">{{ $t(post.snippet) }}</p>
+            <v-btn variant="text" class="mt-2 custom-btn" color="primary" @click="navigateTo(post.link)">
+              {{ $t('learn_more') }}
+            </v-btn>
           </v-card>
         </v-col>
       </v-row>
     </v-container>
 
-    <!-- Call To Action -->
+    <!-- Call To Action Section -->
     <v-container class="py-12 text-center">
-      <h2 class="text-h5 font-weight-bold mb-4">Fragen oder Projektideen?</h2>
-      <p class="mb-6">Wir helfen Ihnen gerne weiter. Kontaktieren Sie uns – schnell und unverbindlich.</p>
+      <h2 class="text-h5 font-weight-bold mb-4">{{ $t('questions_or_project_ideas') }}</h2>
+      <p class="mb-6">{{ $t('contact_us_text') }}</p>
     </v-container>
 
-    <!-- Floating button -->
+    <!-- Floating Button -->
     <v-btn
       v-bind="$attrs"
       fab
@@ -110,7 +112,6 @@
       <v-icon>mdi-email</v-icon>
     </v-btn>
 
-    
   </v-container>
 </template>
 
@@ -123,29 +124,20 @@ const router = useRouter()
 const heroImage = '/images/hero-image.jpg' // Remplacez par votre image réelle
 
 const services = [
-  { title: 'Elektrotechnik', icon: 'mdi-flash', description: 'Moderne Lösungen im Bereich der Elektrotechnik.', link: '/elektrotechnik' },
-  { title: 'Photovoltaik', icon: 'mdi-solar-panel', description: 'Nachhaltige Energie mit hochwertigen PV-Anlagen.', link: '/photovoltaik' },
-  { title: 'Industrietechnik', icon: 'mdi-factory', description: 'Effiziente Technik für die Industrieautomatisierung.', link: '/industrietechnik' }
+  { title: 'electrical_engineering', icon: 'mdi-flash', description: 'electrical_engineering_description', link: '/elektrotechnik' },
+  { title: 'photovoltaics', icon: 'mdi-solar-panel', description: 'photovoltaics_description', link: '/photovoltaik' },
+  { title: 'industrial_technology', icon: 'mdi-factory', description: 'industrial_technology_description', link: '/industrietechnik' }
 ]
 
 const blogPosts = [
-  { title: 'Unsere neue PV-Initiative', snippet: 'Erfahren Sie, wie wir mit innovativen PV-Anlagen die Energiewende gestalten.', image: '/images/blog1.png', link: '/blog/pv-initiative' },
-  { title: 'Technik trifft Nachhaltigkeit', snippet: 'Einblicke in unsere nachhaltigen Projekte und Lösungen.', image: '/images/blog2.png', link: '/blog/nachhaltigkeit' },
-  { title: 'E-Mobilität für Unternehmen', snippet: 'Neue Möglichkeiten für Firmenflotten mit Elektromobilität.', image: '/images/blog3.png', link: '/blog/emobilitaet' }
+  { title: 'new_pv_initiative', snippet: 'new_pv_initiative_description', image: '/images/blog1.png', link: '/blog/pv-initiative' },
+  { title: 'technology_meets_sustainability', snippet: 'technology_meets_sustainability_description', image: '/images/blog2.png', link: '/blog/nachhaltigkeit' },
+  { title: 'e_mobility_for_companies', snippet: 'e_mobility_for_companies_description', image: '/images/blog3.png', link: '/blog/emobilitaet' }
 ]
-
-const contact = ref({
-  name: '',
-  email: '',
-  message: ''
-})
-
-const form = ref(null)
 
 const navigateTo = (path) => {
   router.push(path)
 }
-
 </script>
 
 <style scoped>
@@ -203,4 +195,3 @@ const navigateTo = (path) => {
   color: #0056b3; /* Texte bleu foncé au survol */
 }
 </style>
-

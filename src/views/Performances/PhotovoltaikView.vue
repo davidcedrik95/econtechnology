@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <!-- Texte d'introduction en pleine largeur -->
+    <!-- Texte d'introduction -->
     <v-row justify="center" class="mb-6">
       <v-col cols="12" md="10" class="text-center">
         <h1 class="text-h4 font-weight-bold mb-4 primary--text">
@@ -15,15 +15,14 @@
       </v-col>
     </v-row>
 
-    <!-- Première ligne avec 2 containers alignés horizontalement -->
+    <!-- Services + Sidebar -->
     <v-row justify="space-between" class="mb-6">
-      <!-- Container gauche : Unsere Lösungen -->
+      <!-- Services -->
       <v-col cols="12" md="8">
         <v-row justify="start">
-          <!-- Unsere Lösungen -->
           <v-col
             v-for="(service, index) in services"
-            :key="index"
+            :key="service.title"
             cols="12"
             sm="6"
             md="6"
@@ -42,8 +41,16 @@
               <v-card-text class="text-center text-grey-darken-2 line-height-2">
                 {{ $t(service.description) }}
               </v-card-text>
-              <v-card-actions class="px-0 mt-auto">
-                <v-btn color="primary" variant="text" class="text-center border border-primary">
+              <v-card-actions class="px-0 mt-auto justify-center">
+                <!-- Bouton pour ouvrir le modal -->
+                <v-btn
+                  v-if="service.title === 'solardach'"
+                  color="primary"
+                  variant="text"
+                  class="text-center border border-primary"
+                  @click="openSolarModal"
+                  aria-label="Learn more about Solar Roof"
+                >
                   {{ $t('learn_more') }}
                 </v-btn>
               </v-card-actions>
@@ -52,21 +59,17 @@
         </v-row>
       </v-col>
 
-      <!-- Container droit : Cartes du Berater et Checklist -->
+      <!-- Sidebar -->
       <v-col cols="12" md="4">
         <v-row>
-          <!-- Card Berater -->
+          <!-- Conseiller -->
           <v-col cols="10" class="mb-6 mx-auto">
             <v-card class="pa-4 rounded-xl" elevation="2">
               <v-row class="d-flex align-start">
                 <v-col cols="auto" class="d-flex justify-center align-start">
-                  <v-img
-                    src="../images/blog1.png"
-                    alt="Berater"
-                    height="80px"
-                    width="80px"
-                    class="rounded-circle border-grey"
-                  />
+                  <v-icon color="primary" size="80" class="rounded-circle border-grey">
+                    mdi-headset
+                  </v-icon>
                 </v-col>
                 <v-col class="d-flex flex-column justify-start">
                   <h1 class="text-h6 font-weight-bold mb-1 primary--text">
@@ -95,7 +98,7 @@
             </v-card>
           </v-col>
 
-          <!-- Card Checklist : Unsere Leistungen -->
+          <!-- Checklist -->
           <v-col cols="10" class="mb-6 mx-auto">
             <v-card class="pa-4 rounded-xl" elevation="2">
               <v-card-title class="font-weight-bold text-center primary--text">
@@ -105,21 +108,19 @@
                 <v-list>
                   <v-list-item
                     v-for="(item, index) in performanceItems"
-                    :key="index"
+                    :key="item"
                     class="text-grey-darken-2 line-height-2"
                   >
-                    <v-list-item-content>
-                      <v-list-item-title>
-                        ✅ {{ $t(item) }}
-                      </v-list-item-title>
-                    </v-list-item-content>
+                    <v-list-item-title>
+                      ✅ {{ $t(item) }}
+                    </v-list-item-title>
                   </v-list-item>
                 </v-list>
               </v-card-text>
             </v-card>
           </v-col>
 
-          <!-- Nouvelle Card : Ihre Vorteile mit Photovoltaik -->
+          <!-- Avantages -->
           <v-col cols="10" class="mx-auto">
             <v-card class="pa-4 rounded-xl" elevation="2">
               <v-card-title class="font-weight-bold text-center primary--text">
@@ -129,14 +130,12 @@
                 <v-list>
                   <v-list-item
                     v-for="(benefit, index) in benefits"
-                    :key="index"
+                    :key="benefit.title"
                     class="text-grey-darken-2 line-height-2"
                   >
-                    <v-list-item-content>
-                      <v-list-item-title>
-                        ✅ {{ $t(benefit.title) }}
-                      </v-list-item-title>
-                    </v-list-item-content>
+                    <v-list-item-title>
+                      ✅ {{ $t(benefit.title) }}
+                    </v-list-item-title>
                   </v-list-item>
                 </v-list>
               </v-card-text>
@@ -157,52 +156,32 @@
         </v-btn>
       </v-col>
     </v-row>
+
+    <!-- Modal -->
+    <SolarConfigModal />
   </v-container>
 </template>
 
 <script setup>
+import { useModalStore } from '@/store/modalStore'; // Importez le store
+import SolarConfigModal from '@/views/Performances/SolarConfigModal.vue';
+
+const modalStore = useModalStore();
+
+const openSolarModal = () => {
+  modalStore.openSolarModal(); // Ouvrir le modal via le store
+};
+
 const services = [
-  {
-    title: 'komplettlosungen',
-    description: 'komplettlosungen_desc',
-    icon: 'mdi-package-variant-closed',
-  },
-  {
-    title: 'wallbox',
-    description: 'wallbox_desc',
-    icon: 'mdi-ev-station',
-  },
-  {
-    title: 'energiespeicher',
-    description: 'energiespeicher_desc',
-    icon: 'mdi-battery',
-  },
-  {
-    title: 'warmepumpe',
-    description: 'warmepumpe_desc',
-    icon: 'mdi-heat-pump',
-  },
-  {
-    title: 'monitoring',
-    description: 'monitoring_desc',
-    icon: 'mdi-monitor-dashboard',
-  },
-  {
-    title: 'solardach',
-    description: 'solardach_desc',
-    icon: 'mdi-home-roof',
-  },
-  {
-    title: 'elektroinstallation',
-    description: 'elektroinstallation_desc',
-    icon: 'mdi-flash',
-  },
-  {
-    title: 'erweiterbarkeit',
-    description: 'erweiterbarkeit_desc',
-    icon: 'mdi-plus-box-multiple',
-  },
-]
+  { title: 'komplettlosungen', description: 'komplettlosungen_desc', icon: 'mdi-package-variant-closed' },
+  { title: 'wallbox', description: 'wallbox_desc', icon: 'mdi-ev-station' },
+  { title: 'energiespeicher', description: 'energiespeicher_desc', icon: 'mdi-battery' },
+  { title: 'warmepumpe', description: 'warmepumpe_desc', icon: 'mdi-heat-pump' },
+  { title: 'monitoring', description: 'monitoring_desc', icon: 'mdi-monitor-dashboard' },
+  { title: 'solardach', description: 'solardach_desc', icon: 'mdi-home-roof' },
+  { title: 'elektroinstallation', description: 'elektroinstallation_desc', icon: 'mdi-flash' },
+  { title: 'erweiterbarkeit', description: 'erweiterbarkeit_desc', icon: 'mdi-plus-box-multiple' },
+];
 
 const benefits = [
   { title: 'lower_electricity_costs' },
@@ -212,18 +191,19 @@ const benefits = [
   { title: 'low_maintenance' },
   { title: 'funding' },
   { title: 'self_sufficiency' },
-]
+];
 
 const performanceItems = [
   'kostenlose_beratung',
   'individuelle_planung',
   'optimale_energienutzung',
   'wartung_service',
-]
+];
+
+
 </script>
 
 <style scoped>
-/* Styles globaux pour les textes */
 .primary--text {
   color: var(--v-primary-base) !important;
 }
@@ -240,7 +220,6 @@ const performanceItems = [
   line-height: 1.6;
 }
 
-/* Styles pour les cartes */
 .v-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -250,7 +229,6 @@ const performanceItems = [
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Styles pour les boutons */
 .v-btn {
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
@@ -260,7 +238,6 @@ const performanceItems = [
   background-color: var(--v-primary-darken-1);
 }
 
-/* Styles pour les icônes */
 .v-icon {
   transition: transform 0.3s ease;
 }
@@ -269,7 +246,6 @@ const performanceItems = [
   transform: rotate(10deg);
 }
 
-/* Bordure personnalisée pour les boutons */
 .custom-border-btn {
   border: 2px solid var(--v-primary-base) !important;
 }

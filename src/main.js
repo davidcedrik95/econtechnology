@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import i18n from './i18n';
+import { createPinia } from 'pinia'; // Importez Pinia
 
 // Importer Vuetify
 import { createVuetify } from 'vuetify';
@@ -18,6 +19,9 @@ const vuetify = createVuetify({
 
 // Créer l'application Vue
 const app = createApp(App);
+const pinia = createPinia();
+
+app.use(pinia); // Utilisez Pinia
 
 // Utiliser le routeur et Vuetify
 app.use(router);

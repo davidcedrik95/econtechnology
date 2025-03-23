@@ -8,11 +8,7 @@
 
     <!-- Desktop Menu -->
     <v-toolbar-items class="d-none d-md-flex">
-      <v-btn
-        to="/"
-        text
-        :class="{ 'active-desktop-btn': isActiveRoute('/') }"
-      >
+      <v-btn to="/" text :class="{ 'active-desktop-btn': isActiveRoute('/') }">
         <v-icon left class="icon-color-white">mdi-home</v-icon>
         {{ $t('home') }}
       </v-btn>
@@ -45,29 +41,17 @@
         </v-list>
       </v-menu>
 
-      <v-btn
-        to="/career"
-        text
-        :class="{ 'active-desktop-btn': isActiveRoute('/career') }"
-      >
+      <v-btn to="/career" text :class="{ 'active-desktop-btn': isActiveRoute('/career') }">
         <v-icon left>mdi-briefcase</v-icon>
         {{ $t('career') }}
       </v-btn>
 
-      <v-btn
-        to="/about"
-        text
-        :class="{ 'active-desktop-btn': isActiveRoute('/about') }"
-      >
+      <v-btn to="/about" text :class="{ 'active-desktop-btn': isActiveRoute('/about') }">
         <v-icon left>mdi-information</v-icon>
         {{ $t('about') }}
       </v-btn>
 
-      <v-btn
-        to="/imprint"
-        text
-        :class="{ 'active-desktop-btn': isActiveRoute('/imprint') }"
-      >
+      <v-btn to="/imprint" text :class="{ 'active-desktop-btn': isActiveRoute('/imprint') }">
         <v-icon left>mdi-bookmark-outline</v-icon>
         {{ $t('imprint') }}
       </v-btn>
@@ -81,17 +65,11 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item
-            @click="changeLanguage('de')"
-            :class="{ 'active-nav-item': locale.value === 'de' }"
-          >
+          <v-list-item @click="changeLanguage('de')" :class="{ 'active-nav-item': locale.value === 'de' }">
             <v-icon class="mr-2">mdi-flag</v-icon>
             {{ $t('deutsch') }}
           </v-list-item>
-          <v-list-item
-            @click="changeLanguage('en')"
-            :class="{ 'active-nav-item': locale.value === 'en' }"
-          >
+          <v-list-item @click="changeLanguage('en')" :class="{ 'active-nav-item': locale.value === 'en' }">
             <v-icon class="mr-2">mdi-flag-outline</v-icon>
             {{ $t('english') }}
           </v-list-item>
@@ -103,7 +81,7 @@
     <v-btn icon class="d-md-none" @click="drawer = !drawer"><v-icon>mdi-menu</v-icon></v-btn>
   </v-app-bar>
 
-  <!-- Mobile Navigation Drawer with Fade -->
+  <!-- Mobile Navigation Drawer -->
   <v-fade-transition>
     <v-navigation-drawer v-model="drawer" temporary>
       <v-list dense nav>
@@ -172,7 +150,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
@@ -180,9 +158,11 @@ const drawer = ref(false)
 const route = useRoute()
 const { locale } = useI18n()
 
-const changeLanguage = (lang) => {
+const changeLanguage = async (lang) => {
   locale.value = lang
   localStorage.setItem('lang', lang)
+  drawer.value = false
+  await nextTick()
 }
 
 const savedLang = localStorage.getItem('lang')
@@ -207,21 +187,38 @@ const isActiveRoute = (path) => route.path === path
 </script>
 
 <style scoped>
-.icon-color-white {
-  color: white;
+.icon-color-blue {
+  color: #1A82C1; /* Couleur bleue */
 }
 
 .hover-icon {
   transition: color 0.3s ease;
 }
 
-.v-list-item:hover .hover-icon {
-  color: #1A82C1;
+.v-list-item:hover .hover-icon,
+.v-list-item:hover .mdi-flash,
+.v-list-item:hover .mdi-solar-panel,
+.v-list-item:hover .mdi-factory,
+.v-list-item:hover .mdi-earth,
+.v-list-item:hover .mdi-clipboard-list {
+  color: #1171ad; /* Couleur au survol */
+}
+
+.v-list-item .hover-icon,
+.v-list-item .mdi-flash,
+.v-list-item .mdi-solar-panel,
+.v-list-item .mdi-factory,
+.v-list-item .mdi-earth,
+.v-list-item .mdi-clipboard-list,
+.v-list-item .mdi-flag-outline,
+.v-list-item .mdi-flag{
+  color: #1A82C1; /* Appliquer la couleur bleue aux icônes de services */
 }
 
 .active-nav-item {
   background-color: rgba(26, 130, 193, 0.1);
   border-left: 4px solid #1A82C1;
+  font-weight: bold;
 }
 
 .active-desktop-btn {
@@ -229,6 +226,11 @@ const isActiveRoute = (path) => route.path === path
   color: #ffffff !important;
   font-weight: bold;
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Appliquer la couleur bleue au texte du menu mobile */
+.v-list-item-title, .menu-item-text {
+  color: #1A82C1; /* Couleur bleue pour le texte */
 }
 
 .d-flex {
@@ -244,7 +246,7 @@ const isActiveRoute = (path) => route.path === path
 }
 
 .mobile-menu-text {
-  font-size: 16px; /* Ajustez la taille du texte pour le menu mobile */
+  font-size: 16px;
 }
 
 .menu-item-text {

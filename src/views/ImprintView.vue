@@ -1,7 +1,7 @@
 <template>
     <v-container>
       <h1>ImprintView</h1>
-      <p>This is the Performances page.</p>
+      <p>This is the ImprintView page.</p>
     </v-container>
   </template>
   
