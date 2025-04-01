@@ -6,21 +6,24 @@
   >
     <v-card class="pa-4 rounded-lg">
       <!-- En-tête du modal avec bouton de fermeture -->
-      <v-card-title class="d-flex align-center justify-space-between">
+      <v-card-title class="d-flex align-center justify-space-between bg-blue-lighten-5 rounded-t-lg">
         <span class="text-h5 font-weight-bold primary--text">
+          <v-icon left color="primary">mdi-solar-panel</v-icon>
           {{ $t('solardach_configuration') }}
         </span>
         <v-btn
           icon
           @click="closeModal"
           aria-label="Fermer le modal"
+          variant="text"
+          color="grey-darken-2"
         >
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-card-title>
 
       <!-- Description du modal -->
-      <v-card-text class="text-body-2 text-grey-darken-2 text-center">
+      <v-card-text class="text-body-2 text-grey-darken-2 text-center py-4">
         {{ $t('solardach_modal_description') }}
       </v-card-text>
 
@@ -62,34 +65,74 @@
       <v-card-text>
         <!-- Stepper pour les étapes -->
         <v-stepper v-model="currentStep" class="stepper-container">
-          <v-stepper-header>
-            <v-stepper-step :complete="currentStep > 1" step="1" :editable="currentStep > 1">
-              <v-icon left size="large">mdi-account</v-icon>
+          <v-stepper-header class="stepper-header">
+            <v-stepper-step 
+              :complete="currentStep > 1" 
+              step="1" 
+              :editable="currentStep > 1"
+              color="primary"
+            >
+              <template v-slot:icon>
+                <v-icon size="large" :color="currentStep >= 1 ? 'primary' : 'grey'">mdi-account</v-icon>
+              </template>
               Information
             </v-stepper-step>
             <v-divider></v-divider>
-            <v-stepper-step :complete="currentStep > 2" step="2" :editable="currentStep > 2">
-              <v-icon left size="large">mdi-map-marker</v-icon>
+            <v-stepper-step 
+              :complete="currentStep > 2" 
+              step="2" 
+              :editable="currentStep > 2"
+              color="primary"
+            >
+              <template v-slot:icon>
+                <v-icon size="large" :color="currentStep >= 2 ? 'primary' : 'grey'">mdi-map-marker</v-icon>
+              </template>
               Standort
             </v-stepper-step>
             <v-divider></v-divider>
-            <v-stepper-step :complete="currentStep > 3" step="3" :editable="currentStep > 3">
-              <v-icon left size="large">mdi-home</v-icon>
+            <v-stepper-step 
+              :complete="currentStep > 3" 
+              step="3" 
+              :editable="currentStep > 3"
+              color="primary"
+            >
+              <template v-slot:icon>
+                <v-icon size="large" :color="currentStep >= 3 ? 'primary' : 'grey'">mdi-home</v-icon>
+              </template>
               Gebäude
             </v-stepper-step>
             <v-divider></v-divider>
-            <v-stepper-step :complete="currentStep > 4" step="4" :editable="currentStep > 4">
-              <v-icon left size="large">mdi-account-group</v-icon>
+            <v-stepper-step 
+              :complete="currentStep > 4" 
+              step="4" 
+              :editable="currentStep > 4"
+              color="primary"
+            >
+              <template v-slot:icon>
+                <v-icon size="large" :color="currentStep >= 4 ? 'primary' : 'grey'">mdi-account-group</v-icon>
+              </template>
               Nutzer
             </v-stepper-step>
             <v-divider></v-divider>
-            <v-stepper-step :complete="currentStep > 5" step="5" :editable="currentStep > 5">
-              <v-icon left size="large">mdi-solar-power</v-icon>
+            <v-stepper-step 
+              :complete="currentStep > 5" 
+              step="5" 
+              :editable="currentStep > 5"
+              color="primary"
+            >
+              <template v-slot:icon>
+                <v-icon size="large" :color="currentStep >= 5 ? 'primary' : 'grey'">mdi-solar-power</v-icon>
+              </template>
               System
             </v-stepper-step>
             <v-divider></v-divider>
-            <v-stepper-step step="6">
-              <v-icon left size="large">mdi-check</v-icon>
+            <v-stepper-step 
+              step="6"
+              color="primary"
+            >
+              <template v-slot:icon>
+                <v-icon size="large" :color="currentStep >= 6 ? 'primary' : 'grey'">mdi-check</v-icon>
+              </template>
               Bestätigung
             </v-stepper-step>
           </v-stepper-header>
@@ -97,10 +140,10 @@
           <v-stepper-items>
             <!-- Étape 1 : Informations de base -->
             <v-stepper-content step="1">
-              <v-fade-transition>
+              <v-fade-transition mode="out-in">
                 <v-card v-if="currentStep === 1" class="pa-3 rounded-lg" elevation="0">
-                  <v-card-title class="text-h6 font-weight-bold primary--text">
-                    <v-icon left size="small">mdi-account</v-icon>
+                  <v-card-title class="text-h6 font-weight-bold primary--text bg-blue-lighten-5 rounded-t-lg">
+                    <v-icon left size="small" color="primary">mdi-account</v-icon>
                     Persönliche Informationen
                   </v-card-title>
                   <v-card-text>
@@ -112,6 +155,7 @@
                         dense
                         prepend-icon="mdi-account"
                         :rules="[requiredRule]"
+                        class="mb-4"
                       ></v-text-field>
                       <v-text-field
                         v-model="formData.email"
@@ -120,6 +164,7 @@
                         dense
                         prepend-icon="mdi-email"
                         :rules="[requiredRule, emailRule]"
+                        class="mb-4"
                       ></v-text-field>
                       <v-text-field
                         v-model="formData.phone"
@@ -137,10 +182,10 @@
 
             <!-- Étape 2 : Standortinformationen -->
             <v-stepper-content step="2">
-              <v-fade-transition>
+              <v-fade-transition mode="out-in">
                 <v-card v-if="currentStep === 2" class="pa-3 rounded-lg" elevation="0">
-                  <v-card-title class="text-h6 font-weight-bold primary--text">
-                    <v-icon left size="small">mdi-map-marker</v-icon>
+                  <v-card-title class="text-h6 font-weight-bold primary--text bg-blue-lighten-5 rounded-t-lg">
+                    <v-icon left size="small" color="primary">mdi-map-marker</v-icon>
                     Standortinformationen
                   </v-card-title>
                   <v-card-text>
@@ -152,6 +197,7 @@
                         dense
                         prepend-icon="mdi-home-map-marker"
                         :rules="[requiredRule]"
+                        class="mb-4"
                       ></v-text-field>
                       
                       <v-row>
@@ -163,6 +209,7 @@
                             dense
                             prepend-icon="mdi-post"
                             :rules="[requiredRule]"
+                            class="mb-4"
                           ></v-text-field>
                         </v-col>
                         <v-col cols="12" md="8">
@@ -184,22 +231,21 @@
 
             <!-- Étape 3 : Gebäudeinformationen -->
             <v-stepper-content step="3">
-              <v-fade-transition>
+              <v-fade-transition mode="out-in">
                 <v-card v-if="currentStep === 3" class="pa-3 rounded-lg" elevation="0">
-                  <v-card-title class="text-h6 font-weight-bold primary--text">
-                    <v-icon left size="small">mdi-home</v-icon>
+                  <v-card-title class="text-h6 font-weight-bold primary--text bg-blue-lighten-5 rounded-t-lg">
+                    <v-icon left size="small" color="primary">mdi-home</v-icon>
                     Gebäudeinformationen
                   </v-card-title>
                   <v-card-text>
                     <v-form ref="formStep3">
                       <!-- Carte Gebäudetyp -->
-                      <v-card class="mb-4" elevation="2">
+                      <v-card class="mb-4 card-section" elevation="2">
                         <v-card-title class="text-subtitle-1 font-weight-bold">
-                          <v-icon left>mdi-office-building-marker</v-icon>
+                          <v-icon left color="primary">mdi-office-building-marker</v-icon>
                           Gebäudetyp
                         </v-card-title>
                         <v-card-text>
-                          <!-- Nouveau sélecteur avec cartes -->
                           <div class="card-selector">
                             <v-row>
                               <v-col
@@ -229,13 +275,12 @@
                       </v-card>
 
                       <!-- Carte Dachdaten -->
-                      <v-card class="mb-4" elevation="2">
+                      <v-card class="mb-4 card-section" elevation="2">
                         <v-card-title class="text-subtitle-1 font-weight-bold">
-                          <v-icon left>mdi-roofing</v-icon>
+                          <v-icon left color="primary">mdi-roofing</v-icon>
                           Dachinformationen
                         </v-card-title>
                         <v-card-text>
-                          <!-- Sélecteur de forme de toit avec cartes -->
                           <div class="card-selector">
                             <v-row>
                               <v-col
@@ -282,85 +327,86 @@
 
             <!-- Étape 4 : Nutzerinformationen -->
             <v-stepper-content step="4">
-  <v-fade-transition>
-    <v-card v-if="currentStep === 4" class="pa-3 rounded-lg" elevation="0">
-      <v-card-title class="text-h6 font-weight-bold primary--text">
-        <v-icon left size="small">mdi-account-group</v-icon>
-        Nutzerinformationen
-      </v-card-title>
-      <v-card-text>
-        <v-form ref="formStep4">
-          <v-row>
-            <v-col cols="12" md="6">
-              <div>
-                <div class="text-caption mb-2">Personen im Haushalt</div>
-                <div class="card-selector">
-                  <v-row>
-                    <v-col v-for="size in householdSizes" :key="size.value" cols="12" sm="4">
-                      <v-card
-                        class="size-card"
-                        :class="{ 'selected-card': formData.householdSize === size.value }"
-                        @click="formData.householdSize = size.value"
-                        elevation="2"
+              <v-fade-transition mode="out-in">
+                <v-card v-if="currentStep === 4" class="pa-3 rounded-lg" elevation="0">
+                  <v-card-title class="text-h6 font-weight-bold primary--text bg-blue-lighten-5 rounded-t-lg">
+                    <v-icon left size="small" color="primary">mdi-account-group</v-icon>
+                    Nutzerinformationen
+                  </v-card-title>
+                  <v-card-text>
+                    <v-form ref="formStep4">
+                      <v-row>
+                        <v-col cols="12" md="6">
+                          <div>
+                            <div class="text-caption mb-2">Personen im Haushalt</div>
+                            <div class="card-selector">
+                              <v-row>
+                                <v-col v-for="size in householdSizes" :key="size.value" cols="12" sm="4">
+                                  <v-card
+                                    class="size-card"
+                                    :class="{ 'selected-card': formData.householdSize === size.value }"
+                                    @click="formData.householdSize = size.value"
+                                    elevation="2"
+                                  >
+                                    <v-card-text class="text-center">
+                                      <v-icon :color="formData.householdSize === size.value ? 'primary' : ''">
+                                        mdi-account-multiple
+                                      </v-icon>
+                                      <div class="text-subtitle-2 mt-1">{{ size.text }}</div>
+                                    </v-card-text>
+                                  </v-card>
+                                </v-col>
+                              </v-row>
+                            </div>
+                          </div>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                          <div>
+                            <div class="text-caption mb-2">Hauptstromverbrauchszeit</div>
+                            <div class="card-selector">
+                              <v-row>
+                                <v-col v-for="time in electricityUsageTimes" :key="time.value" cols="12" sm="6">
+                                  <v-card
+                                    class="time-card"
+                                    :class="{ 'selected-card': formData.electricityUsageTime === time.value }"
+                                    @click="formData.electricityUsageTime = time.value"
+                                    elevation="2"
+                                  >
+                                    <v-card-text class="text-center">
+                                      <v-icon :color="formData.electricityUsageTime === time.value ? 'primary' : ''">
+                                        {{ time.icon }}
+                                      </v-icon>
+                                      <div class="text-subtitle-2 mt-1">{{ time.text }}</div>
+                                    </v-card-text>
+                                  </v-card>
+                                </v-col>
+                              </v-row>
+                            </div>
+                          </div>
+                        </v-col>
+                      </v-row>
+                      
+                      <v-radio-group
+                        v-model="formData.isOwner"
+                        label="Sind Sie der Eigentümer?"
+                        :rules="[requiredRule]"
+                        class="mt-4"
                       >
-                        <v-card-text class="text-center">
-                          <v-icon :color="formData.householdSize === size.value ? 'primary' : ''">
-                            mdi-account-multiple
-                          </v-icon>
-                          <div class="text-subtitle-2 mt-1">{{ size.text }}</div>
-                        </v-card-text>
-                      </v-card>
-                    </v-col>
-                  </v-row>
-                </div>
-              </div>
-            </v-col>
-            <v-col cols="12" md="6">
-              <div>
-                <div class="text-caption mb-2">Hauptstromverbrauchszeit</div>
-                <div class="card-selector">
-                  <v-row>
-                    <v-col v-for="time in electricityUsageTimes" :key="time.value" cols="12" sm="6">
-                      <v-card
-                        class="time-card"
-                        :class="{ 'selected-card': formData.electricityUsageTime === time.value }"
-                        @click="formData.electricityUsageTime = time.value"
-                        elevation="2"
-                      >
-                        <v-card-text class="text-center">
-                          <v-icon :color="formData.electricityUsageTime === time.value ? 'primary' : ''">
-                            {{ time.icon }}
-                          </v-icon>
-                          <div class="text-subtitle-2 mt-1">{{ time.text }}</div>
-                        </v-card-text>
-                      </v-card>
-                    </v-col>
-                  </v-row>
-                </div>
-              </div>
-            </v-col>
-          </v-row>
-          
-          <v-radio-group
-            v-model="formData.isOwner"
-            label="Sind Sie der Eigentümer?"
-            :rules="[requiredRule]"
-            class="mt-2"
-          >
-            <v-radio label="Ja" :value="true" color="primary"></v-radio>
-            <v-radio label="Nein" :value="false" color="primary"></v-radio>
-          </v-radio-group>
-        </v-form>
-      </v-card-text>
-    </v-card>
-  </v-fade-transition>
-</v-stepper-content>
+                        <v-radio label="Ja" :value="true" color="primary"></v-radio>
+                        <v-radio label="Nein" :value="false" color="primary"></v-radio>
+                      </v-radio-group>
+                    </v-form>
+                  </v-card-text>
+                </v-card>
+              </v-fade-transition>
+            </v-stepper-content>
+
             <!-- Étape 5 : Configuration du système -->
             <v-stepper-content step="5">
-              <v-fade-transition>
+              <v-fade-transition mode="out-in">
                 <v-card v-if="currentStep === 5" class="pa-3 rounded-lg" elevation="0">
-                  <v-card-title class="text-h6 font-weight-bold primary--text">
-                    <v-icon left size="small">mdi-solar-power</v-icon>
+                  <v-card-title class="text-h6 font-weight-bold primary--text bg-blue-lighten-5 rounded-t-lg">
+                    <v-icon left size="small" color="primary">mdi-solar-power</v-icon>
                     Systemkonfiguration
                   </v-card-title>
                   <v-card-text>
@@ -404,6 +450,7 @@
                         prepend-icon="mdi-flash"
                         :rules="[requiredRule]"
                         type="number"
+                        class="mb-4"
                       ></v-text-field>
 
                       <!-- Sélecteur de type d'onduleur avec cartes -->
@@ -444,19 +491,23 @@
 
             <!-- Étape 6 : Confirmation -->
             <v-stepper-content step="6">
-              <v-fade-transition>
-                <v-card v-if="currentStep === 6" class="pa-3 rounded-lg" elevation="0">
-                  <v-card-title class="text-h6 font-weight-bold primary--text">
-                    <v-icon left size="small">mdi-check</v-icon>
-                    Zusammenfassung
+              <v-fade-transition mode="out-in">
+                <v-card v-if="currentStep === 6" class="confirmation-card pa-4">
+                  <v-card-title class="success--text">
+                    <v-icon left color="success">mdi-check-circle</v-icon>
+                    Fast fertig!
                   </v-card-title>
                   <v-card-text>
-                    <p class="text-body-2">Bitte überprüfen Sie Ihre Angaben vor dem Absenden.</p>
-                    <v-list dense>
-                      <v-list-item v-for="(value, key) in formData" :key="key">
-                        <v-list-item-content>
-                          <v-list-item-title class="text-body-2">{{ getLabel(key) }}: {{ value }}</v-list-item-title>
-                        </v-list-item-content>
+                    <p class="text-body-1 mb-4">Bitte überprüfen Sie Ihre Angaben vor dem Absenden.</p>
+                    <v-list class="confirmation-list">
+                      <v-list-item 
+                        v-for="(value, key) in formData" 
+                        :key="key"
+                        class="confirmation-item"
+                      >
+                        <v-list-item-title class="text-body-1">
+                          <strong>{{ getLabel(key) }}:</strong> {{ formatValue(value) }}
+                        </v-list-item-title>
                       </v-list-item>
                     </v-list>
                   </v-card-text>
@@ -475,6 +526,7 @@
               color="primary"
               variant="text"
               @click="currentStep--"
+              class="back-button"
             >
               <v-icon left size="small">mdi-arrow-left</v-icon>
               Zurück
@@ -487,14 +539,17 @@
               v-if="currentStep < 6"
               color="primary"
               @click="validateAndNext"
+              class="next-button"
+              :class="{ 'pulse-animation': currentStep === 5 }"
             >
               Weiter
               <v-icon right size="small">mdi-arrow-right</v-icon>
             </v-btn>
             <v-btn
               v-else
-              color="primary"
+              color="success"
               @click="submitForm"
+              class="submit-button"
             >
               Absenden
               <v-icon right size="small">mdi-check</v-icon>
@@ -738,10 +793,25 @@ const getLabel = (key) => {
   };
   return labels[key] || key;
 };
+
+// Formater les valeurs pour l'affichage
+const formatValue = (value) => {
+  if (value === null || value === undefined) return 'Nicht angegeben';
+  if (typeof value === 'boolean') return value ? 'Ja' : 'Nein';
+  return value;
+};
 </script>
 
 <style scoped>
 /* Couleurs de base */
+:root {
+  --v-primary-base: #1A82C1;
+  --v-secondary-base: #FFA726;
+  --v-success-base: #4CAF50;
+  --v-background-base: #F5F7FA;
+  --v-card-border: #E0E0E0;
+}
+
 .primary--text {
   color: var(--v-primary-base) !important;
 }
@@ -772,19 +842,35 @@ const getLabel = (key) => {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.v-btn:active {
+  transform: scale(0.98);
+}
+
+.back-button {
+  background-color: #F5F7FA !important;
+}
+
+.next-button {
+  font-weight: 600;
+}
+
+.submit-button {
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(76, 175, 80, 0.3) !important;
+}
+
 /* Barre de progression */
 .progress-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  background: linear-gradient(90deg, #E3F2FD 0%, #BBDEFB 100%);
+  border-radius: 12px;
+  padding: 16px;
   margin: 24px 0;
-  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .progress-container {
   position: relative;
-  width: calc(100% - 48px);
-  max-width: 800px;
+  width: 100%;
   padding-top: 24px;
 }
 
@@ -853,19 +939,33 @@ const getLabel = (key) => {
 
 /* Stepper */
 .stepper-container {
-  width: calc(100% - 48px);
-  max-width: 800px;
+  width: 100%;
   margin: 0 auto;
 }
 
+.stepper-header {
+  background: white !important;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.v-stepper {
+  background: transparent !important;
+}
+
 .v-stepper__header {
-  box-shadow: none;
-  border-bottom: 1px solid #e0e0e0;
+  box-shadow: none !important;
+  border-bottom: 1px solid #E0E0E0;
   margin-bottom: 16px;
 }
 
 .v-stepper__step {
-  padding: 8px;
+  padding: 8px 12px;
+}
+
+.v-stepper__step--complete .v-stepper__step__step {
+  background: var(--v-success-base) !important;
 }
 
 /* Styles des cartes */
@@ -873,6 +973,12 @@ const getLabel = (key) => {
   margin-bottom: 24px;
   border-radius: 8px;
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
 }
 
 .card-section .v-card__title {
@@ -890,6 +996,26 @@ const getLabel = (key) => {
 
 .card-section .v-icon {
   color: #1A82C1;
+}
+
+/* Cartes de sélection */
+.building-card, .roof-card, .panel-card, .inverter-card,
+.size-card, .time-card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.building-card:hover, .roof-card:hover, .panel-card:hover, 
+.inverter-card:hover, .size-card:hover, .time-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(26, 130, 193, 0.2) !important;
+}
+
+.selected-card {
+  border: 2px solid var(--v-primary-base) !important;
+  background-color: rgba(26, 130, 193, 0.05);
+  box-shadow: 0 4px 8px rgba(26, 130, 193, 0.1) !important;
 }
 
 /* Radio buttons */
@@ -925,6 +1051,77 @@ const getLabel = (key) => {
 @keyframes progressStripes {
   0% { background-position: 0 0; }
   100% { background-position: 16px 0; }
+}
+
+/* Animation de pulsation */
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(26, 130, 193, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(26, 130, 193, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(26, 130, 193, 0); }
+}
+
+/* Confirmation card */
+.confirmation-card {
+  background-color: #F8F9FA;
+  border-left: 4px solid var(--v-success-base);
+  transition: all 0.3s ease;
+}
+
+.confirmation-list {
+  background: transparent;
+}
+
+.confirmation-item {
+  border-bottom: 1px dashed #E0E0E0;
+  padding: 12px 0;
+}
+
+.confirmation-item:last-child {
+  border-bottom: none;
+}
+
+/* Champs de formulaire */
+.v-text-field {
+  margin-bottom: 12px;
+}
+
+.v-text-field :deep(.v-input__control) {
+  border-radius: 8px;
+}
+
+.v-text-field :deep(.v-field) {
+  border: 1px solid #E0E0E0;
+  transition: border 0.3s ease;
+}
+
+.v-text-field :deep(.v-field:hover) {
+  border-color: var(--v-primary-base);
+}
+
+/* Effets de transition */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Style pour les champs en erreur */
+.error--text {
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
 }
 
 /* Responsive Design */
@@ -999,32 +1196,5 @@ const getLabel = (key) => {
   .v-stepper__step__step {
     margin-right: 8px;
   }
-}
-
-/* Effets de transition */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
-/* Style pour les champs en erreur */
-.error--text {
-  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-5px); }
-  40%, 80% { transform: translateX(5px); }
-}
-
-.selected-card {
-  border: 2px solid #1A82C1;
-  background-color: rgba(26, 130, 193, 0.1);
 }
 </style>
