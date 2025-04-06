@@ -7,7 +7,7 @@
   scrollable
 >
     <v-card class="pa-4 rounded-lg">
-      <!-- En-tête   -->
+      <!-- En-tête-->
       <v-card-title class="d-flex align-center justify-space-between bg-blue-lighten-5 rounded-t-lg">
         <span class="text-h5 font-weight-bold primary--text">
           <v-icon left color="primary">mdi-solar-panel</v-icon>
