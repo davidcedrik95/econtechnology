@@ -7,7 +7,7 @@
   scrollable
 >
     <v-card class="pa-4 rounded-lg">
-      <!-- En-tête-->
+      <!-- En-tête -->
       <v-card-title class="d-flex align-center justify-space-between bg-blue-lighten-5 rounded-t-lg">
         <span class="text-h5 font-weight-bold primary--text">
           <v-icon left color="primary">mdi-solar-panel</v-icon>
@@ -1235,6 +1235,7 @@ const validateCurrentStep = async () => {
     if (isValid) {
       currentStep.value++;
     }
+
   } catch (error) {
     console.error('Validation error:', error);
   } finally {
@@ -1242,10 +1243,42 @@ const validateCurrentStep = async () => {
   }
 };
 
-const submitForm = () => {
-  console.log('Formular abgeschickt:', formData.value);
-  // Hier könnten Sie die Daten an einen Server senden
-  closeModal();
+const submitForm = async () => {
+  if (!formData.value.termsAccepted) {
+    alert('Bitte akzeptieren Sie die AGB');
+    return;
+  }
+
+  loading.value = true;
+
+  try {
+    const response = await fetch('http://localhost:3001/api/send-config', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData.value)
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Server error: ${response.status} ${errorText}`);
+    }
+
+    const result = await response.json();
+
+    if (result.success) {
+      alert('Vielen Dank! Ihre Konfiguration wurde erfolgreich versendet.');
+      closeModal();
+    } else {
+      throw new Error(result.message || 'Unbekannter Fehler');
+    }
+  } catch (error) {
+    console.error('Fehler:', error);
+    alert(`Fehler beim Versenden: ${error.message}`);
+  } finally {
+    loading.value = false;
+  }
 };
 
 const getLabel = (key) => {
