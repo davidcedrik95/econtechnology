@@ -83,14 +83,27 @@
       <h2 class="text-h5 font-weight-bold text-center mb-6">{{ $t('news_and_updates') }}</h2>
       <v-row>
         <v-col v-for="(post, i) in blogPosts" :key="i" cols="12" md="4">
-          <v-card class="pa-4">
-            <v-img :src="post.image" height="160" class="mb-4" cover />
-            <h3 class="text-subtitle-1 font-weight-bold">{{ $t(post.title) }}</h3>
-            <p class="text-body-2">{{ $t(post.snippet) }}</p>
-            <v-btn variant="text" class="mt-2 custom-btn" color="primary" @click="navigateTo(post.link)">
-              {{ $t('learn_more') }}
-            </v-btn>
-          </v-card>
+          <v-hover v-slot="{ isHovering, props }">
+            <v-card 
+              v-bind="props"
+              class="pa-4 blog-card"
+              :elevation="isHovering ? 12 : 4"
+              :class="{ 'blog-card-hover': isHovering }"
+            >
+              <v-img :src="post.image" height="160" class="mb-4" cover />
+              <h3 class="text-subtitle-1 font-weight-bold">{{ $t(post.title) }}</h3>
+              <p class="text-body-2">{{ $t(post.snippet) }}</p>
+              <v-btn 
+                variant="text" 
+                class="mt-2 custom-btn" 
+                color="primary" 
+                @click="navigateTo(post.link)"
+                :class="{ 'btn-hover': isHovering }"
+              >
+                {{ $t('learn_more') }}
+              </v-btn>
+            </v-card>
+          </v-hover>
         </v-col>
       </v-row>
     </v-container>
@@ -193,5 +206,28 @@ const navigateTo = (path) => {
 .custom-btn:hover {
   border-color: #0056b3; /* Bordure bleue plus foncée au survol */
   color: #0056b3; /* Texte bleu foncé au survol */
+}
+
+.blog-card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.blog-card-hover {
+  transform: translateY(-5px);
+  border-bottom: 3px solid #007bff;
+}
+
+.blog-card-hover .custom-btn {
+  color: white !important;
+  background-color: #007bff !important;
+}
+
+.blog-card .v-img {
+  transition: transform 0.3s ease;
+}
+
+.blog-card-hover .v-img {
+  transform: scale(1.03);
 }
 </style>

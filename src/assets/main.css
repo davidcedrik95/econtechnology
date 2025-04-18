@@ -33,3 +33,29 @@ a,
     padding: 0 2rem;
   }
 }
+
+/* Styles globaux pour les cartes */
+.card-section {
+  margin-bottom: 12px !important;
+  border-radius: 6px !important;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
+  border: 1px solid #E0E0E0;
+}
+
+.selected-card {
+  border: 1px solid #1A82C1 !important;
+  background-color: rgba(26, 130, 193, 0.05) !important;
+}
+
+.building-card, .roof-card, .panel-card, .inverter-card, .size-card, .time-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
+  cursor: pointer;
+  border: 1px solid transparent;
+  height: 100%;
+  border-radius: 6px !important;
+}
+
+.card-selector {
+  margin: 8px 0;
+}

@@ -163,8 +163,8 @@
 </template>
 
 <script setup>
-import { useModalStore } from '@/store/modalStore'; // Importez le store
-import SolarConfigModal from '@/views/Performances/SolarConfigModal.vue';
+import { useModalStore } from '@/stores/modalStore'; // Importez le store
+import SolarConfigModal from '@/components/solar-config/SolarConfigDialog.vue';
 
 const modalStore = useModalStore();
 
