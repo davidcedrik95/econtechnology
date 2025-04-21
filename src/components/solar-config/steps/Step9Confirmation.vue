@@ -9,23 +9,193 @@
         <p class="text-body-1 mb-4">Bitte überprüfen Sie Ihre Angaben vor dem Absenden.</p>
         
         <v-expansion-panels class="mb-4">
-          <v-expansion-panel
-            v-for="(section, index) in confirmationSections"
-            :key="index"
-          >
+          <!-- Section 1: Persönliche Informationen -->
+          <v-expansion-panel>
             <v-expansion-panel-title>
-              <v-icon left>{{ section.icon }}</v-icon>
-              {{ section.title }}
+              <v-icon left>mdi-account</v-icon>
+              Persönliche Informationen
             </v-expansion-panel-title>
             <v-expansion-panel-text>
               <v-list density="compact" class="confirmation-list">
-                <v-list-item
-                  v-for="(item, i) in section.items"
-                  :key="i"
-                  class="confirmation-item"
-                >
+                <v-list-item>
                   <v-list-item-title>
-                    <strong>{{ item.label }}:</strong> {{ formatValue(item.value) }}
+                    <strong>Name:</strong> {{ formatValue(formData.name) }}
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>
+                    <strong>E-Mail:</strong> {{ formatValue(formData.email) }}
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>
+                    <strong>Telefon:</strong> {{ formatValue(formData.phone) }}
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-expansion-panel-text>
+          </v-expansion-panel>
+
+          <!-- Section 2: Standortinformationen -->
+          <v-expansion-panel>
+            <v-expansion-panel-title>
+              <v-icon left>mdi-map-marker</v-icon>
+              Standortinformationen
+            </v-expansion-panel-title>
+            <v-expansion-panel-text>
+              <v-list density="compact" class="confirmation-list">
+                <v-list-item>
+                  <v-list-item-title>
+                    <strong>Adresse:</strong> {{ formatValue(formData.address) }}
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>
+                    <strong>Postleitzahl:</strong> {{ formatValue(formData.postalCode) }}
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>
+                    <strong>Ort:</strong> {{ formatValue(formData.city) }}
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-expansion-panel-text>
+          </v-expansion-panel>
+
+          <!-- Section 3: Gebäudeinformationen -->
+          <v-expansion-panel>
+            <v-expansion-panel-title>
+              <v-icon left>mdi-home</v-icon>
+              Gebäudeinformationen
+            </v-expansion-panel-title>
+            <v-expansion-panel-text>
+              <v-list density="compact" class="confirmation-list">
+                <v-list-item>
+                  <v-list-item-title>
+                    <strong>Gebäudetyp:</strong> {{ formatValue(formData.buildingType) }}
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-expansion-panel-text>
+          </v-expansion-panel>
+
+          <!-- Section 4: Dachinformationen -->
+          <v-expansion-panel>
+            <v-expansion-panel-title>
+              <v-icon left>mdi-roofing</v-icon>
+              Dachinformationen
+            </v-expansion-panel-title>
+            <v-expansion-panel-text>
+              <v-list density="compact" class="confirmation-list">
+                <v-list-item>
+                  <v-list-item-title>
+                    <strong>Dachform:</strong> {{ formatValue(formData.roofShape) }}
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>
+                    <strong>Dachfläche:</strong> {{ formatValue(formData.roofArea ? `${formData.roofArea} m²` : '') }}
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-expansion-panel-text>
+          </v-expansion-panel>
+
+          <!-- Section 5: Haushaltsinformationen -->
+          <v-expansion-panel>
+            <v-expansion-panel-title>
+              <v-icon left>mdi-account-group</v-icon>
+              Haushaltsinformationen
+            </v-expansion-panel-title>
+            <v-expansion-panel-text>
+              <v-list density="compact" class="confirmation-list">
+                <v-list-item>
+                  <v-list-item-title>
+                    <strong>Personen im Haushalt:</strong> {{ formatValue(formData.householdSize) }}
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-expansion-panel-text>
+          </v-expansion-panel>
+
+          <!-- Section 6: Stromverbrauchsverhalten -->
+          <v-expansion-panel>
+            <v-expansion-panel-title>
+              <v-icon left>mdi-chart-line</v-icon>
+              Stromverbrauchsverhalten
+            </v-expansion-panel-title>
+            <v-expansion-panel-text>
+              <v-list density="compact" class="confirmation-list">
+                <v-list-item>
+                  <v-list-item-title>
+                    <strong>Hauptverbrauchszeit:</strong> {{ formatValue(formData.electricityUsageTime) }}
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>
+                    <strong>Aktueller Verbrauch:</strong> {{ formatValue(formData.currentConsumption ? `${formData.currentConsumption} kWh/Jahr` : '') }}
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-expansion-panel-text>
+          </v-expansion-panel>
+
+          <!-- Section 7: Eigentumsverhältnisse -->
+          <v-expansion-panel>
+            <v-expansion-panel-title>
+              <v-icon left>mdi-key</v-icon>
+              Eigentumsverhältnisse
+            </v-expansion-panel-title>
+            <v-expansion-panel-text>
+              <v-list density="compact" class="confirmation-list">
+                <v-list-item>
+                  <v-list-item-title>
+                    <strong>Eigentümer:</strong> {{ formatValue(formData.isOwner ? 'Ja' : 'Nein') }}
+                  </v-list-item-title>
+                </v-list-item>
+                <template v-if="!formData.isOwner">
+                  <v-list-item>
+                    <v-list-item-title>
+                      <strong>Eigentümer Name:</strong> {{ formatValue(formData.ownerName) }}
+                    </v-list-item-title>
+                  </v-list-item>
+                  <v-list-item>
+                    <v-list-item-title>
+                      <strong>Eigentümer Kontakt:</strong> {{ formatValue(formData.ownerContact) }}
+                    </v-list-item-title>
+                  </v-list-item>
+                </template>
+              </v-list>
+            </v-expansion-panel-text>
+          </v-expansion-panel>
+
+          <!-- Section 8: Systemkonfiguration -->
+          <v-expansion-panel>
+            <v-expansion-panel-title>
+              <v-icon left>mdi-solar-power</v-icon>
+              Systemkonfiguration
+            </v-expansion-panel-title>
+            <v-expansion-panel-text>
+              <v-list density="compact" class="confirmation-list">
+                <v-list-item>
+                  <v-list-item-title>
+                    <strong>Solarmodul-Typ:</strong> {{ formatValue(formData.solarPanelType) }}
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>
+                    <strong>Leistung:</strong> {{ formatValue(formData.power ? `${formData.power} kW` : '') }}
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>
+                    <strong>Wechselrichter-Typ:</strong> {{ formatValue(formData.inverterType) }}
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>
+                    <strong>Batteriespeicher:</strong> {{ formatValue(formData.hasBattery ? (formData.batteryCapacity ? `${formData.batteryCapacity} kWh` : 'Ja') : 'Nein') }}
                   </v-list-item-title>
                 </v-list-item>
               </v-list>
@@ -47,7 +217,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue';
+import { ref, watch } from 'vue';
 
 const props = defineProps({
   formData: {
@@ -55,7 +225,6 @@ const props = defineProps({
     required: true
   }
 });
-
 
 const emit = defineEmits(['update:formData', 'validate']);
 
@@ -68,32 +237,6 @@ const formatValue = (value) => {
   if (typeof value === 'boolean') return value ? 'Ja' : 'Nein';
   return value;
 };
-
-const confirmationSections = computed(() => {
-  return [
-    {
-      title: 'Persönliche Informationen',
-      icon: 'mdi-account',
-      items: [
-        { label: 'Name', value: props.formData.name },
-        { label: 'E-Mail', value: props.formData.email },
-        { label: 'Telefon', value: props.formData.phone }
-      ]
-    },
-    // Ajoutez toutes les autres sections de la même manière
-    {
-      title: 'Systemkonfiguration',
-      icon: 'mdi-solar-power',
-      items: [
-        { label: 'Solarmodul-Typ', value: props.formData.solarPanelType },
-        { label: 'Leistung', value: props.formData.power ? `${props.formData.power} kW` : '' },
-        { label: 'Wechselrichter-Typ', value: props.formData.inverterType },
-        { label: 'Batteriespeicher', value: props.formData.hasBattery ? 
-          (props.formData.batteryCapacity ? `${props.formData.batteryCapacity} kWh` : 'Ja') : 'Nein' }
-      ]
-    }
-  ];
-});
 
 const updateAndValidate = () => {
   emit('update:formData', {
