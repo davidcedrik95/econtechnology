@@ -5,10 +5,10 @@
     <v-parallax :src="heroImage" height="300">
       <v-container class="fill-height d-flex align-center justify-center text-center text-white hero-container">
         <div>
-          <h1 class="text-h3 text-h5-sm font-weight-bold mb-4 hero-title" style="color: white;">
+          <h1 class="text-h3 text-h5-sm font-weight-bold mb-4 hero-title">
             {{ $t('innovative_energy_solutions') }}
           </h1>
-          <p class="text-subtitle-1 text-body-1-sm hero-description" style="color: white;">
+          <p class="text-subtitle-1 text-body-1-sm hero-description">
             {{ $t('econ_technology') }}
           </p>
         </div>
@@ -60,20 +60,10 @@
     <v-container class="py-12">
       <h2 class="text-h5 font-weight-bold text-center mb-6">{{ $t('why_econ_technology') }}</h2>
       <v-row justify="center" class="text-center">
-        <v-col cols="12" sm="4">
-          <v-icon size="36" color="primary">mdi-lightbulb-on-outline</v-icon>
-          <h3 class="text-subtitle-1 font-weight-bold mt-2">{{ $t('innovation') }}</h3>
-          <p>{{ $t('innovation_description') }}</p>
-        </v-col>
-        <v-col cols="12" sm="4">
-          <v-icon size="36" color="primary">mdi-account-group</v-icon>
-          <h3 class="text-subtitle-1 font-weight-bold mt-2">{{ $t('customer_proximity') }}</h3>
-          <p>{{ $t('customer_proximity_description') }}</p>
-        </v-col>
-        <v-col cols="12" sm="4">
-          <v-icon size="36" color="primary">mdi-leaf</v-icon>
-          <h3 class="text-subtitle-1 font-weight-bold mt-2">{{ $t('sustainability') }}</h3>
-          <p>{{ $t('sustainability_description') }}</p>
+        <v-col cols="12" sm="4" v-for="(reason, index) in reasons" :key="index">
+          <v-icon size="36" color="primary">{{ reason.icon }}</v-icon>
+          <h3 class="text-subtitle-1 font-weight-bold mt-2">{{ $t(reason.title) }}</h3>
+          <p>{{ $t(reason.description) }}</p>
         </v-col>
       </v-row>
     </v-container>
@@ -93,13 +83,7 @@
               <v-img :src="post.image" height="160" class="mb-4" cover />
               <h3 class="text-subtitle-1 font-weight-bold">{{ $t(post.title) }}</h3>
               <p class="text-body-2">{{ $t(post.snippet) }}</p>
-              <v-btn 
-                variant="text" 
-                class="mt-2 custom-btn" 
-                color="primary" 
-                @click="navigateTo(post.link)"
-                :class="{ 'btn-hover': isHovering }"
-              >
+              <v-btn variant="text" class="mt-2 custom-btn" color="primary" @click="navigateTo(post.link)">
                 {{ $t('learn_more') }}
               </v-btn>
             </v-card>
@@ -116,7 +100,6 @@
 
     <!-- Floating Button -->
     <v-btn
-      v-bind="$attrs"
       fab
       color="primary"
       @click="navigateTo('/kontakt')"
@@ -134,18 +117,24 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-const heroImage = '/images/hero-image.jpg' // Remplacez par votre image réelle
+const heroImage = '/images/hero-image.jpg'
 
 const services = [
-  { title: 'electrical_engineering', icon: 'mdi-flash', description: 'electrical_engineering_description', link: '/elektrotechnik' },
-  { title: 'photovoltaics', icon: 'mdi-solar-panel', description: 'photovoltaics_description', link: '/photovoltaik' },
-  { title: 'industrial_technology', icon: 'mdi-factory', description: 'industrial_technology_description', link: '/industrietechnik' }
+  { title: 'electrical_engineering', icon: 'mdi-flash', description: 'electrical_engineering_description', link: '/performances/elektrotechnik' },
+  { title: 'photovoltaics', icon: 'mdi-solar-panel', description: 'photovoltaics_description', link: '/performances/photovoltaik' },
+  { title: 'industrial_technology', icon: 'mdi-factory', description: 'industrial_technology_description', link: '/performances/industrietechnik' }
+]
+
+const reasons = [
+  { title: 'innovation', description: 'innovation_description', icon: 'mdi-lightbulb-on-outline' },
+  { title: 'customer_proximity', description: 'customer_proximity_description', icon: 'mdi-account-group' },
+  { title: 'sustainability', description: 'sustainability_description', icon: 'mdi-leaf' }
 ]
 
 const blogPosts = [
-  { title: 'new_pv_initiative', snippet: 'new_pv_initiative_description', image: '/images/blog1.png', link: '/blog/pv-initiative' },
-  { title: 'technology_meets_sustainability', snippet: 'technology_meets_sustainability_description', image: '/images/blog2.png', link: '/blog/nachhaltigkeit' },
-  { title: 'e_mobility_for_companies', snippet: 'e_mobility_for_companies_description', image: '/images/blog3.png', link: '/blog/emobilitaet' }
+  { title: 'new_pv_initiative', snippet: 'new_pv_initiative_description', image: '/images/blog/blog1.png', link: '/blog/pv-initiative' },
+  { title: 'technology_meets_sustainability', snippet: 'technology_meets_sustainability_description', image: '/images/blog/blog2.png', link: '/blog/nachhaltigkeit' },
+  { title: 'e_mobility_for_companies', snippet: 'e_mobility_for_companies_description', image: '/images/blog/blog3.png', link: '/blog/emobilitaet' }
 ]
 
 const navigateTo = (path) => {
@@ -156,18 +145,17 @@ const navigateTo = (path) => {
 <style scoped>
 @media (max-width: 600px) {
   .hero-title {
-    font-size: 1.25rem; /* Réduit la taille du titre sur petits écrans */
+    font-size: 1.25rem;
   }
   .hero-description {
-    font-size: 0.875rem; /* Réduit la taille du texte sur petits écrans */
+    font-size: 0.875rem;
   }
 }
 
 .hero-container {
-  background: 
-    linear-gradient(45deg, #007bff, #ff7f00, #808080), 
-    repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0, 0, 0, 2) 4px, rgba(0, 0, 0, 0) 6px),
-    repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(0, 0, 0, 1) 4px, rgba(0, 0, 0, 0.5) 6px);
+  background: linear-gradient(45deg, #007bff, #ff7f00, #808080),
+              repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.2) 4px, rgba(0,0,0,0) 6px),
+              repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(0,0,0,0.2) 4px, rgba(0,0,0,0) 6px);
 }
 
 .card-with-icon {
@@ -196,16 +184,16 @@ const navigateTo = (path) => {
 }
 
 .custom-btn {
-  color: #007bff; /* Couleur du texte */
-  border: 2px solid #007bff; /* Bordure bleue */
-  background-color: transparent; /* Pas de fond */
-  border-radius: 8px; /* Coins arrondis */
-  font-weight: bold; /* Texte en gras */
+  color: #007bff;
+  border: 2px solid #007bff;
+  background-color: transparent;
+  border-radius: 8px;
+  font-weight: bold;
 }
 
 .custom-btn:hover {
-  border-color: #0056b3; /* Bordure bleue plus foncée au survol */
-  color: #0056b3; /* Texte bleu foncé au survol */
+  border-color: #0056b3;
+  color: #0056b3;
 }
 
 .blog-card {
