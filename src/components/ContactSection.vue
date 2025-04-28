@@ -7,7 +7,7 @@
             <div class="contact-info">
               <div class="info-item">
                 <v-icon name="mdi-phone" />
-                <span>+49 123 456 789</span>
+                <span>+49 15561 050775</span>
               </div>
               <div class="info-item">
                 <v-icon name="mdi-email" />
@@ -15,7 +15,7 @@
               </div>
               <div class="info-item">
                 <v-icon name="mdi-map-marker" />
-                <span>Musterstraße 123, 80331 München</span>
+                <span>Landshuter Straße 194, 94315 Straubing</span>
               </div>
             </div>
             <button class="contact-button">{{ buttonText }}</button>

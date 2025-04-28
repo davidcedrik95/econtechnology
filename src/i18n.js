@@ -135,7 +135,12 @@ const messages = {
     amtsgericht_straubing: 'Amtsgericht Straubing',
     managing_directors: 'Managing Directors',
     ghassen_bouaziz: 'Ghassen Bouaziz',
+    ghassen_position: 'Electrical Engineer (Electromechanics)',
+    ghassen_description: 'Experienced electrical engineer with extensive expertise in electromechanics.',
     martin_thalhammer: 'Martin Thalhammer',
+    martin_position: 'State-certified Technician (Mechatronics)',
+    martin_description: 'Expert in mechatronics with many years of experience in the industry.',
+    management_team: 'The Management Team',
     company_location: 'Company Location',
   },
   de: {
@@ -233,9 +238,7 @@ const messages = {
     supervisory_authority: 'Aufsichtsbehörde',
     amtsgericht_straubing: 'Amtsgericht Straubing',
     managing_directors: 'Geschäftsführer',
-    ghassen_bouaziz: 'Ghassen Bouaziz (Elektroingenieur)',
-    martin_thalhammer: 'Martin Thalhammer (staatlich geprüfter Techniker, Mechatronik)',
-
+    
     // Neue Service Titel
     komplettlosungen: 'Komplettlösungen',
     wallbox: 'Wallbox',
@@ -295,7 +298,12 @@ const messages = {
     amtsgericht_straubing: 'Amtsgericht Straubing',
     managing_directors: 'Geschäftsführer',
     ghassen_bouaziz: 'Ghassen Bouaziz',
+    ghassen_position: 'Elektroingenieur (Elektromechanik)',
+    ghassen_description: 'Erfahrener Elektroingenieur mit umfangreicher Expertise in Elektromechanik.',
     martin_thalhammer: 'Martin Thalhammer',
+    martin_position: 'staatlich geprüfter Techniker (Mechatronik)',
+    martin_description: 'Fachmann in Mechatronik mit langjähriger Erfahrung in der Industrie.',
+    management_team: 'Die Geschäftsführung',
     company_location: 'Firmenstandort',
   }
 }
