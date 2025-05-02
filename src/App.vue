@@ -6,7 +6,7 @@
         <router-view></router-view>
       </v-container>
     </v-main>
-    <Footer/> <!-- Ajout du footer ici -->
+    <Footer/>
   </v-app>
 </template>
 

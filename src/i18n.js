@@ -14,6 +14,12 @@ const messages = {
     language: 'Language',
     deutsch: 'German',
     english: 'English',
+    contact_us:'Contact us',
+
+    our_partners_title: "We are your partner for every project",
+    our_partners_subtitle: "Strong partnerships coming soon.",
+    partners_coming_soon: "Our partners will be announced shortly. Stay tuned!",
+
 
     innovative_energy_solutions: 'Innovative Energy Solutions',
     econ_technology: 'ECON Technology: Your Partner for the Future',
@@ -142,6 +148,26 @@ const messages = {
     martin_description: 'Expert in mechatronics with many years of experience in the industry.',
     management_team: 'The Management Team',
     company_location: 'Company Location',
+
+    faq_title: "Frequently Asked Questions",
+    faq_question_1: "How does the free consultation work?",
+    faq_answer_1: "Simply contact us via the form or phone. We'll schedule a session tailored to your needs.",
+    faq_question_2: "What regions do you operate in?",
+    faq_answer_2: "We operate across Germany and can support projects across Europe upon request.",
+    faq_question_3: "Do you offer installation services?",
+    faq_answer_3: "Yes, we offer turnkey installations through our certified partner network.",
+
+    "testimonials": "Testimonials",
+    "testimonial_1_quote": "Econ Technology carried out our project efficiently and professionally.",
+    "testimonial_1_name": "Max Müller",
+    "testimonial_1_role": "CEO, GreenTech GmbH",
+    "testimonial_2_quote": "The collaboration was excellent – highly recommended!",
+    "testimonial_2_name": "Anna Weber",
+    "testimonial_2_role": "Project Manager, SolarHaus AG",
+    "testimonial_3_quote": "Top-level competence and reliability.",
+    "testimonial_3_name": "Tom Schneider",
+    "testimonial_3_role": "Engineer, Energie Zukunft e.V.",
+
   },
   de: {
     // Hero und Startseite
@@ -156,6 +182,12 @@ const messages = {
     language: 'Sprache',
     deutsch: 'Deutsch',
     english: 'Englisch',
+    contact_us:'Kontaktieren Sie uns',
+
+    our_partners_title: "Wir sind Ihr Partner für jedes Projekt",
+    our_partners_subtitle: "Starke Partnerschaften folgen in Kürze.",
+    partners_coming_soon: "Unsere Partner werden in Kürze bekannt gegeben. Bleiben Sie dran!",
+
 
     innovative_energy_solutions: 'Innovative Energielösungen',
     econ_technology: 'ECON Technology: Ihr Partner für die Zukunft',
@@ -305,6 +337,28 @@ const messages = {
     martin_description: 'Fachmann in Mechatronik mit langjähriger Erfahrung in der Industrie.',
     management_team: 'Die Geschäftsführung',
     company_location: 'Firmenstandort',
+
+    faq_title: "Häufig gestellte Fragen",
+    faq_question_1: "Wie funktioniert die kostenlose Beratung?",
+    faq_answer_1: "Kontaktieren Sie uns einfach über das Formular oder telefonisch. Wir vereinbaren einen Termin nach Ihren Bedürfnissen.",
+    faq_question_2: "In welchen Regionen sind Sie tätig?",
+    faq_answer_2: "Wir sind in ganz Deutschland tätig und unterstützen Projekte europaweit auf Anfrage.",
+    faq_question_3: "Bieten Sie auch Installationsdienste an?",
+    faq_answer_3: "Ja, wir bieten schlüsselfertige Installationen über unser zertifiziertes Partnernetzwerk an.",
+
+    
+      "testimonials": "Kundenbewertungen",
+      "testimonial_1_quote": "Econ Technology hat unser Projekt effizient und professionell umgesetzt.",
+      "testimonial_1_name": "Max Müller",
+      "testimonial_1_role": "CEO, GreenTech GmbH",
+      "testimonial_2_quote": "Die Zusammenarbeit war hervorragend – sehr empfehlenswert!",
+      "testimonial_2_name": "Anna Weber",
+      "testimonial_2_role": "Projektleiterin, SolarHaus AG",
+      "testimonial_3_quote": "Kompetenz und Zuverlässigkeit auf höchstem Niveau.",
+      "testimonial_3_name": "Tom Schneider",
+      "testimonial_3_role": "Ingenieur, Energie Zukunft e.V."
+    
+
   }
 }
 
