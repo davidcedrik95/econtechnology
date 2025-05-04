@@ -160,7 +160,85 @@
     "monitoring": "Überwachung",
     "solardach": "Solardach",
     "elektroinstallation": "Elektroinstallation",
-    "erweiterbarkeit": "Erweiterbarkeit"
+    "erweiterbarkeit": "Erweiterbarkeit",
+    
+    "elektrotechnikItem": {
+    "hero": {
+      "title": "Elektrotechnik",
+      "subtitle": "Innovative Lösungen für Ihre elektrotechnischen Herausforderungen"
+    },
+    "intro": {
+      "title": "Unsere elektrotechnischen Dienstleistungen",
+      "description": "Als erfahrener Partner bieten wir maßgeschneiderte Lösungen in der Elektrotechnik für Industrie, Gewerbe und öffentliche Einrichtungen. Unsere Expertise reicht von der Planung bis zur Inbetriebnahme komplexer elektrotechnischer Systeme."
+    },
+    "services": [
+      {
+        "title": "Planung und Projektierung",
+        "description": "Individuelle Planung elektrotechnischer Anlagen nach aktuellen Normen und Standards."
+      },
+      {
+        "title": "Installation und Montage",
+        "description": "Fachgerechte Installation von elektrischen Anlagen durch zertifizierte Elektrofachkräfte."
+      },
+      {
+        "title": "Inbetriebnahme",
+        "description": "Sicherstellung der einwandfreien Funktion aller elektrischen Systeme vor der Übergabe."
+      },
+      {
+        "title": "Wartung und Service",
+        "description": "Regelmäßige Wartung und Inspektion für langfristige Betriebssicherheit."
+      },
+      {
+        "title": "Störungsanalyse",
+        "description": "Schnelle Identifikation und Behebung von Störungen in elektrischen Systemen."
+      },
+      {
+        "title": "Modernisierung",
+        "description": "Upgrade veralteter elektrotechnischer Anlagen auf den neuesten Stand der Technik."
+      }
+    ],
+    "features": {
+      "title": "Energieeffizienz und Nachhaltigkeit",
+      "description": "Wir entwickeln elektrotechnische Konzepte, die nicht nur leistungsstark, sondern auch energieeffizient und nachhaltig sind. Durch den Einsatz modernster Technologien helfen wir unseren Kunden, Energiekosten zu senken und Umweltziele zu erreichen.",
+      "items": [
+        "Energieeffizienzanalysen",
+        "Nachhaltige Stromversorgungskonzepte",
+        "Integration erneuerbarer Energien",
+        "Smart-Grid-Lösungen"
+      ],
+      "imageAlt": "Energieeffizienz"
+    },
+    "projects": {
+      "title": "Referenzprojekte",
+      "list": [
+        {
+          "title": "Industrieanlage in München",
+          "description": "Komplette elektrotechnische Ausrüstung einer neuen Produktionshalle"
+        },
+        {
+          "title": "Bürokomplex Frankfurt",
+          "description": "Modernisierung der elektrischen Infrastruktur mit Smart-Building-Technologie"
+        },
+        {
+          "title": "Krankenhaus Berlin",
+          "description": "Notstromversorgung und unterbrechungsfreie Stromversorgung für kritische Bereiche"
+        }
+      ]
+    },
+    "tags": {
+      "industry": "Industrie",
+      "newConstruction": "Neubau",
+      "energyEfficiency": "Energieeffizienz",
+      "buildingTechnology": "Gebäudetechnik",
+      "modernization": "Modernisierung",
+      "medicalTechnology": "Medizintechnik",
+      "safety": "Sicherheit"
+    },
+    "contact": {
+      "title": "Haben Sie Fragen zu unseren elektrotechnischen Dienstleistungen?",
+      "button": "Kontakt aufnehmen"
+    }
+  }
     
     
   }

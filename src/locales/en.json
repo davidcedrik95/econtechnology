@@ -159,6 +159,85 @@
     "elektroinstallation": "Electrical installation",
     "erweiterbarkeit": "Expandability",
     "opening_hours_saturday": "Saturday: 9:00 AM–1:00 PM",
-    "opening_hours_sunday": "Sunday: Closed"
+    "opening_hours_sunday": "Sunday: Closed",
+
+    
+    "elektrotechnikItem": {
+    "hero": {
+      "title": "Electrical Engineering",
+      "subtitle": "Innovative solutions for your electrical engineering challenges"
+    },
+    "intro": {
+      "title": "Our electrical engineering services",
+      "description": "As an experienced partner, we offer tailored solutions in electrical engineering for industry, commerce and public institutions. Our expertise ranges from planning to commissioning of complex electrical systems."
+    },
+    "services": [
+      {
+        "title": "Planning and Project Design",
+        "description": "Custom planning of electrical systems according to current norms and standards."
+      },
+      {
+        "title": "Installation and Assembly",
+        "description": "Professional installation of electrical systems by certified electrical specialists."
+      },
+      {
+        "title": "Commissioning",
+        "description": "Ensuring flawless operation of all electrical systems before handover."
+      },
+      {
+        "title": "Maintenance and Service",
+        "description": "Regular maintenance and inspection for long-term operational safety."
+      },
+      {
+        "title": "Fault Analysis",
+        "description": "Quick identification and resolution of faults in electrical systems."
+      },
+      {
+        "title": "Modernization",
+        "description": "Upgrading outdated electrical systems to the latest technology standards."
+      }
+    ],
+    "features": {
+      "title": "Energy Efficiency and Sustainability",
+      "description": "We develop electrical engineering concepts that are not only powerful but also energy efficient and sustainable. By using state-of-the-art technologies, we help our customers reduce energy costs and achieve environmental goals.",
+      "items": [
+        "Energy efficiency analyses",
+        "Sustainable power supply concepts",
+        "Integration of renewable energies",
+        "Smart grid solutions"
+      ],
+      "imageAlt": "Energy efficiency"
+    },
+    "projects": {
+      "title": "Reference Projects",
+      "list": [
+        {
+          "title": "Industrial plant in Munich",
+          "description": "Complete electrical equipment for a new production hall"
+        },
+        {
+          "title": "Office complex in Frankfurt",
+          "description": "Modernization of electrical infrastructure with smart building technology"
+        },
+        {
+          "title": "Hospital in Berlin",
+          "description": "Emergency power supply and uninterruptible power supply for critical areas"
+        }
+      ]
+    },
+    "tags": {
+      "industry": "Industry",
+      "newConstruction": "New construction",
+      "energyEfficiency": "Energy efficiency",
+      "buildingTechnology": "Building technology",
+      "modernization": "Modernization",
+      "medicalTechnology": "Medical technology",
+      "safety": "Safety"
+    },
+    "contact": {
+      "title": "Do you have questions about our electrical engineering services?",
+      "button": "Contact us"
+    }
+  }
 
   }

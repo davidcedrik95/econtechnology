@@ -1,84 +1,87 @@
+<!-- TEMPLATE SECTION -->
 <template>
   <div class="elektrotechnik-view">
+    <!-- Hero Banner Section -->
     <HeroSection
-      title="Elektrotechnik"
-      subtitle="Innovative Lösungen für Ihre elektrotechnischen Herausforderungen"
+      :title="$t('elektrotechnikItem.hero.title')"
+      :subtitle="$t('elektrotechnikItem.hero.subtitle')"
       background-image="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
     />
 
+    <!-- Introduction Section -->
     <section class="intro-section">
       <div class="container">
-        <h2 class="section-title">Unsere elektrotechnischen Dienstleistungen</h2>
+        <h2 class="section-title">{{ $t('elektrotechnikItem.intro.title') }}</h2>
         <p class="section-description">
-          Als erfahrener Partner bieten wir maßgeschneiderte Lösungen in der Elektrotechnik 
-          für Industrie, Gewerbe und öffentliche Einrichtungen. Unsere Expertise reicht von 
-          der Planung bis zur Inbetriebnahme komplexer elektrotechnischer Systeme.
+          {{ $t('elektrotechnikItem.intro.description') }}
         </p>
       </div>
     </section>
 
+    <!-- Services Section -->
     <section class="services-section">
       <div class="container">
         <div class="service-cards">
           <ServiceCard
             v-for="(service, index) in services"
             :key="index"
-            :title="service.title"
-            :description="service.description"
+            :title="$t(`elektrotechnikItem.services.${index}.title`)"
+            :description="$t(`elektrotechnikItem.services.${index}.description`)"
             :icon="service.icon"
           />
         </div>
       </div>
     </section>
 
+    <!-- Features Section -->
     <section class="feature-section">
       <div class="container">
         <div class="feature-grid">
           <div class="feature-content">
-            <h2>Energieeffizienz und Nachhaltigkeit</h2>
-            <p>
-              Wir entwickeln elektrotechnische Konzepte, die nicht nur leistungsstark, 
-              sondern auch energieeffizient und nachhaltig sind. Durch den Einsatz modernster 
-              Technologien helfen wir unseren Kunden, Energiekosten zu senken und 
-              Umweltziele zu erreichen.
-            </p>
+            <h2>{{ $t('elektrotechnikItem.features.title') }}</h2>
+            <p>{{ $t('elektrotechnikItem.features.description') }}</p>
+            
+            <!-- Feature List -->
             <ul class="feature-list">
-              <li>Energieeffizienzanalysen</li>
-              <li>Nachhaltige Stromversorgungskonzepte</li>
-              <li>Integration erneuerbarer Energien</li>
-              <li>Smart-Grid-Lösungen</li>
+              <li v-for="(item, index) in featureItems" :key="index">
+                <span class="check-icon">✓</span>
+                <span class="item-text">{{ item }}</span>
+              </li>
             </ul>
           </div>
           <div class="feature-image">
-            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Energieeffizienz">
+            <img :src="featureImage" :alt="$t('elektrotechnikItem.features.imageAlt')">
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Projects Section -->
     <section class="projects-section">
       <div class="container">
-        <h2 class="section-title">Referenzprojekte</h2>
+        <h2 class="section-title">{{ $t('elektrotechnikItem.projects.title') }}</h2>
         <div class="projects-grid">
           <ProjectCard
             v-for="(project, index) in projects"
             :key="index"
-            :title="project.title"
-            :description="project.description"
+            :title="$t(`elektrotechnikItem.projects.list.${index}.title`)"
+            :description="$t(`elektrotechnikItem.projects.list.${index}.description`)"
             :image="project.image"
-            :tags="project.tags"
+            :tags="project.tags.map(tag => $t(`elektrotechnikItem.tags.${tag}`))"
           />
         </div>
       </div>
     </section>
 
+    <!-- Contact Section -->
     <ContactSection
-      title="Haben Sie Fragen zu unseren elektrotechnischen Dienstleistungen?"
-      button-text="Kontakt aufnehmen"
+      :title="$t('elektrotechnikItem.contact.title')"
+      :button-text="$t('elektrotechnikItem.contact.button')"
     />
   </div>
 </template>
 
+<!-- SCRIPT SECTION -->
 <script>
 import HeroSection from '@/components/HeroSection.vue';
 import ServiceCard from '@/components/ServiceCard.vue';
@@ -95,74 +98,61 @@ export default {
   },
   data() {
     return {
+      // Static image URLs
+      featureImage: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+     
+      // Services data (icons only)
       services: [
-        {
-          title: "Planung und Projektierung",
-          description: "Individuelle Planung elektrotechnischer Anlagen nach aktuellen Normen und Standards.",
-          icon: "mdi-drawing"
-        },
-        {
-          title: "Installation und Montage",
-          description: "Fachgerechte Installation von elektrischen Anlagen durch zertifizierte Elektrofachkräfte.",
-          icon: "mdi-tools"
-        },
-        {
-          title: "Inbetriebnahme",
-          description: "Sicherstellung der einwandfreien Funktion aller elektrischen Systeme vor der Übergabe.",
-          icon: "mdi-power-plug"
-        },
-        {
-          title: "Wartung und Service",
-          description: "Regelmäßige Wartung und Inspektion für langfristige Betriebssicherheit.",
-          icon: "mdi-cog"
-        },
-        {
-          title: "Störungsanalyse",
-          description: "Schnelle Identifikation und Behebung von Störungen in elektrischen Systemen.",
-          icon: "mdi-alert-octagon"
-        },
-        {
-          title: "Modernisierung",
-          description: "Upgrade veralteter elektrotechnischer Anlagen auf den neuesten Stand der Technik.",
-          icon: "mdi-update"
-        }
+        { icon: "mdi-drawing" },
+        { icon: "mdi-tools" },
+        { icon: "mdi-power-plug" },
+        { icon: "mdi-cog" },
+        { icon: "mdi-alert-octagon" },
+        { icon: "mdi-update" }
       ],
+      
+      // Projects data
       projects: [
         {
-          title: "Industrieanlage in München",
-          description: "Komplette elektrotechnische Ausrüstung einer neuen Produktionshalle",
           image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-          tags: ["Industrie", "Neubau", "Energieeffizienz"]
+          tags: ["industry", "newConstruction", "energyEfficiency"]
         },
         {
-          title: "Bürokomplex Frankfurt",
-          description: "Modernisierung der elektrischen Infrastruktur mit Smart-Building-Technologie",
           image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-          tags: ["Gebäudetechnik", "Modernisierung"]
+          tags: ["buildingTechnology", "modernization"]
         },
         {
-          title: "Krankenhaus Berlin",
-          description: "Notstromversorgung und unterbrechungsfreie Stromversorgung für kritische Bereiche",
           image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-          tags: ["Medizintechnik", "Sicherheit"]
+          tags: ["medicalTechnology", "safety"]
         }
       ]
     }
+  },
+  computed: {
+  // Computed property for feature items with fallback
+  featureItems() {
+    const items = this.$t('elektrotechnikItem.features.items');
+    if (Array.isArray(items) && items.length > 0) {
+      return items;
+    } else {
+      console.log("Fallback to default items:", ['Item par défaut']);
+      return ['Item par défaut']; // Retourne une valeur par défaut si la traduction est vide
+    }
   }
+}
+
+
 }
 </script>
 
+<!-- STYLE SECTION -->
 <style scoped>
+/* Base Styles */
 .elektrotechnik-view {
   color: #333;
 }
 
-.intro-section {
-  padding: 80px 0;
-  text-align: center;
-  background-color: #f9f9f9;
-}
-
+/* Section Styles */
 .section-title {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
@@ -190,6 +180,14 @@ export default {
   color: #666;
 }
 
+/* Intro Section */
+.intro-section {
+  padding: 80px 0;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+/* Services Section */
 .services-section {
   padding: 80px 0;
   background-color: white;
@@ -202,6 +200,7 @@ export default {
   margin-top: 50px;
 }
 
+/* Features Section */
 .feature-section {
   padding: 80px 0;
   background-color: #f5f7fa;
@@ -228,23 +227,35 @@ export default {
 }
 
 .feature-list {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
+  margin: 1.5rem 0;
 }
 
 .feature-list li {
-  position: relative;
-  padding-left: 30px;
-  margin-bottom: 15px;
-  font-size: 1.1rem;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.8rem;
 }
 
-.feature-list li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
+.check-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.75rem;
+  margin-top: 0.15rem;
   color: #42b983;
   font-weight: bold;
+  flex-shrink: 0;
+}
+
+.item-text {
+  flex: 1;
+  display: inline-block;
+  vertical-align: top;
+  line-height: 1.5;
 }
 
 .feature-image img {
@@ -254,6 +265,7 @@ export default {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
+/* Projects Section */
 .projects-section {
   padding: 80px 0;
   background-color: white;
@@ -266,6 +278,7 @@ export default {
   margin-top: 50px;
 }
 
+/* Responsive Styles */
 @media (max-width: 768px) {
   .feature-grid {
     grid-template-columns: 1fr;

@@ -159,6 +159,84 @@
     "elektroinstallation": "Installation électrique",
     "erweiterbarkeit": "Extensibilité",
     "opening_hours_saturday": "Samedi : 9h00–13h00",
-    "opening_hours_sunday": "Dimanche : Fermé"
+    "opening_hours_sunday": "Dimanche : Fermé",
+
+    "elektrotechnikItem": {
+    "hero": {
+      "title": "Génie électrique",
+      "subtitle": "Des solutions innovantes pour vos défis électrotechniques"
+    },
+    "intro": {
+      "title": "Nos services en électrotechnique",
+      "description": "En tant que partenaire expérimenté, nous proposons des solutions sur mesure en électrotechnique pour l'industrie, le commerce et les institutions publiques. Notre expertise va de la planification à la mise en service de systèmes électrotechniques complexes."
+    },
+    "services": [
+      {
+        "title": "Planification et conception",
+        "description": "Planification personnalisée des installations électriques selon les normes et standards actuels."
+      },
+      {
+        "title": "Installation et montage",
+        "description": "Installation professionnelle des installations électriques par des électriciens certifiés."
+      },
+      {
+        "title": "Mise en service",
+        "description": "Vérification du bon fonctionnement de tous les systèmes électriques avant la remise."
+      },
+      {
+        "title": "Maintenance et service",
+        "description": "Maintenance et inspection régulières pour une sécurité opérationnelle à long terme."
+      },
+      {
+        "title": "Analyse des pannes",
+        "description": "Identification et résolution rapides des pannes dans les systèmes électriques."
+      },
+      {
+        "title": "Modernisation",
+        "description": "Mise à niveau des installations électriques obsolètes selon les dernières normes technologiques."
+      }
+    ],
+      "features": {
+      "title": "Efficacité énergétique et durabilité",
+      "description": "Nous développons des concepts électrotechniques non seulement performants mais aussi économes en énergie et durables.",
+      "items": [
+        "Analyses d'efficacité énergétique",
+        "Concepts d'alimentation électrique durable",
+        "Intégration des énergies renouvelables",
+        "Solutions de smart grid"
+      ],
+      "imageAlt": "Efficacité énergétique"
+      },
+    "projects": {
+      "title": "Projets de référence",
+      "list": [
+        {
+          "title": "Usine industrielle à Munich",
+          "description": "Équipement électrique complet pour une nouvelle halle de production"
+        },
+        {
+          "title": "Complexe de bureaux à Francfort",
+          "description": "Modernisation de l'infrastructure électrique avec la technologie smart building"
+        },
+        {
+          "title": "Hôpital à Berlin",
+          "description": "Alimentation de secours et alimentation sans interruption pour les zones critiques"
+        }
+      ]
+    },
+    "tags": {
+      "industry": "Industrie",
+      "newConstruction": "Nouvelle construction",
+      "energyEfficiency": "Efficacité énergétique",
+      "buildingTechnology": "Technologie du bâtiment",
+      "modernization": "Modernisation",
+      "medicalTechnology": "Technologie médicale",
+      "safety": "Sécurité"
+    },
+    "contact": {
+      "title": "Vous avez des questions sur nos services en électrotechnique ?",
+      "button": "Nous contacter"
+    }
+  }
 
   }
