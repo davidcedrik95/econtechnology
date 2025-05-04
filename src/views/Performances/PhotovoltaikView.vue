@@ -40,6 +40,7 @@
         <!-- Sidebar -->
         <div class="sidebar">
           <!-- Advisor Card -->
+      
           <div class="sidebar-card advisor-card">
             <div class="advisor-header">
               <v-icon icon="mdi-headset" size="64" />
@@ -52,11 +53,12 @@
                 {{ $t('call_us') }}
               </button>
               <p class="contact-detail">
-                <v-icon icon="mdi-phone" /> 01234 567890
+                <v-icon icon="mdi-phone" /> +49 15561 050775
               </p>
               <p class="contact-hours">
                 <strong>{{ $t('opening_hours') }}:</strong><br />
-                Mo–Fr: 9:00–18:00 Uhr
+                <strong>{{ $t('opening_hours_saturday') }}</strong><br />
+                <strong>{{ $t('opening_hours_sunday') }}</strong>
               </p>
             </div>
           </div>

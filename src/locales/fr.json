@@ -157,6 +157,8 @@
     "monitoring": "Surveillance",
     "solardach": "Toit solaire",
     "elektroinstallation": "Installation électrique",
-    "erweiterbarkeit": "Extensibilité"
+    "erweiterbarkeit": "Extensibilité",
+    "opening_hours_saturday": "Samedi : 9h00–13h00",
+    "opening_hours_sunday": "Dimanche : Fermé"
 
   }

@@ -227,17 +227,20 @@ const submitForm = async () => {
   position: relative;
   overflow: hidden;
   background-color: #f8f9fa;
+  padding-top: 60px; /* Espace pour l'animation */
 }
 
-/* Animation de l'enveloppe-voiture */
+/* Animation de l'enveloppe-voiture - Version parfaitement centrée */
 .envelope-animation {
   position: absolute;
   top: 20px;
-  left: -100px;
+  left: 0;
+  right: 0;
   width: 200px;
   height: 100px;
-  animation: drive-in 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  margin: 0 auto;
   z-index: 10;
+  animation: envelope-drive 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .envelope {
@@ -248,7 +251,7 @@ const submitForm = async () => {
   animation: 
     close-envelope 2s 1s ease-in-out infinite,
     bounce 0.5s ease-in-out infinite alternate;
-    color: #dd891b;
+  color: #dd891b;
 }
 
 .tire {
@@ -279,18 +282,19 @@ const submitForm = async () => {
   border-radius: 10px;
 }
 
-@keyframes drive-in {
+/* Nouvelle animation parfaitement centrée */
+@keyframes envelope-drive {
   0% {
-    transform: translateX(-100px);
+    transform: translateX(-100vw);
   }
   20% {
-    transform: translateX(calc(50vw - 100px));
+    transform: translateX(0);
   }
   80% {
-    transform: translateX(calc(50vw - 100px));
+    transform: translateX(0);
   }
   100% {
-    transform: translateX(calc(100vw + 100px));
+    transform: translateX(100vw);
   }
 }
 
@@ -320,7 +324,6 @@ const submitForm = async () => {
     transform: rotate(360deg);
   }
 }
-
 
 /* Floating Particles */
 .particles {
@@ -393,5 +396,69 @@ const submitForm = async () => {
 .info-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Responsive Mobile */
+@media (max-width: 600px) {
+  .contact-container {
+    padding-top: 50px;
+  }
+  
+  .envelope-animation {
+    width: 150px;
+    height: 80px;
+    top: 10px;
+    animation: mobile-envelope-drive 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  
+  @keyframes mobile-envelope-drive {
+    0% {
+      transform: translateX(-100vw);
+    }
+    25% {
+      transform: translateX(0);
+    }
+    75% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100vw);
+    }
+  }
+  
+  .envelope {
+    left: 40px;
+    font-size: 48px;
+  }
+  
+  .rear-tire {
+    left: 15px;
+    width: 25px;
+    height: 25px;
+  }
+  
+  .front-tire {
+    left: 90px;
+    width: 25px;
+    height: 25px;
+  }
+  
+  .car-body {
+    left: 25px;
+    width: 80px;
+  }
+  
+  .gradient-text {
+    font-size: 2rem !important;
+  }
+  
+  .glass-card {
+    padding: 20px 12px !important;
+  }
+  
+  /* Optionnel - désactive les particules sur mobile */
+  .particles {
+    display: none;
+  }
 }
 </style>

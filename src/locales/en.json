@@ -76,7 +76,7 @@
     "your_advisor": "Your Advisor",
     "advisor_desc": "We accompany you from the initial consultation to the completed project.",
     "call_us": "Call us",
-    "phone_number": "01234 567890",
+    "phone_number": "+49 15561 050775",
     "opening_hours": "Mon–Fri: 9:00 am–6:00 pm",
     "switch_to_solar": "Switch to Solar",
     "discover_solutions": "Discover our solutions for a sustainable future.",
@@ -157,6 +157,8 @@
     "monitoring": "Monitoring",
     "solardach": "Solar roof",
     "elektroinstallation": "Electrical installation",
-    "erweiterbarkeit": "Expandability"
+    "erweiterbarkeit": "Expandability",
+    "opening_hours_saturday": "Saturday: 9:00 AM–1:00 PM",
+    "opening_hours_sunday": "Sunday: Closed"
 
   }

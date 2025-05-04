@@ -49,6 +49,6 @@ const { locale } = useI18n()
 const languages = computed(() => [
   { code: 'de', icon: 'mdi-flag', label: 'deutsch' },
   { code: 'en', icon: 'mdi-flag-outline', label: 'english' },
-  { code: 'fr', icon: 'mdi-flag', label: 'français' }
+  { code: 'fr', icon: 'mdi-flag', label: 'french' }
 ])
 </script>

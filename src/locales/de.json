@@ -149,5 +149,18 @@
     "message_required": "Nachricht ist erforderlich",
     "message_min_length": "Nachricht muss mindestens 10 Zeichen haben",
     "message_sent_success": "Ihre Nachricht wurde erfolgreich gesendet!",
-    "message_sent_error": "Fehler beim Senden der Nachricht. Bitte versuchen Sie es später erneut."
+    "message_sent_error": "Fehler beim Senden der Nachricht. Bitte versuchen Sie es später erneut.",
+    "opening_hours_saturday": "Samstag: 9:00–13:00 Uhr",
+    "opening_hours_sunday": "Sonntag: Geschlossen",
+    
+    "komplettlosungen": "Komplettlösungen",
+    "wallbox": "Wallbox",
+    "energiespeicher": "Energiespeicher",
+    "warmepumpe": "Wärmepumpe",
+    "monitoring": "Überwachung",
+    "solardach": "Solardach",
+    "elektroinstallation": "Elektroinstallation",
+    "erweiterbarkeit": "Erweiterbarkeit"
+    
+    
   }

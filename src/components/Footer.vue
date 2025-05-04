@@ -17,8 +17,8 @@
           <v-btn to="/terms-of-service" variant="text" class="footer-link">{{ $t('terms_of_service') }}</v-btn>
           <div class="social-links">
             <v-btn icon href="https://instagram.com" target="_blank" class="social-btn"><v-icon>mdi-instagram</v-icon></v-btn>
-            <v-btn icon href="mailto:contact@econtechnology.com" class="social-btn"><v-icon>mdi-email</v-icon></v-btn>
-            <v-btn icon href="tel:+123456789" class="social-btn"><v-icon>mdi-phone</v-icon></v-btn>
+            <v-btn icon href="mailto:info@econ-technology.de" class="social-btn"><v-icon>mdi-email</v-icon></v-btn>
+            <v-btn icon href="tel:+49 15561 050775" class="social-btn"><v-icon>mdi-phone</v-icon></v-btn>
           </div>
         </v-col>
       </v-row>
