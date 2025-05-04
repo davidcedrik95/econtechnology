@@ -18,7 +18,7 @@
                 <span>Landshuter Straße 194, 94315 Straubing</span>
               </div>
             </div>
-            <button class="contact-button">{{ buttonText }}</button>
+            <button class="contact-button"  @click="goToContactView">{{ buttonText }}</button>
           </div>
         </div>
       </div>
@@ -37,7 +37,12 @@
         type: String,
         required: true
       }
+    },
+    methods: {
+    goToContactView() {
+      this.$router.push('/contact'); 
     }
+  }
   }
   </script>
   

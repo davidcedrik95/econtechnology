@@ -180,7 +180,7 @@ export default {
   methods: {
     openContactForm() {
       // Implementation for opening contact form/modal
-      this.$emit('open-contact');
+      this.$router.push('/contact'); 
     }
   }
 }
