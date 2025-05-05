@@ -198,15 +198,9 @@
     ],
       "features": {
       "title": "Efficacité énergétique et durabilité",
-      "description": "Nous développons des concepts électrotechniques non seulement performants mais aussi économes en énergie et durables.",
-      "items": [
-        "Analyses d'efficacité énergétique",
-        "Concepts d'alimentation électrique durable",
-        "Intégration des énergies renouvelables",
-        "Solutions de smart grid"
-      ],
-      "imageAlt": "Efficacité énergétique"
-      },
+      "description": "Nous développons des concepts électrotechniques non seulement performants mais aussi économes en énergie et durables."
+      
+    },
     "projects": {
       "title": "Projets de référence",
       "list": [

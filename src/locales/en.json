@@ -200,12 +200,6 @@
     "features": {
       "title": "Energy Efficiency and Sustainability",
       "description": "We develop electrical engineering concepts that are not only powerful but also energy efficient and sustainable. By using state-of-the-art technologies, we help our customers reduce energy costs and achieve environmental goals.",
-      "items": [
-        "Energy efficiency analyses",
-        "Sustainable power supply concepts",
-        "Integration of renewable energies",
-        "Smart grid solutions"
-      ],
       "imageAlt": "Energy efficiency"
     },
     "projects": {

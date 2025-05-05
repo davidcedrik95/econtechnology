@@ -129,17 +129,41 @@ export default {
     }
   },
   computed: {
-  // Computed property for feature items with fallback
-  featureItems() {
-    const items = this.$t('elektrotechnikItem.features.items');
-    if (Array.isArray(items) && items.length > 0) {
-      return items;
-    } else {
-      console.log("Fallback to default items:", ['Item par défaut']);
-      return ['Item par défaut']; // Retourne une valeur par défaut si la traduction est vide
+    featureItems() {
+      // Get items for current language
+      const items = this.$t('elektrotechnikItem.features.items');
+      
+      // Fallback items for each language
+      const fallbackItems = {
+        en: [
+          "Energy efficiency analysis",
+          "Sustainable power supply concepts",
+          "Integration of renewable energies",
+          "Smart grid solutions"
+        ],
+        de: [
+          "Energieeffizienzanalysen",
+          "Nachhaltige Stromversorgungskonzepte",
+          "Integration erneuerbarer Energien",
+          "Smart-Grid-Lösungen"
+        ],
+        fr: [
+          "Analyses d'efficacité énergétique",
+          "Concepts d'alimentation électrique durable",
+          "Intégration des énergies renouvelables",
+          "Solutions de smart grid"
+        ]
+      };
+
+      // Check if items exist and are in correct format
+      if (Array.isArray(items) && items.length > 0) {
+        return items;
+      }
+      
+      // Return fallback based on current language
+      return fallbackItems[this.$i18n.locale] || fallbackItems.en;
     }
   }
-}
 
 
 }

@@ -200,12 +200,6 @@
     "features": {
       "title": "Energieeffizienz und Nachhaltigkeit",
       "description": "Wir entwickeln elektrotechnische Konzepte, die nicht nur leistungsstark, sondern auch energieeffizient und nachhaltig sind. Durch den Einsatz modernster Technologien helfen wir unseren Kunden, Energiekosten zu senken und Umweltziele zu erreichen.",
-      "items": [
-        "Energieeffizienzanalysen",
-        "Nachhaltige Stromversorgungskonzepte",
-        "Integration erneuerbarer Energien",
-        "Smart-Grid-Lösungen"
-      ],
       "imageAlt": "Energieeffizienz"
     },
     "projects": {
