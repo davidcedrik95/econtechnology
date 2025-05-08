@@ -232,7 +232,88 @@
       "title": "Haben Sie Fragen zu unseren elektrotechnischen Dienstleistungen?",
       "button": "Kontakt aufnehmen"
     }
+  },
+
+  "industrialTech": {
+    "hero": {
+      "title": "Industrietechnik",
+      "subtitle": "Innovative Lösungen für industrielle Herausforderungen"
+    },
+    "intro": {
+      "title": "Maßgeschneiderte Lösungen für die Industrie",
+      "description": "Unsere Expertise in der Industrietechnik umfasst die Entwicklung und Implementierung von hochwertigen technischen Lösungen für verschiedene industrielle Anwendungen. Wir bieten individuelle Konzepte, die genau auf Ihre Anforderungen zugeschnitten sind.",
+      "imageAlt": "Industrielle Technologie"
+    },
+    "services": {
+      "title": "Unsere Leistungen",
+      "list": [
+        {
+          "title": "Maschinenbau",
+          "description": "Konstruktion und Fertigung von maßgeschneiderten Maschinen und Anlagen"
+        },
+        {
+          "title": "Automatisierung",
+          "description": "Modernste Automatisierungslösungen für effiziente Produktionsprozesse"
+        },
+        {
+          "title": "Steuerungstechnik",
+          "description": "Individuelle Steuerungs- und Regelungstechnik für komplexe Systeme"
+        },
+        {
+          "title": "Anlagenbau",
+          "description": "Planung und Realisierung kompletter industrieller Anlagen"
+        },
+        {
+          "title": "Instandhaltung",
+          "description": "Wartung und Optimierung bestehender industrieller Systeme"
+        },
+        {
+          "title": "Projektmanagement",
+          "description": "Umfassende Betreuung Ihrer Industrieprojekte von der Planung bis zur Umsetzung"
+        }
+      ]
+    },
+    "technologies": {
+  "title": "Technologiekompetenz",
+  "list": [
+    {
+      "name": "Industrie 4.0",
+      "description": "Wir implementieren intelligente, vernetzte Systeme für die Fabrik der Zukunft.",
+      "features": [
+        "IoT-Integration für Maschinen",
+        "Echtzeit-Datenanalyse",
+        "Predictive Maintenance Lösungen",
+        "Digitale Zwillinge"
+      ]
+    },
+    {
+      "name": "Robotik",
+      "description": "Automatisierte Lösungen für präzise und effiziente Produktionsprozesse.",
+      "features": [
+        "Kollaborative Roboter (Cobots)",
+        "Industrieroboter Integration",
+        "Visionsysteme",
+        "Handlingsysteme"
+      ]
+    },
+    {
+      "name": "Energieeffizienz",
+      "description": "Nachhaltige Lösungen zur Optimierung des Energieverbrauchs in industriellen Prozessen.",
+      "features": [
+        "Energiemanagementsysteme",
+        "Wärmerückgewinnung",
+        "Effizienzanalysen",
+        "Nachhaltige Antriebstechnik"
+      ]
+    }
+  ]
+},
+    "cta": {
+      "title": "Bereit für Ihre individuelle Lösung?",
+      "subtitle": "Kontaktieren Sie uns für ein unverbindliches Beratungsgespräch.",
+      "button": "Kontakt aufnehmen"
+    }
   }
     
-    
+
   }

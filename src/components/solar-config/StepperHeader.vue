@@ -1,4 +1,3 @@
-<!-- StepperHeader.vue -->
 <template>
   <v-stepper-header class="stepper-header">
     <!-- Étape 1 -->
@@ -11,7 +10,7 @@
       <template v-slot:icon>
         <v-icon size="large" :color="currentStep >= 1 ? 'primary' : 'grey'">mdi-account</v-icon>
       </template>
-      Information
+      <span class="step-title">Information</span>
     </v-stepper-step>
     <v-divider></v-divider>
 
@@ -25,7 +24,7 @@
       <template v-slot:icon>
         <v-icon size="large" :color="currentStep >= 2 ? 'primary' : 'grey'">mdi-map-marker</v-icon>
       </template>
-      Standort
+      <span class="step-title">Standort</span>
     </v-stepper-step>
     <v-divider></v-divider>
 
@@ -39,7 +38,7 @@
       <template v-slot:icon>
         <v-icon size="large" :color="currentStep >= 3 ? 'primary' : 'grey'">mdi-home</v-icon>
       </template>
-      Gebäude
+      <span class="step-title">Gebäude</span>
     </v-stepper-step>
     <v-divider></v-divider>
 
@@ -53,7 +52,7 @@
       <template v-slot:icon>
         <v-icon size="large" :color="currentStep >= 4 ? 'primary' : 'grey'">mdi-roofing</v-icon>
       </template>
-      Dach
+      <span class="step-title">Dach</span>
     </v-stepper-step>
     <v-divider></v-divider>
 
@@ -67,7 +66,7 @@
       <template v-slot:icon>
         <v-icon size="large" :color="currentStep >= 5 ? 'primary' : 'grey'">mdi-account-group</v-icon>
       </template>
-      Haushalt
+      <span class="step-title">Haushalt</span>
     </v-stepper-step>
     <v-divider></v-divider>
 
@@ -81,7 +80,7 @@
       <template v-slot:icon>
         <v-icon size="large" :color="currentStep >= 6 ? 'primary' : 'grey'">mdi-chart-line</v-icon>
       </template>
-      Verbrauch
+      <span class="step-title">Verbrauch</span>
     </v-stepper-step>
     <v-divider></v-divider>
 
@@ -95,7 +94,7 @@
       <template v-slot:icon>
         <v-icon size="large" :color="currentStep >= 7 ? 'primary' : 'grey'">mdi-key</v-icon>
       </template>
-      Eigentum
+      <span class="step-title">Eigentum</span>
     </v-stepper-step>
     <v-divider></v-divider>
 
@@ -109,7 +108,7 @@
       <template v-slot:icon>
         <v-icon size="large" :color="currentStep >= 8 ? 'primary' : 'grey'">mdi-solar-power</v-icon>
       </template>
-      System
+      <span class="step-title">System</span>
     </v-stepper-step>
     <v-divider></v-divider>
 
@@ -121,7 +120,7 @@
       <template v-slot:icon>
         <v-icon size="large" :color="currentStep >= 9 ? 'primary' : 'grey'">mdi-check</v-icon>
       </template>
-      Bestätigung
+      <span class="step-title">Bestätigung</span>
     </v-stepper-step>
   </v-stepper-header>
 </template>
@@ -154,19 +153,47 @@ defineProps({
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
+    padding: 8px 4px;
   }
   
   .v-stepper__step {
-    min-width: 100px;
+    min-width: 80px;
     display: inline-flex;
     flex-direction: column;
+    padding: 0 4px;
   }
   
   .v-divider {
     display: inline-block;
-    height: auto;
+    height: 24px;
     min-height: 1px;
     vertical-align: middle;
+    margin: 0 2px;
+  }
+
+  .step-title {
+    font-size: 0.7rem;
+    display: block;
+    text-align: center;
+    margin-top: 4px;
+    line-height: 1.2;
+  }
+
+  .v-stepper__step__step {
+    width: 24px;
+    height: 24px;
+    margin: 0 auto;
+  }
+
+  .v-icon {
+    font-size: 1.25rem;
+  }
+}
+
+/* Styles pour les écrans plus larges */
+@media (min-width: 961px) {
+  .step-title {
+    font-size: 0.875rem;
   }
 }
 
@@ -174,6 +201,7 @@ defineProps({
 .v-stepper__step__step {
   width: 32px;
   height: 32px;
+  transition: all 0.3s ease;
 }
 
 .v-icon {

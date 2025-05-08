@@ -6,8 +6,8 @@
       :style="{ background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/industrial-hero.jpg')` }"
     >
       <div class="container">
-        <h1 class="hero-title">Industrietechnik</h1>
-        <p class="hero-subtitle">Innovative Lösungen für industrielle Herausforderungen</p>
+        <h1 class="hero-title">{{ $t('industrialTech.hero.title') }}</h1>
+        <p class="hero-subtitle">{{ $t('industrialTech.hero.subtitle') }}</p>
       </div>
     </section>
 
@@ -15,11 +15,11 @@
     <section class="intro-section">
       <div class="container grid-container">
         <div class="intro-content">
-          <h2>Maßgeschneiderte Lösungen für die Industrie</h2>
-          <p>Unsere Expertise in der Industrietechnik umfasst die Entwicklung und Implementierung von hochwertigen technischen Lösungen für verschiedene industrielle Anwendungen. Wir bieten individuelle Konzepte, die genau auf Ihre Anforderungen zugeschnitten sind.</p>
+          <h2>{{ $t('industrialTech.intro.title') }}</h2>
+          <p>{{ $t('industrialTech.intro.description') }}</p>
         </div>
         <div class="intro-image">
-          <img src="/images/industrial-hero.jpg" alt="Industrielle Technologie" loading="lazy">
+          <img src="/images/industrial-hero.jpg" :alt="$t('industrialTech.intro.imageAlt')" loading="lazy">
         </div>
       </div>
     </section>
@@ -27,13 +27,13 @@
     <!-- Services Section -->
     <section class="services-section">
       <div class="container">
-        <h2 class="section-title">Unsere Leistungen</h2>
+        <h2 class="section-title">{{ $t('industrialTech.services.title') }}</h2>
         
         <div class="services-grid">
           <div 
             class="service-card" 
-            v-for="service in services" 
-            :key="service.title"
+            v-for="(service, index) in services" 
+            :key="index"
             :style="{ backgroundColor: service.color }"
           >
             <div class="service-icon-container">
@@ -42,8 +42,8 @@
               </svg>
             </div>
             <div class="service-content">
-              <h3>{{ service.title }}</h3>
-              <p>{{ service.description }}</p>
+              <h3>{{ $t(`industrialTech.services.list.${index}.title`) }}</h3>
+              <p>{{ $t(`industrialTech.services.list.${index}.description`) }}</p>
             </div>
           </div>
         </div>
@@ -53,31 +53,31 @@
     <!-- Technology Showcase -->
     <section class="technology-showcase">
       <div class="container">
-        <h2 class="section-title">Technologiekompetenz</h2>
+        <h2 class="section-title">{{ $t('industrialTech.technologies.title') }}</h2>
         <div class="tech-tabs">
           <button 
             v-for="(tech, index) in technologies" 
-            :key="tech.name"
+            :key="index"
             @click="activeTech = index"
             :class="{ active: activeTech === index }"
           >
-            {{ tech.name }}
+            {{ $t(`industrialTech.technologies.list.${index}.name`) }}
           </button>
         </div>
         <div class="tech-content">
           <div class="tech-details">
-            <h3>{{ technologies[activeTech].name }}</h3>
-            <p>{{ technologies[activeTech].description }}</p>
+            <h3>{{ $t(`industrialTech.technologies.list.${activeTech}.name`) }}</h3>
+            <p>{{ $t(`industrialTech.technologies.list.${activeTech}.description`) }}</p>
             <ul v-if="technologies[activeTech].features">
-              <li v-for="feature in technologies[activeTech].features" :key="feature">
-                {{ feature }}
+              <li v-for="(feature, fIndex) in technologies[activeTech].features" :key="fIndex">
+                {{ $t(`industrialTech.technologies.list.${activeTech}.features.${fIndex}`) }}
               </li>
             </ul>
           </div>
           <div class="tech-visual">
             <img 
               :src="`/images/${technologies[activeTech].image}`" 
-              :alt="technologies[activeTech].name"
+              :alt="$t(`industrialTech.technologies.list.${activeTech}.name`)"
               loading="lazy"
             >
           </div>
@@ -88,9 +88,9 @@
     <!-- CTA Section -->
     <section class="cta-section">
       <div class="container">
-        <h2>Bereit für Ihre individuelle Lösung?</h2>
-        <p>Kontaktieren Sie uns für ein unverbindliches Beratungsgespräch.</p>
-        <button class="cta-button" @click="openContactForm">Kontakt aufnehmen</button>
+        <h2>{{ $t('industrialTech.cta.title') }}</h2>
+        <p>{{ $t('industrialTech.cta.subtitle') }}</p>
+        <button class="cta-button" @click="openContactForm">{{ $t('industrialTech.cta.button') }}</button>
       </div>
     </section>
   </div>
@@ -105,45 +105,31 @@ export default {
       services: [
         {
           mdiIcon: 'M5,3C3.89,3 3,3.89 3,5V19C3,20.11 3.89,21 5,21H19C20.11,21 21,20.11 21,19V5C21,3.89 20.11,3 19,3H5M5,5H19V19H5V5M7,7V9H17V7H7M7,11V13H17V11H7M7,15V17H14V15H7Z',
-          title: 'Maschinenbau',
-          description: 'Konstruktion und Fertigung von maßgeschneiderten Maschinen und Anlagen',
           color: '#e3f2fd'
         },
         {
           mdiIcon: 'M13,19V16H21V19H13M8.5,13L2.47,7H6.71L11.67,11.95C12.25,12.54 12.25,13.5 11.67,14.07L6.74,19H2.5L8.5,13M15.5,12C15.5,12.93 15.19,13.77 14.68,14.42L20,19.67V20H13.33L8,14.67C7.38,14.03 7,13.07 7,12C7,10.93 7.38,9.97 8,9.33L13.33,4H20V4.33L14.68,9.58C15.19,10.23 15.5,11.07 15.5,12Z',
-          title: 'Automatisierung',
-          description: 'Modernste Automatisierungslösungen für effiziente Produktionsprozesse',
           color: '#e8f5e9'
         },
         {
           mdiIcon: 'M2,12H4V17H20V12H22V17A2,2 0 0,1 20,19H4A2,2 0 0,1 2,17V12M5,8H19V10H5V8M11,3H13V5H11V3M7,3H9V5H7V3M15,3H17V5H15V3M11,6H13V8H11V6M7,6H9V8H7V6M15,6H17V8H15V6Z',
-          title: 'Steuerungstechnik',
-          description: 'Individuelle Steuerungs- und Regelungstechnik für komplexe Systeme',
           color: '#fff8e1'
         },
         {
           mdiIcon: 'M19,17H21V19H19V17M19,5H21V15H19V5M17,15H19V17H17V15M17,5H19V13H17V5M3,21H15V19H3V21M3,17H15V15H3V17M3,13H15V11H3V13M3,9H15V7H3V9M3,5H15V3H3V5Z',
-          title: 'Anlagenbau',
-          description: 'Planung und Realisierung kompletter industrieller Anlagen',
           color: '#f3e5f5'
         },
         {
           mdiIcon: 'M12,2L4,7V20H20V7L12,2M12,12.5C13.38,12.5 14.5,11.38 14.5,10C14.5,8.62 13.38,7.5 12,7.5C10.62,7.5 9.5,8.62 9.5,10C9.5,11.38 10.62,12.5 12,12.5M7,18V14.88C7,13.04 9.76,12 12,12C14.24,12 17,13.04 17,14.88V18H7Z',
-          title: 'Instandhaltung',
-          description: 'Wartung und Optimierung bestehender industrieller Systeme',
           color: '#e0f7fa'
         },
         {
           mdiIcon: 'M10,3H14A2,2 0 0,1 16,5V7H20A2,2 0 0,1 22,9V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V9A2,2 0 0,1 4,7H8V5A2,2 0 0,1 10,3M10,7V5H14V7H10Z',
-          title: 'Projektmanagement',
-          description: 'Umfassende Betreuung Ihrer Industrieprojekte von der Planung bis zur Umsetzung',
           color: '#fffde7'
         }
       ],
       technologies: [
         {
-          name: 'Industrie 4.0',
-          description: 'Wir implementieren intelligente, vernetzte Systeme für die Fabrik der Zukunft.',
           features: [
             'IoT-Integration für Maschinen',
             'Echtzeit-Datenanalyse',
@@ -153,8 +139,6 @@ export default {
           image: 'industry-4.0.jpg'
         },
         {
-          name: 'Robotik',
-          description: 'Automatisierte Lösungen für präzise und effiziente Produktionsprozesse.',
           features: [
             'Kollaborative Roboter (Cobots)',
             'Industrieroboter Integration',
@@ -164,8 +148,6 @@ export default {
           image: 'robotics.jpg'
         },
         {
-          name: 'Energieeffizienz',
-          description: 'Nachhaltige Lösungen zur Optimierung des Energieverbrauchs in industriellen Prozessen.',
           features: [
             'Energiemanagementsysteme',
             'Wärmerückgewinnung',
@@ -179,12 +161,13 @@ export default {
   },
   methods: {
     openContactForm() {
-      // Implementation for opening contact form/modal
-      this.$router.push('/contact'); 
+      this.$router.push(this.localePath('contact')); 
     }
   }
 }
 </script>
+
+
 
 <style scoped>
 /* Base Styles */

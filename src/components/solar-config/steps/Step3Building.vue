@@ -1,57 +1,71 @@
 <template>
-  <v-fade-transition mode="out-in">
-    <v-card class="pa-3 rounded-lg" elevation="0">
-      <v-card-title class="text-subtitle-1 font-weight-bold primary--text bg-blue-lighten-5 rounded-t-lg py-2 px-3">
-        <v-icon left size="small" color="primary">mdi-home</v-icon>
-        Gebäudeinformationen
-      </v-card-title>
-      <v-card-text>
-        <v-form ref="form" v-model="valid">
-          <v-card class="mb-4 card-section" elevation="2">
-            <v-card-title class="text-subtitle-1 font-weight-bold">
-              <v-icon left color="primary">mdi-office-building-marker</v-icon>
-              Gebäudetyp*
-            </v-card-title>
-            <v-card-text>
-              <div class="card-selector">
-                <v-row>
-                  <v-col
-                    v-for="type in buildingTypes"
-                    :key="type.value"
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
-                    <v-card
-                      class="building-card pa-2"
-                      :class="{ 'selected-card': formData.buildingType === type.value }"
-                      @click="selectBuildingType(type.value)"
-                      elevation="1"
-                      hover
-                    >
-                      <v-card-text class="text-center">
-                        <v-icon size="small" :color="formData.buildingType === type.value ? 'primary' : ''">
-                          {{ type.icon }}
-                        </v-icon>
-                        <div class="text-caption mt-1">{{ type.text }}</div>
-                      </v-card-text>
-                    </v-card>
-                  </v-col>
-                </v-row>
+  <v-card class="pa-3" elevation="0">
+    <v-card-title class="text-subtitle-1 font-weight-bold primary--text">
+      <v-icon left size="small" color="primary">mdi-home</v-icon>
+      Gebäudeinformationen
+    </v-card-title>
+
+    <v-card-text>
+      <v-form ref="form" v-model="valid">
+        <div class="mb-4">
+          <div class="text-subtitle-1 font-weight-bold mb-2">
+            <v-icon left color="primary">mdi-office-building-marker</v-icon>
+            Gebäudetyp*
+          </div>
+
+          <div class="d-flex align-center">
+            <v-btn 
+              icon 
+              @click="scroll(-1)"
+              :disabled="scrollPosition === 0"
+              class="mr-2"
+            >
+              <v-icon>mdi-chevron-left</v-icon>
+            </v-btn>
+
+            <div class="flex-grow-1" ref="scrollContainer" style="overflow-x: auto; scroll-behavior: smooth;">
+              <div class="d-flex" style="gap: 12px; padding: 4px 0;">
+                <v-card
+                  v-for="type in buildingTypes"
+                  :key="type.value"
+                  class="pa-2 building-card"
+                  :class="{ 'selected-card': formData.buildingType === type.value }"
+                  @click="selectBuildingType(type.value)"
+                  elevation="1"
+                  hover
+                  style="min-width: 150px; height: 100px; cursor: pointer;"
+                >
+                  <v-card-text class="text-center pa-0">
+                    <v-icon size="small" :color="formData.buildingType === type.value ? 'primary' : ''">
+                      {{ type.icon }}
+                    </v-icon>
+                    <div class="text-caption mt-1">{{ type.text }}</div>
+                  </v-card-text>
+                </v-card>
               </div>
-              <div v-if="showError" class="text-caption error--text mt-2">
-                Bitte wählen Sie einen Gebäudetyp aus
-              </div>
-            </v-card-text>
-          </v-card>
-        </v-form>
-      </v-card-text>
-    </v-card>
-  </v-fade-transition>
+            </div>
+
+            <v-btn 
+              icon 
+              @click="scroll(1)"
+              :disabled="isScrollEnd"
+              class="ml-2"
+            >
+              <v-icon>mdi-chevron-right</v-icon>
+            </v-btn>
+          </div>
+
+          <div v-if="showError" class="text-caption error--text mt-2">
+            Bitte wählen Sie einen Gebäudetyp aus
+          </div>
+        </div>
+      </v-form>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 const props = defineProps({
   formData: { type: Object, required: true }
@@ -61,7 +75,9 @@ const emit = defineEmits(['validate']);
 
 const valid = ref(false);
 const showError = ref(false);
-const form = ref(null);
+const scrollContainer = ref(null);
+const scrollPosition = ref(0);
+const maxScroll = ref(0);
 
 const buildingTypes = [
   { value: 'Reihenhaus', text: 'Reihenhaus', icon: 'mdi-home-group' },
@@ -71,6 +87,10 @@ const buildingTypes = [
   { value: 'Mehrfamilienhaus', text: 'Mehrfamilienhaus', icon: 'mdi-home-city' },
   { value: 'Anderes', text: 'Anderes', icon: 'mdi-home-modern' }
 ];
+
+const isScrollEnd = computed(() => {
+  return scrollPosition.value >= maxScroll.value;
+});
 
 const selectBuildingType = (type) => {
   props.formData.buildingType = type;
@@ -83,14 +103,33 @@ const validate = () => {
   emit('validate', valid.value);
 };
 
-watch(() => props.formData.buildingType, () => {
-  validate();
+const scroll = (direction) => {
+  if (!scrollContainer.value) return;
+  
+  const scrollAmount = 200;
+  const newPosition = scrollPosition.value + (direction * scrollAmount);
+  
+  scrollPosition.value = Math.max(0, Math.min(newPosition, maxScroll.value));
+  scrollContainer.value.scrollTo({
+    left: scrollPosition.value,
+    behavior: 'smooth'
+  });
+};
+
+const updateMaxScroll = () => {
+  if (scrollContainer.value) {
+    maxScroll.value = scrollContainer.value.scrollWidth - scrollContainer.value.clientWidth;
+  }
+};
+
+onMounted(() => {
+  updateMaxScroll();
+  window.addEventListener('resize', updateMaxScroll);
 });
 </script>
 
 <style scoped>
 .building-card {
-  cursor: pointer;
   transition: all 0.3s ease;
 }
 
@@ -104,8 +143,8 @@ watch(() => props.formData.buildingType, () => {
   background-color: rgba(26, 130, 193, 0.05) !important;
 }
 
-.card-section {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+/* Cache la scrollbar */
+::-webkit-scrollbar {
+  display: none;
 }
 </style>

@@ -232,6 +232,91 @@
       "title": "Do you have questions about our electrical engineering services?",
       "button": "Contact us"
     }
+  },
+
+  "industrialTech": {
+    "hero": {
+      "title": "Industrial Technology",
+      "subtitle": "Innovative solutions for industrial challenges"
+    },
+    "intro": {
+      "title": "Customized solutions for industry",
+      "description": "Our expertise in industrial technology includes the development and implementation of high-quality technical solutions for various industrial applications. We offer individual concepts tailored precisely to your requirements.",
+      "imageAlt": "Industrial technology"
+    },
+    "services": {
+      "title": "Our Services",
+      "list": [
+        {
+          "title": "Mechanical Engineering",
+          "description": "Design and manufacturing of customized machines and systems"
+        },
+        {
+          "title": "Automation",
+          "description": "State-of-the-art automation solutions for efficient production processes"
+        },
+        {
+          "title": "Control Technology",
+          "description": "Custom control and regulation technology for complex systems"
+        },
+        {
+          "title": "Plant Engineering",
+          "description": "Planning and realization of complete industrial plants"
+        },
+        {
+          "title": "Maintenance",
+          "description": "Maintenance and optimization of existing industrial systems"
+        },
+        {
+          "title": "Project Management",
+          "description": "Comprehensive supervision of your industrial projects from planning to implementation"
+        }
+      ]
+    },
+    "technologies": {
+  "title": "Technology Expertise",
+  "list": [
+    {
+      "name": "Industry 4.0",
+      "description": "We implement intelligent, networked systems for the factory of the future.",
+      "features": [
+        "IoT integration for machines",
+        "Real-time data analysis",
+        "Predictive maintenance solutions",
+        "Digital twins"
+      ]
+    },
+    {
+      "name": "Robotics",
+      "description": "Automated solutions for precise and efficient production processes.",
+      "features": [
+        "Collaborative robots (Cobots)",
+        "Industrial robot integration",
+        "Vision systems",
+        "Handling systems"
+      ]
+    },
+    {
+      "name": "Energy Efficiency",
+      "description": "Sustainable solutions for optimizing energy consumption in industrial processes.",
+      "features": [
+        "Energy management systems",
+        "Heat recovery",
+        "Efficiency analyses",
+        "Sustainable drive technology"
+      ]
+    }
+  ]
+},
+    "cta": {
+      "title": "Ready for your custom solution?",
+      "subtitle": "Contact us for a non-binding consultation.",
+      "button": "Contact us"
+    }
   }
 
+  
+
   }
+
+  

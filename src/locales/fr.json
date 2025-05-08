@@ -231,6 +231,87 @@
       "title": "Vous avez des questions sur nos services en électrotechnique ?",
       "button": "Nous contacter"
     }
+  },
+
+  "industrialTech": {
+    "hero": {
+      "title": "Technologie Industrielle",
+      "subtitle": "Solutions innovantes pour les défis industriels"
+    },
+    "intro": {
+      "title": "Solutions sur mesure pour l'industrie",
+      "description": "Notre expertise en technologie industrielle comprend le développement et la mise en œuvre de solutions techniques de haute qualité pour diverses applications industrielles. Nous proposons des concepts individuels adaptés précisément à vos besoins.",
+      "imageAlt": "Technologie industrielle"
+    },
+    "services": {
+      "title": "Nos Services",
+      "list": [
+        {
+          "title": "Génie Mécanique",
+          "description": "Conception et fabrication de machines et systèmes sur mesure"
+        },
+        {
+          "title": "Automatisation",
+          "description": "Solutions d'automatisation de pointe pour des processus de production efficaces"
+        },
+        {
+          "title": "Technologie de Commande",
+          "description": "Technologie de commande et de régulation personnalisée pour systèmes complexes"
+        },
+        {
+          "title": "Construction d'Installations",
+          "description": "Planification et réalisation d'installations industrielles complètes"
+        },
+        {
+          "title": "Maintenance",
+          "description": "Maintenance et optimisation des systèmes industriels existants"
+        },
+        {
+          "title": "Gestion de Projet",
+          "description": "Supervision complète de vos projets industriels de la planification à la mise en œuvre"
+        }
+      ]
+    },
+    "technologies": {
+  "title": "Expertise Technologique",
+  "list": [
+    {
+      "name": "Industrie 4.0",
+      "description": "Nous mettons en œuvre des systèmes intelligents et connectés pour l'usine du futur.",
+      "features": [
+        "Intégration IoT pour machines",
+        "Analyse de données en temps réel",
+        "Solutions de maintenance prédictive",
+        "Jumeaux numériques"
+      ]
+    },
+    {
+      "name": "Robotique",
+      "description": "Solutions automatisées pour des processus de production précis et efficaces.",
+      "features": [
+        "Robots collaboratifs (Cobots)",
+        "Intégration de robots industriels",
+        "Systèmes de vision",
+        "Systèmes de manutention"
+      ]
+    },
+    {
+      "name": "Efficacité Énergétique",
+      "description": "Solutions durables pour optimiser la consommation d'énergie dans les processus industriels.",
+      "features": [
+        "Systèmes de gestion de l'énergie",
+        "Récupération de chaleur",
+        "Analyses d'efficacité",
+        "Technologie d'entraînement durable"
+      ]
+    }
+  ]
+},
+    "cta": {
+      "title": "Prêt pour votre solution sur mesure ?",
+      "subtitle": "Contactez-nous pour une consultation sans engagement.",
+      "button": "Nous contacter"
+    }
   }
 
   }
