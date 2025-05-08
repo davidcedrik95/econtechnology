@@ -1,31 +1,40 @@
 <template>
   <v-dialog v-model="isOpen" max-width="800" persistent>
     <v-card class="pa-4 rounded-xl" elevation="3">
-      <!-- Header Stepper -->
+      <!-- Bouton de fermeture en haut à droite -->
+      <v-btn
+        icon
+        class="close-button"
+        @click="closeModal"
+      >
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+      
+      <!-- Seul le header simplifié -->
       <StepperHeader :current-step="currentStep" />
+      
+      <!-- Progress bar visuelle seulement (sans texte) -->
+      <v-progress-linear
+        :value="(currentStep / maxStep) * 100"
+        height="8"
+        color="primary"
+        class="my-4"
+      ></v-progress-linear>
 
-      <!-- Progress Bar -->
-      <ProgressBar :step="currentStep" :max-step="maxStep" />
-
-      <!-- Step component -->
-      <div v-if="isLoading" class="text-center py-4">
-        <v-progress-circular indeterminate color="primary" />
-      </div>
+      <!-- Contenu de l'étape actuelle -->
       <component
         :is="currentComponent"
         :key="currentStep"
-        v-if="!isLoading && currentComponent"
         :form-data="formStore.formData"
         @validate="handleStepValidation"
         @update:form-data="updateFormData"
       />
 
-      <!-- Navigation Buttons -->
+      <!-- Boutons de navigation -->
       <NavigationButtons
         :step="currentStep"
         :max-step="maxStep"
         :is-valid="isCurrentStepValid"
-        :loading="loading"
         @next="handleNext"
         @prev="handlePrev"
         @close="closeModal"
@@ -153,3 +162,12 @@ onMounted(async () => {
   }
 });
 </script>
+
+<style scoped>
+.close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1;
+}
+</style>

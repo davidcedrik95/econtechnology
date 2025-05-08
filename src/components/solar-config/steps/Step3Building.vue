@@ -1,10 +1,5 @@
 <template>
   <v-card class="pa-3" elevation="0">
-    <v-card-title class="text-subtitle-1 font-weight-bold primary--text">
-      <v-icon left size="small" color="primary">mdi-home</v-icon>
-      Gebäudeinformationen
-    </v-card-title>
-
     <v-card-text>
       <v-form ref="form" v-model="valid">
         <div class="mb-4">

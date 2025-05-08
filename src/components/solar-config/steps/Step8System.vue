@@ -1,10 +1,6 @@
 <template>
   <v-fade-transition mode="out-in">
     <v-card class="pa-3 rounded-lg" elevation="0">
-      <v-card-title class="text-subtitle-1 font-weight-bold primary--text bg-blue-lighten-5 rounded-t-lg py-2 px-3">
-        <v-icon left size="small" color="primary">mdi-solar-power</v-icon>
-        Systemkonfiguration
-      </v-card-title>
       <v-card-text>
         <v-form ref="form" v-model="valid">
           <!-- Type de panneau solaire -->

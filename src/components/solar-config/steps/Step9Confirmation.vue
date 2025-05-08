@@ -1,10 +1,6 @@
 <template>
   <v-fade-transition mode="out-in">
     <v-card class="confirmation-card pa-4 rounded-lg">
-      <v-card-title class="d-flex align-center success--text">
-        <v-icon left color="success">mdi-check-circle</v-icon>
-        Fast fertig!
-      </v-card-title>
       <v-card-text>
         <p class="text-body-1 mb-4">Bitte überprüfen Sie Ihre Angaben vor dem Absenden.</p>
         

@@ -1,76 +1,75 @@
 <template>
   <v-container class="pa-0">
+    <!-- Orange Banner -->
+    <div class="orange-banner"></div>
+
     <!-- Hero Section -->
-<section class="hero-section">
-  <v-img
-    :src="heroImage"
-    gradient="to top right, rgba(0,87,184,.7), rgba(0,0,0,.6)"
-    height="100vh"
-    min-height="600"
-    cover
-  >
-    <v-container class="fill-height">
-      <v-row align="center" justify="center">
-        <v-col cols="12" md="8" class="text-center">
-          <div class="hero-content">
-            <!-- Animation du titre -->
-            <h1 
-              class="hero-title text-h1 text-md-h2 text-lg-h1 font-weight-black mb-6"
-              v-animate-on-scroll="{ animation: 'fadeInDown', delay: 100 }"
-            >
-              <span class="title-line">{{ $t('innovative_energy_solutions') }}</span>
-            </h1>
-            
-            <!-- Animation du sous-titre -->
-            <p 
-              class="hero-subtitle text-h5 text-md-h6 text-lg-h5 mb-8"
-              v-animate-on-scroll="{ animation: 'fadeInUp', delay: 300 }"
-            >
-              {{ $t('econ_technology') }}
-            </p>
-            
-            <!-- Animation des boutons -->
-            <div 
-              class="hero-actions"
-              v-animate-on-scroll="{ animation: 'fadeInUp', delay: 500 }"
-            >
-              <v-btn
-                x-large
-                rounded
-                color="accent"
-                class="mr-4 mb-2 action-btn"
-                elevation="0"
-                @click="navigateTo('/leistungen')"
-              >
-                {{ $t('our_services') }}
-                <v-icon end>mdi-arrow-right</v-icon>
-              </v-btn>
-              <v-btn
-                x-large
-                rounded
-                outlined
-                color="white"
-                class="action-btn"
-                elevation="0"
-                @click="navigateTo('/contact')"
-              >
-                {{ $t('contact_us') }}
-              </v-btn>
-            </div>
-          </div>
-        </v-col>
-      </v-row>
-    </v-container>
-    
-    <!-- Animation de l'indicateur de scroll -->
-    <div 
-      class="scroll-hint"
-      v-animate-on-scroll="{ animation: 'bounceIn', delay: 800, infinite: true }"
-    >
-      <v-icon large color="white">mdi-chevron-double-down</v-icon>
-    </div>
-  </v-img>
-</section>
+    <section class="hero-section">
+      <v-img
+        :src="heroImage"
+        gradient="to top right, rgba(243, 146, 0, .7), rgba(0,0,0,.6)"
+        height="100vh"
+        min-height="600"
+        cover
+      >
+        <v-container class="fill-height">
+          <v-row align="center" justify="center">
+            <v-col cols="12" md="8" class="text-center">
+              <div class="hero-content">
+                <h1 
+                  class="hero-title text-h1 text-md-h2 text-lg-h1 font-weight-black mb-6"
+                  v-animate-on-scroll="{ animation: 'fadeInDown', delay: 100 }"
+                >
+                  <span class="title-line">{{ $t('innovative_energy_solutions') }}</span>
+                </h1>
+                
+                <p 
+                  class="hero-subtitle text-h5 text-md-h6 text-lg-h5 mb-8"
+                  v-animate-on-scroll="{ animation: 'fadeInUp', delay: 300 }"
+                >
+                  {{ $t('econ_technology') }}
+                </p>
+                
+                <div 
+                  class="hero-actions"
+                  v-animate-on-scroll="{ animation: 'fadeInUp', delay: 500 }"
+                >
+                  <v-btn
+                    x-large
+                    rounded
+                    color="accent"
+                    class="mr-4 mb-2 action-btn"
+                    elevation="0"
+                    @click="navigateTo('/leistungen')"
+                  >
+                    {{ $t('our_services') }}
+                    <v-icon end>mdi-arrow-right</v-icon>
+                  </v-btn>
+                  <v-btn
+                    x-large
+                    rounded
+                    outlined
+                    color="white"
+                    class="action-btn"
+                    elevation="0"
+                    @click="navigateTo('/contact')"
+                  >
+                    {{ $t('contact_us') }}
+                  </v-btn>
+                </div>
+              </div>
+            </v-col>
+          </v-row>
+        </v-container>
+        
+        <div 
+          class="scroll-hint"
+          v-animate-on-scroll="{ animation: 'bounceIn', delay: 800, infinite: true }"
+        >
+          <v-icon large color="white">mdi-chevron-double-down</v-icon>
+        </div>
+      </v-img>
+    </section>
 
     <!-- Promo Section -->
     <v-container class="promo-section">
@@ -511,11 +510,24 @@ function navigateTo(link) {
 /* Variables CSS */
 :root {
   --primary: #0057B8;
-  --accent: #00AEEF;
+  --accent: #F39200; /* Orange Econ Technology */
+  --econ-orange: #F39200;
+  --econ-dark-orange: #E07F00;
   --dark: #1A237E;
   --light: #E8EAF6;
   --text: #212121;
   --text-secondary: #757575;
+}
+
+/* Orange Banner */
+.orange-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--econ-orange);
+  z-index: 1000;
 }
 
 /* Global Styles */
@@ -675,7 +687,7 @@ function navigateTo(link) {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgba(0, 174, 239, 0.1);
+  background: rgba(243, 146, 0, 0.1);
   border-radius: 50%;
   transform: scale(1);
   transition: all 0.3s ease;
@@ -683,7 +695,7 @@ function navigateTo(link) {
 
 .service-card:hover .service-icon-bg {
   transform: scale(1.1);
-  background: rgba(0, 174, 239, 0.2);
+  background: rgba(243, 146, 0, 0.2);
 }
 
 .service-icon {
@@ -706,9 +718,14 @@ function navigateTo(link) {
 
 .service-link:hover {
   letter-spacing: 0.5px;
+  color: var(--econ-dark-orange) !important;
 }
 
 /* Features Section */
+.features-section {
+  background-color: rgba(243, 146, 0, 0.03);
+}
+
 .features-grid {
   position: relative;
 }
@@ -735,7 +752,7 @@ function navigateTo(link) {
   display: inline-flex;
   padding: 1.5rem;
   border-radius: 50%;
-  background: rgba(0, 174, 239, 0.1);
+  background: rgba(243, 146, 0, 0.1);
 }
 
 .feature-title {
@@ -806,6 +823,7 @@ function navigateTo(link) {
 
 .blog-link:hover {
   letter-spacing: 0.5px;
+  color: var(--econ-dark-orange) !important;
 }
 
 /* Testimonials Section */
@@ -850,6 +868,7 @@ function navigateTo(link) {
   border-radius: 12px;
   overflow: hidden;
   position: relative;
+  background: linear-gradient(135deg, var(--econ-orange) 0%, var(--econ-dark-orange) 100%);
 }
 
 .cta-card::before {
@@ -880,6 +899,8 @@ function navigateTo(link) {
 .cta-button:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
+  background: white !important;
+  color: var(--econ-orange) !important;
 }
 
 /* Partners Section */
@@ -900,10 +921,13 @@ function navigateTo(link) {
   z-index: 999;
   transform: scale(1);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background: var(--econ-orange) !important;
+  box-shadow: 0 4px 12px rgba(243, 146, 0, 0.3) !important;
 }
 
 .fab-button:hover {
   transform: scale(1.1);
+  background: var(--econ-dark-orange) !important;
 }
 
 /* Responsive Adjustments */
