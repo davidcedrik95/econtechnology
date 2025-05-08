@@ -1,7 +1,16 @@
 <template>
   <div class="photovoltaik-view">
+    <!-- Animated Background Particles -->
+    <div class="particles-background" id="particles-js"></div>
+    
+    <!-- Floating Solar Panels Animation -->
+    <div class="floating-solar-panels">
+      <div class="solar-panel" v-for="i in 8" :key="i" :style="getPanelStyle(i)"></div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero-section">
+      <div class="hero-overlay"></div>
       <div class="container">
         <h1 class="hero-title animate__animated animate__fadeInDown">{{ $t('switch_to_solar') }}</h1>
         <p class="hero-subtitle animate__animated animate__fadeInUp animate__delay-1s">{{ $t('discover_solutions') }}</p>
@@ -24,6 +33,9 @@
               :key="service.title"
               class="service-card"
               :style="{ 'transition-delay': `${index * 0.1}s` }"
+              @mouseenter="hoverCard(index)"
+              @mouseleave="unhoverCard(index)"
+              :class="{ 'card-hovered': hoveredCard === index }"
             >
               <div class="service-icon">
                 <v-icon :icon="service.icon" size="48" />
@@ -46,12 +58,15 @@
           <!-- Advisor Card -->
           <div class="sidebar-card advisor-card floating">
             <div class="advisor-header">
-              <v-icon icon="mdi-headset" size="64" />
+              <div class="animated-avatar">
+                <v-icon icon="mdi-headset" size="64" />
+                <div class="ripple-effect"></div>
+                <div class="ripple-effect delay-1"></div>
+              </div>
               <h3>{{ $t('your_advisor') }}</h3>
             </div>
             <p>{{ $t('advisor_desc') }}</p>
             <div class="advisor-contact">
-              <!--<p class="contact-title">{{ $t('call_us') }}</p>-->
               <button class="contact-button hover-grow" style="color: black;">
                 {{ $t('call_us') }}
               </button>
@@ -71,7 +86,10 @@
             <h3>{{ $t('our_services') }}</h3>
             <ul class="checklist">
               <li v-for="(item, index) in performanceItems" :key="item" class="checklist-item">
-                <v-icon icon="mdi-check-circle" color="success" /> {{ $t(item) }}
+                <div class="check-animation">
+                  <v-icon icon="mdi-check-circle" color="success" />
+                </div>
+                {{ $t(item) }}
               </li>
             </ul>
           </div>
@@ -81,7 +99,10 @@
             <h3>{{ $t('your_benefits') }}</h3>
             <ul class="benefits-list">
               <li v-for="(benefit, index) in benefits" :key="benefit.title" class="benefit-item">
-                <v-icon icon="mdi-star-circle" color="warning" /> {{ $t(benefit.title) }}
+                <div class="star-animation">
+                  <v-icon icon="mdi-star-circle" color="warning" />
+                </div>
+                {{ $t(benefit.title) }}
               </li>
             </ul>
           </div>
@@ -89,9 +110,13 @@
       </div>
     </div>
 
+    <!-- Animated Solar Rays -->
+    <div class="solar-rays">
+      <div class="ray" v-for="i in 6" :key="i" :style="getRayStyle(i)"></div>
+    </div>
+
     <!-- Modal -->
     <SolarConfigModal />
-    
   </div>
 </template>
 
@@ -99,12 +124,75 @@
 import { useModalStore } from '@/stores/modalStore';
 import SolarConfigModal from '@/components/solar-config/SolarConfigDialog.vue';
 import 'animate.css';
+import { ref, onMounted } from 'vue';
 
 const modalStore = useModalStore();
+const hoveredCard = ref(null);
 
 const openSolarModal = () => {
   modalStore.openSolarModal();
 };
+
+const hoverCard = (index) => {
+  hoveredCard.value = index;
+};
+
+const unhoverCard = () => {
+  hoveredCard.value = null;
+};
+
+const getPanelStyle = (index) => {
+  const size = Math.random() * 40 + 20;
+  const duration = Math.random() * 20 + 20;
+  const delay = Math.random() * 10;
+  const posX = Math.random() * 100;
+  
+  return {
+    width: `${size}px`,
+    height: `${size * 0.6}px`,
+    left: `${posX}%`,
+    animationDuration: `${duration}s`,
+    animationDelay: `${delay}s`,
+    opacity: Math.random() * 0.3 + 0.1
+  };
+};
+
+const getRayStyle = (index) => {
+  const angle = (index * 60) + Math.random() * 15;
+  const duration = Math.random() * 3 + 2;
+  const delay = Math.random() * 2;
+  
+  return {
+    transform: `rotate(${angle}deg)`,
+    animationDuration: `${duration}s`,
+    animationDelay: `${delay}s`,
+    height: `${Math.random() * 100 + 200}px`
+  };
+};
+
+onMounted(() => {
+  // Load particles.js if available
+  if (window.particlesJS) {
+    window.particlesJS('particles-js', {
+      particles: {
+        number: { value: 40, density: { enable: true, value_area: 800 } },
+        color: { value: "#00a86b" },
+        shape: { type: "circle" },
+        opacity: { value: 0.3, random: true },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 150, color: "#00a86b", opacity: 0.2, width: 1 },
+        move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "grab" },
+          onclick: { enable: true, mode: "push" }
+        }
+      }
+    });
+  }
+});
 
 const services = [
   { title: 'komplettlosungen', description: 'komplettlosungen_desc', icon: 'mdi-package-variant-closed' },
@@ -154,8 +242,73 @@ const performanceItems = [
   padding: 0 20px;
 }
 
+/* Background Particles */
+.particles-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+/* Floating Solar Panels */
+.floating-solar-panels {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.solar-panel {
+  position: absolute;
+  background: linear-gradient(45deg, rgba(0, 168, 107, 0.1), rgba(58, 134, 255, 0.1));
+  border: 1px solid rgba(0, 168, 107, 0.2);
+  border-radius: 4px;
+  animation: float-up linear infinite;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+  }
+}
+
+/* Solar Rays */
+.solar-rays {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100%;
+  transform-origin: top center;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.ray {
+  position: absolute;
+  width: 1px;
+  background: linear-gradient(to bottom, rgba(255, 215, 0, 0.3), transparent);
+  animation: ray-pulse ease-in-out infinite;
+}
+
+@keyframes ray-pulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.5; }
+}
+
 /* Hero Section */
 .hero-section {
+  position: relative;
   background: linear-gradient(135deg, rgba(0, 168, 107, 0.8), rgba(58, 134, 255, 0.8)), 
               url('/images/solar-hero.png');
   background-size: cover;
@@ -164,12 +317,10 @@ const performanceItems = [
   color: white;
   padding: 150px 0;
   text-align: center;
-  position: relative;
   overflow: hidden;
 }
 
-.hero-section::before {
-  content: '';
+.hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -178,6 +329,7 @@ const performanceItems = [
   background: radial-gradient(circle at 20% 50%, transparent 10%, rgba(0,0,0,0.1) 10.5%);
   background-size: 30px 30px;
   opacity: 0.5;
+  z-index: 0;
 }
 
 .hero-title {
@@ -185,6 +337,7 @@ const performanceItems = [
   margin-bottom: 1rem;
   font-weight: 800;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  position: relative;
 }
 
 .hero-subtitle {
@@ -192,6 +345,7 @@ const performanceItems = [
   opacity: 0.9;
   max-width: 700px;
   margin: 0 auto;
+  position: relative;
 }
 
 .scroll-indicator {
@@ -200,6 +354,7 @@ const performanceItems = [
   opacity: 0.8;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .scroll-indicator:hover {
@@ -209,8 +364,20 @@ const performanceItems = [
 
 /* Main Content */
 .main-content {
+  position: relative;
   padding: 100px 0;
+}
+
+.main-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: var(--light-bg);
+  opacity: 0.95;
+  z-index: -1;
 }
 
 .grid-container {
@@ -263,6 +430,26 @@ const performanceItems = [
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 0.6s forwards;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 168, 107, 0.05), rgba(58, 134, 255, 0.05));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-hovered::before {
+  opacity: 1;
 }
 
 @keyframes fadeInUp {
@@ -399,6 +586,43 @@ const performanceItems = [
 
 .advisor-header {
   margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.animated-avatar {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.ripple-effect {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 2px solid rgba(0, 168, 107, 0.3);
+  border-radius: 50%;
+  animation: ripple 3s linear infinite;
+  opacity: 0;
+}
+
+.ripple-effect.delay-1 {
+  animation-delay: 1.5s;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
 }
 
 .advisor-header .v-icon {
@@ -408,12 +632,6 @@ const performanceItems = [
 
 .advisor-contact {
   margin-top: 2rem;
-}
-
-.contact-title {
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--dark-text);
 }
 
 .contact-button {
@@ -473,38 +691,25 @@ const performanceItems = [
   background-color: rgba(255, 107, 53, 0.1);
 }
 
-/* CTA Section */
-.cta-section {
-  padding: 100px 0;
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-  color: white;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+.check-animation {
+  animation: check-bounce 0.5s ease;
 }
 
-.cta-section::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-  background-size: 30px 30px;
-  transform: rotate(15deg);
-  animation: moveBackground 100s linear infinite;
+@keyframes check-bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
 }
 
-@keyframes moveBackground {
-  from {
-    transform: rotate(15deg) translateX(0);
-  }
-  to {
-    transform: rotate(15deg) translateX(-500px);
-  }
+.star-animation {
+  animation: star-spin 2s ease-in-out infinite;
 }
 
+@keyframes star-spin {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  75% { transform: rotate(-15deg); }
+  100% { transform: rotate(0deg); }
+}
 
 /* Responsive Design */
 @media (max-width: 992px) {
@@ -536,14 +741,6 @@ const performanceItems = [
   
   .section-title {
     font-size: 2rem;
-  }
-  
-  .cta-section h2 {
-    font-size: 2rem;
-  }
-  
-  .cta-section p {
-    font-size: 1.1rem;
   }
 }
 
