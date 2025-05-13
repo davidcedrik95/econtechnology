@@ -3,12 +3,11 @@
     <v-card class="pa-3 rounded-lg" elevation="0">
       <v-card-text>
         <v-form ref="form" v-model="valid">
-          <!-- Liste déroulante corrigée -->
           <v-select
             v-model="selectedRoofShape"
             :items="roofShapes"
-            label="Dachform*"
-            :rules="[v => !!v || 'Bitte auswählen']"
+            :label="$t('roofForm.shape.label')"
+            :rules="[v => !!v || $t('validation.required')]"
             prepend-icon="mdi-roofing"
             density="comfortable"
             item-title="text"
@@ -17,16 +16,16 @@
             @update:modelValue="handleRoofShapeChange"
           ></v-select>
 
-          <!-- Champ surface -->
           <v-text-field
             v-model.number="roofArea"
-            label="Dachfläche (m²)*"
+            :label="$t('roofForm.area.label')"
             :rules="roofAreaRules"
             type="number"
             prepend-icon="mdi-ruler-square"
             density="comfortable"
             suffix="m²"
             @blur="updateFormData"
+            @input="handleInput"
           ></v-text-field>
         </v-form>
       </v-card-text>
@@ -35,7 +34,10 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const props = defineProps({
   formData: {
@@ -46,35 +48,34 @@ const props = defineProps({
 
 const emit = defineEmits(['update:formData', 'validate']);
 
-// Données réactives
 const selectedRoofShape = ref(props.formData.roofShape || '');
 const roofArea = ref(props.formData.roofArea || '');
 const valid = ref(false);
 
-// Options de la liste
 const roofShapes = [
-  { value: 'Flachdach', text: 'Flachdach' },
-  { value: 'Satteldach', text: 'Satteldach' },
-  { value: 'Walmdach', text: 'Walmdach' },
-  { value: 'Pultdach', text: 'Pultdach' },
-  { value: 'Mansardendach', text: 'Mansardendach' },
-  { value: 'Andere', text: 'Andere' }
+  { value: 'flat', text: t('roofForm.shape.options.flat') },
+  { value: 'gable', text: t('roofForm.shape.options.gable') },
+  { value: 'hipped', text: t('roofForm.shape.options.hipped') },
+  { value: 'shed', text: t('roofForm.shape.options.shed') },
+  { value: 'mansard', text: t('roofForm.shape.options.mansard') },
+  { value: 'other', text: t('roofForm.shape.options.other') }
 ];
 
-// Règles de validation
 const roofAreaRules = [
-  v => !!v || 'Pflichtfeld',
-  v => (v > 0) || 'Muss > 0 sein',
-  v => (v <= 1000) || 'Max 1000 m²'
+  v => !!v || t('validation.required'),
+  v => (v > 0) || t('validation.min', { min: 0 }),
+  v => (v <= 1000) || t('validation.max', { max: 1000 })
 ];
 
-// Gestion du changement de sélection
 const handleRoofShapeChange = (value) => {
   selectedRoofShape.value = value;
   updateFormData();
 };
 
-// Mise à jour des données parentes
+const handleInput = () => {
+  updateFormData();
+};
+
 const updateFormData = () => {
   const formData = {
     roofShape: selectedRoofShape.value,
@@ -84,7 +85,6 @@ const updateFormData = () => {
   validateForm();
 };
 
-// Validation du formulaire
 const validateForm = () => {
   valid.value = !!selectedRoofShape.value && 
                !!roofArea.value &&
@@ -101,5 +101,11 @@ watch(() => props.formData, (newData) => {
   if (newData.roofArea !== roofArea.value) {
     roofArea.value = newData.roofArea || '';
   }
+  validateForm();
 }, { immediate: true, deep: true });
+
+// Validation initiale
+onMounted(() => {
+  validateForm();
+});
 </script>

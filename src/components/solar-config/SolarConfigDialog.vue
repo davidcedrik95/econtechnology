@@ -1,27 +1,19 @@
 <template>
   <v-dialog v-model="isOpen" max-width="800" persistent>
     <v-card class="pa-4 rounded-xl" elevation="3">
-      <!-- Bouton de fermeture en haut à droite -->
       <v-btn
         icon
         class="close-button"
         @click="closeModal"
+        :title="$t('modal.close')"
       >
         <v-icon>mdi-close</v-icon>
       </v-btn>
       
-      <!-- Seul le header simplifié -->
       <StepperHeader :current-step="currentStep" />
       
-      <!-- Progress bar visuelle seulement (sans texte) -->
-      <v-progress-linear
-        :value="(currentStep / maxStep) * 100"
-        height="8"
-        color="primary"
-        class="my-4"
-      ></v-progress-linear>
+      <ProgressBar :step="currentStep" :max-step="maxStep" />
 
-      <!-- Contenu de l'étape actuelle -->
       <component
         :is="currentComponent"
         :key="currentStep"
@@ -30,11 +22,11 @@
         @update:form-data="updateFormData"
       />
 
-      <!-- Boutons de navigation -->
       <NavigationButtons
         :step="currentStep"
         :max-step="maxStep"
         :is-valid="isCurrentStepValid"
+        :loading="loading"
         @next="handleNext"
         @prev="handlePrev"
         @close="closeModal"
@@ -45,18 +37,36 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import { defineAsyncComponent } from 'vue';
-import { useModalStore } from '@/stores/modalStore';
-import { useFormStore } from '@/stores/solarFormStore';
-import { storeToRefs } from 'pinia';
+import { ref, computed, watch, onMounted } from 'vue'
+import { defineAsyncComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useModalStore } from '@/stores/modalStore'
+import { useFormStore } from '@/stores/solarFormStore'
+import { storeToRefs } from 'pinia'
 
-// Async components
-const NavigationButtons = defineAsyncComponent(() => import('./NavigationButtons.vue'));
-const ProgressBar = defineAsyncComponent(() => import('./ProgressBar.vue'));
-const StepperHeader = defineAsyncComponent(() => import('./StepperHeader.vue'));
+const { t } = useI18n()
+const modalStore = useModalStore()
+const formStore = useFormStore()
+const { isSolarModalOpen: isOpen } = storeToRefs(modalStore)
 
-// Step components
+// Configuration des étapes
+const currentStep = ref(1)
+const maxStep = 9
+const stepNames = [
+  'personalInfo',
+  'location',
+  'building',
+  'roof',
+  'household',
+  'consumption',
+  'ownership',
+  'system',
+  'confirmation'
+]
+
+const currentStepName = computed(() => stepNames[currentStep.value - 1])
+
+// Composants dynamiques
 const StepComponents = {
   1: defineAsyncComponent(() => import('./steps/Step1PersonalInfo.vue')),
   2: defineAsyncComponent(() => import('./steps/Step2Location.vue')),
@@ -67,54 +77,45 @@ const StepComponents = {
   7: defineAsyncComponent(() => import('./steps/Step7Ownership.vue')),
   8: defineAsyncComponent(() => import('./steps/Step8System.vue')),
   9: defineAsyncComponent(() => import('./steps/Step9Confirmation.vue'))
-};
+}
 
-// Stores
-const modalStore = useModalStore();
-const formStore = useFormStore();
-const { isSolarModalOpen: isOpen } = storeToRefs(modalStore);
+const NavigationButtons = defineAsyncComponent(() => import('./NavigationButtons.vue'))
+const StepperHeader = defineAsyncComponent(() => import('./StepperHeader.vue'))
+const ProgressBar = defineAsyncComponent(() => import('./ProgressBar.vue'))
 
-// State
-const currentStep = ref(1);
-const maxStep = 9;
-const isLoading = ref(false);
-const loading = ref(false);
-const stepValidations = ref({});
-const isCurrentStepValid = computed(() => stepValidations.value[currentStep.value] || false);
+// State et méthodes
+const loading = ref(false)
+const stepValidations = ref(Array(maxStep).fill(false))
+const isCurrentStepValid = computed(() => stepValidations.value[currentStep.value - 1])
+const currentComponent = computed(() => StepComponents[currentStep.value])
 
-// Current component
-const currentComponent = computed(() => StepComponents[currentStep.value]);
-
-// Methods
 const handleStepValidation = (isValid) => {
-  stepValidations.value[currentStep.value] = isValid;
-};
+  stepValidations.value[currentStep.value - 1] = isValid
+}
 
 const updateFormData = (data) => {
-  formStore.updateFormData(data);
-};
+  formStore.updateFormData(data)
+}
 
-const handleNext = async () => {
+const handleNext = () => {
   if (currentStep.value < maxStep && isCurrentStepValid.value) {
-    isLoading.value = true;
-    currentStep.value++;
-    isLoading.value = false;
+    currentStep.value++
   }
-};
+}
 
 const handlePrev = () => {
   if (currentStep.value > 1) {
-    currentStep.value--;
+    currentStep.value--
   }
-};
+}
 
 const submitForm = async () => {
   if (!formStore.formData.termsAccepted) {
-    alert('Bitte akzeptieren Sie die AGB');
-    return;
+    alert(t('modal.acceptTermsError'))
+    return
   }
 
-  loading.value = true;
+  loading.value = true
 
   try {
     const response = await fetch('http://localhost:3001/api/send-config', {
@@ -123,42 +124,47 @@ const submitForm = async () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(formStore.formData)
-    });
+    })
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Server error: ${response.status} ${errorText}`);
-    }
+    if (!response.ok) throw new Error(await response.text())
 
-    const result = await response.json();
-
+    const result = await response.json()
     if (result.success) {
-      alert('Vielen Dank! Ihre Konfiguration wurde erfolgreich versendet.');
-      closeModal();
+      alert(t('modal.successMessage'))
+      closeModal()
     } else {
-      throw new Error(result.message || 'Unbekannter Fehler');
+      throw new Error(result.message || t('modal.unknownError'))
     }
   } catch (error) {
-    console.error('Fehler:', error);
-    alert(`Fehler beim Versenden: ${error.message}`);
+    console.error('Error:', error)
+    alert(t('modal.errorMessage', { message: error.message }))
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-};
+}
 
 const closeModal = () => {
-  modalStore.closeSolarModal();
-  currentStep.value = 1;
-  formStore.resetForm();
-  stepValidations.value = {};
-};
+  modalStore.closeSolarModal()
+  currentStep.value = 1
+  formStore.resetForm()
+  stepValidations.value = Array(maxStep).fill(false)
+}
 
-// Préchargement des composants
+// Debug
+watch(isCurrentStepValid, (val) => {
+  console.log(`Step ${currentStep.value} validity:`, val)
+})
+
 onMounted(async () => {
-  for (let i = 2; i <= maxStep; i++) {
-    if (typeof StepComponents[i]?.__asyncLoader === 'function') {
-      await StepComponents[i].__asyncLoader();
+  try {
+    // Précharge tous les composants
+    for (const component of Object.values(StepComponents)) {
+      if (typeof component === 'function') {
+        await component();
+      }
     }
+  } catch (error) {
+    console.error('Error preloading components:', error);
   }
 });
 </script>

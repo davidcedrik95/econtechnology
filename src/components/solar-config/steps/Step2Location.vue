@@ -8,7 +8,7 @@
               <v-text-field
                 density="compact"
                 v-model="formData.address"
-                label="Installationsadresse*"
+                :label="t('form.address')"
                 outlined
                 prepend-icon="mdi-home-map-marker"
                 :rules="addressRules"
@@ -21,7 +21,7 @@
                   <v-text-field
                     density="compact"
                     v-model="formData.postalCode"
-                    label="Postleitzahl*"
+                    :label="t('form.postalCode')"
                     outlined
                     prepend-icon="mdi-post"
                     :rules="postalCodeRules"
@@ -33,7 +33,7 @@
                   <v-text-field
                     density="compact"
                     v-model="formData.city"
-                    label="Ort*"
+                    :label="t('form.city')"
                     outlined
                     prepend-icon="mdi-city"
                     :rules="cityRules"
@@ -51,29 +51,31 @@
 
 <script setup>
 import { ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
   formData: { type: Object, required: true }
 });
 
 const emit = defineEmits(['validate']);
+const { t } = useI18n();
 
 const valid = ref(false);
 const form = ref(null);
 
 const addressRules = [
-  v => !!v || 'Adresse ist erforderlich',
-  v => (v && v.length >= 5) || 'Adresse muss mindestens 5 Zeichen haben'
+  v => !!v || t('form.addressRequired'),
+  v => (v && v.length >= 5) || t('form.addressMin')
 ];
 
 const postalCodeRules = [
-  v => !!v || 'Postleitzahl ist erforderlich',
-  v => /^\d{4,5}$/.test(v) || 'Postleitzahl muss gültig sein'
+  v => !!v || t('form.postalCodeRequired'),
+  v => /^\d{4,5}$/.test(v) || t('form.postalCodeValid')
 ];
 
 const cityRules = [
-  v => !!v || 'Ort ist erforderlich',
-  v => (v && v.length >= 2) || 'Ort muss mindestens 2 Zeichen haben'
+  v => !!v || t('form.cityRequired'),
+  v => (v && v.length >= 2) || t('form.cityMin')
 ];
 
 const emitValidation = async () => {

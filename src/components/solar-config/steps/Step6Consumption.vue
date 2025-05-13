@@ -3,13 +3,12 @@
     <v-card class="pa-3 rounded-lg" elevation="0">
       <v-card-text>
         <v-form ref="form" v-model="valid">
-          <!-- Liste déroulante corrigée -->
           <v-select
             v-model="localFormData.electricityUsageTime"
             :items="electricityUsageTimeItems"
-            label="Hauptstromverbrauchszeit*"
+            :label="$t('electricityUsage.timeLabel')"
             prepend-icon="mdi-clock-outline"
-            :rules="[v => !!v || 'Bitte wählen Sie eine Zeit aus']"
+            :rules="[v => !!v || $t('electricityUsage.timeError')]"
             required
             class="mb-4"
             density="comfortable"
@@ -18,15 +17,14 @@
             @update:modelValue="updateAndValidate"
           ></v-select>
 
-          <!-- Champ numérique inchangé -->
           <v-text-field
             v-model="localFormData.currentConsumption"
-            label="Aktueller Stromverbrauch (optional)"
+            :label="$t('electricityUsage.consumptionLabel')"
             outlined
             density="compact"
             prepend-icon="mdi-flash"
             type="number"
-            suffix="kWh/Jahr"
+            :suffix="$t('electricityUsage.consumptionSuffix')"
             :rules="consumptionRules"
             @blur="updateParentData"
           ></v-text-field>
@@ -37,7 +35,10 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const props = defineProps({
   formData: {
@@ -55,18 +56,17 @@ const emit = defineEmits(['update:formData', 'validate']);
 const localFormData = ref({ ...props.formData });
 const valid = ref(false);
 
-// Format correct pour v-select
-const electricityUsageTimeItems = [
-  { value: 'Vorwiegend morgens', text: 'Vorwiegend morgens' },
-  { value: 'Vorwiegend tagsüber', text: 'Vorwiegend tagsüber' },
-  { value: 'Vorwiegend abends', text: 'Vorwiegend abends' },
-  { value: 'Gleichmäßig über den Tag verteilt', text: 'Gleichmäßig verteilt' }
-];
+const electricityUsageTimeItems = computed(() => [
+  { value: 'morning', text: t('electricityUsage.timeOptions.morning') },
+  { value: 'day', text: t('electricityUsage.timeOptions.day') },
+  { value: 'evening', text: t('electricityUsage.timeOptions.evening') },
+  { value: 'uniform', text: t('electricityUsage.timeOptions.uniform') }
+]);
+
 
 const consumptionRules = [
-  v => !v || (v >= 500 && v <= 50000) || 'Verbrauch sollte zwischen 500 und 50.000 kWh liegen'
+  v => !v || (v >= 500 && v <= 50000) || t('electricityUsage.consumptionError')
 ];
-
 const updateParentData = () => {
   emit('update:formData', {
     electricityUsageTime: localFormData.value.electricityUsageTime,
@@ -97,7 +97,6 @@ validateForm();
 </script>
 
 <style scoped>
-/* Styles existants */
 .card-section {
   border: 1px solid #e0e0e0;
   border-radius: 8px;

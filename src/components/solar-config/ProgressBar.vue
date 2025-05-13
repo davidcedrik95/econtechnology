@@ -2,33 +2,33 @@
   <div class="progress-wrapper">
     <div class="progress-container">
       <!-- Indicateur de pourcentage -->
-      <div class="progress-percentage" :style="{ left: `calc(${progressValue}% - 20px)` }">
-        <span style="color: #1A82C1;">{{ Math.round(progressValue) }}%</span>
+      <div class="progress-percentage" :style="{ left: `calc(${progress}% - 12px)` }">
+        {{ progress }}%
       </div>
       
-      <!-- Conteneur de la barre -->
+      <!-- Conteneur principal de la barre -->
       <div class="progress-bar-container">
-        <!-- Icône de progression -->
-        <div class="progress-icon-outer" :style="{ left: `${progressValue}%` }">
-          <div class="progress-icon-inner">
-            <v-icon 
-              size="24" 
-              :color="progressValue > 0 ? '#1A82C1' : 'grey'"
-            >
-              mdi-check-circle
-            </v-icon>
-          </div>
-        </div>
+        <!-- Barre de fond grise -->
+        <div class="progress-background"></div>
         
-        <!-- Barre de progression Vuetify -->
-        <v-progress-linear
-          :model-value="progressValue"
-          height="8"
-          color="#1A82C1"
-          bg-color="#e0e0e0"
-          rounded
-          class="custom-progress-bar"
-        ></v-progress-linear>
+        <!-- Barre de progression bleue -->
+        <div 
+          class="progress-fill" 
+          :style="{ width: `${progress}%` }"
+        ></div>
+        
+        <!-- Icône de progression -->
+        <div 
+          class="progress-icon" 
+          :style="{ left: `${progress}%` }"
+        >
+          <v-icon 
+            size="24" 
+            :color="progress > 0 ? '#1A82C1' : 'grey'"
+          >
+            mdi-check-circle
+          </v-icon>
+        </div>
       </div>
     </div>
   </div>
@@ -50,12 +50,15 @@ const props = defineProps({
   }
 });
 
-const progressValue = computed(() => {
-  return ((props.step - 1) / (props.maxStep - 1)) * 100;
+// Calcul pour avoir des paliers de 10% exacts
+const progress = computed(() => {
+  const stepSize = 100 / props.maxStep; // Taille de chaque palier
+  return Math.round((props.step * stepSize) / 10) * 10; // Arrondi à la dizaine
 });
 </script>
 
 <style scoped>
+/* [Conservez les mêmes styles que précédemment] */
 .progress-wrapper {
   padding: 16px 0;
   width: 100%;
@@ -64,57 +67,58 @@ const progressValue = computed(() => {
 .progress-container {
   position: relative;
   width: 100%;
-  height: 24px;
+  height: 40px;
 }
 
 .progress-bar-container {
   position: relative;
   width: 100%;
-  height: 24px;
+  height: 8px;
+  margin-top: 16px;
 }
 
-.custom-progress-bar {
+.progress-background {
   position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
   width: 100%;
-  z-index: 1;
+  height: 100%;
+  background-color: #e0e0e0;
+  border-radius: 4px;
 }
 
-.progress-icon-outer {
+.progress-fill {
+  position: absolute;
+  height: 100%;
+  background-color: #447796;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-icon {
   position: absolute;
   top: 50%;
-  left: 0;
   transform: translate(-50%, -50%);
   z-index: 2;
   transition: left 0.3s ease;
 }
 
-.progress-icon-inner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
 .progress-percentage {
   position: absolute;
-  top: -20px;
-  left: 0;
-  transform: translateX(-50%);
+  top: 0;
   font-size: 12px;
   font-weight: bold;
-  color: #1A82C1;
+  color: #5497c0;
   background: white;
   padding: 2px 6px;
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   z-index: 3;
   transition: left 0.3s ease;
+  white-space: nowrap;
+}
+
+.v-icon {
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 </style>

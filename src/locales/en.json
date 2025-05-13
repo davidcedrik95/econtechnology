@@ -245,34 +245,50 @@
       "imageAlt": "Industrial technology"
     },
     "services": {
-      "title": "Our Services",
-      "list": [
-        {
-          "title": "Mechanical Engineering",
-          "description": "Design and manufacturing of customized machines and systems"
-        },
-        {
-          "title": "Automation",
-          "description": "State-of-the-art automation solutions for efficient production processes"
-        },
-        {
-          "title": "Control Technology",
-          "description": "Custom control and regulation technology for complex systems"
-        },
-        {
-          "title": "Plant Engineering",
-          "description": "Planning and realization of complete industrial plants"
-        },
-        {
-          "title": "Maintenance",
-          "description": "Maintenance and optimization of existing industrial systems"
-        },
-        {
-          "title": "Project Management",
-          "description": "Comprehensive supervision of your industrial projects from planning to implementation"
-        }
-      ]
+  "title": "Our Services",
+  "list": [
+    {
+      "title": "Mechanical Engineering",
+      "description": "Design and manufacturing of custom machines and systems"
     },
+    {
+      "title": "Automation",
+      "description": "State-of-the-art automation solutions for efficient production processes"
+    },
+    {
+      "title": "Control Technology",
+      "description": "Custom control and regulation technology for complex systems"
+    },
+    {
+      "title": "Plant Engineering",
+      "description": "Planning and implementation of complete industrial plants"
+    },
+    {
+      "title": "Maintenance",
+      "description": "Maintenance and optimization of existing industrial systems"
+    },
+    {
+      "title": "Project Management",
+      "description": "Comprehensive support for your industrial projects from planning to implementation"
+    },
+    {
+      "title": "Electrical Installation",
+      "description": "Professional installation of electrical systems for industry and commerce"
+    },
+    {
+      "title": "Energy Management",
+      "description": "Efficient energy use and sustainable energy supply concepts"
+    },
+    {
+      "title": "Safety Technology",
+      "description": "Modern safety and protection systems for people and facilities"
+    },
+    {
+      "title": "Digitalization",
+      "description": "Future-oriented digitalization solutions for Industry 4.0"
+    }
+  ]
+},
     "technologies": {
   "title": "Technology Expertise",
   "list": [
@@ -313,9 +329,236 @@
       "subtitle": "Contact us for a non-binding consultation.",
       "button": "Contact us"
     }
-  }
+  },
 
+  "form": {
+    "name": {
+      "label": "Your name*",
+      "errors": {
+        "required": "Name is required",
+        "minLength": "At least 2 characters"
+      }
+    },
+    "email": {
+      "label": "Your email address*",
+      "errors": {
+        "required": "Email is required",
+        "invalid": "Valid email required"
+      }
+    },
+    "phone": {
+      "label": "Your phone number*",
+      "errors": {
+        "required": "Phone is required",
+        "invalid": "Valid phone number required"
+      }
+    },
+    "address": "Installation address*",
+    "postalCode": "Postal code*",
+    "city": "City*",
+    "addressRequired": "Address is required",
+    "addressMin": "Address must be at least 5 characters",
+    "postalCodeRequired": "Postal code is required",
+    "postalCodeValid": "Postal code must be valid",
+    "cityRequired": "City is required",
+    "cityMin": "City must be at least 2 characters"
+  },
+
+  "modal": {
+    "close": "Close",
+    "acceptTermsError": "Please accept the terms and conditions",
+    "successMessage": "Thank you! Your configuration has been successfully sent.",
+    "errorMessage": "Error while sending: {message}",
+    "unknownError": "Unknown error"
+  },
   
+  "buttons": {
+    "back": "Back",
+    "cancel": "Cancel",
+    "next": "Next",
+    "submit": "Submit"
+  },
+   "buildingTypes": {
+    "Reihenhaus": "Terraced house",
+    "Doppelhaushälfte": "Semi-detached house",
+    "Einfamilienhaus": "Detached house",
+    "Gewerbe": "Commercial building",
+    "Mehrfamilienhaus": "Multi-family house",
+    "Anderes": "Other",
+    "error": "Please select a building type"
+  },
+  "steps": {
+    "personalInfo": "Personal Information",
+    "location": "Location",
+    "building": "Building",
+    "roof": "Roof",
+    "household": "Household",
+    "consumption": "Consumption",
+    "ownership": "Ownership",
+    "system": "System",
+    "confirmation": "Confirmation"
+  },
+  "roofForm": {
+    "shape": {
+      "label": "Roof shape",
+      "options": {
+        "flat": "Flat roof",
+        "gable": "Gable roof",
+        "hipped": "Hipped roof",
+        "shed": "Shed roof",
+        "mansard": "Mansard roof",
+        "other": "Other"
+      }
+    },
+    "area": {
+      "label": "Roof area (m²)"
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "min": "Value must be greater than {min}",
+    "max": "Value must be less than {max}",
+    "termsRequired": "You must accept the terms"
+  },
+  "householdSize": {
+    "title": "Household size",
+    "options": {
+      "1-2": "1-2 people",
+      "3-4": "3-4 people",
+      "5+": "5 and more"
+    },
+    "error": "Please select the number of people"
+  },
+  "electricityUsage": {
+    "timeLabel": "Main usage time*",
+    "timeOptions": {
+      "morning": "Mostly in the morning",
+      "day": "Mostly during the day",
+      "evening": "Mostly in the evening",
+      "uniform": "Evenly distributed"
+    },
+    "timeError": "Please select a time period",
+    "consumptionLabel": "Current consumption (optional)",
+    "consumptionSuffix": "kWh/year",
+    "consumptionError": "Consumption must be between 500 and 50,000 kWh"
+  },
+   "ownerSection": {
+    "title": "Owner or tenant",
+    "ownerLabel": "Yes, I am the owner",
+    "tenantLabel": "No, I am a tenant or lessee",
+    "ownerName": "Owner's name*",
+    "ownerContact": "Contact information*",
+    "validation": {
+      "requiredOption": "Please select an option",
+      "nameRequired": "Name is required",
+      "contactRequired": "Contact is required"
+    }
+  },
+  "solarPanelSection": {
+    "panelType": {
+      "label": "Solar panel type*",
+      "options": {
+        "monocrystalline": "Monocrystalline (high efficiency)",
+        "polycrystalline": "Polycrystalline (good value)",
+        "thinFilm": "Thin-film (lightweight and flexible)"
+      },
+      "validation": "Please select"
+    },
+    "power": {
+      "label": "Desired power (kW)*",
+      "validation": {
+        "required": "Power is required",
+        "min": "Minimum 1 kW",
+        "max": "Maximum 100 kW"
+      }
+    },
+    "inverterType": {
+      "label": "Inverter type*",
+      "options": {
+        "string": "String inverter (cost-effective)",
+        "micro": "Micro inverter (module-optimized)",
+        "hybrid": "Hybrid inverter (battery-ready)"
+      },
+      "validation": "Please select"
+    },
+    "battery": {
+      "label": "Battery storage desired",
+      "capacity": {
+        "label": "Battery capacity (kWh)",
+        "validation": {
+          "required": "Capacity required",
+          "min": "Minimum 1 kWh"
+        }
+      }
+    }
+  },
+
+  "confirmation": {
+      "title": "Please review your information before submitting",
+      "sections": {
+        "personal_info": "Personal Information",
+        "location_info": "Location Information",
+        "building_info": "Building Information",
+        "roof_info": "Roof Information",
+        "household_info": "Household Information",
+        "electricity_usage": "Electricity Usage",
+        "ownership": "Ownership",
+        "system_config": "System Configuration"
+      },
+      "fields": {
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "address": "Address",
+        "postalCode": "Postal Code",
+        "city": "City",
+        "buildingType": "Building Type",
+        "roofShape": "Roof Shape",
+        "roofArea": "Roof Area",
+        "householdSize": "Household Size",
+        "electricityUsageTime": "Peak Usage Time",
+        "currentConsumption": "Current Consumption",
+        "isOwner": "Owner",
+        "ownerName": "Owner Name",
+        "ownerContact": "Owner Contact",
+        "solarPanelType": "Solar Panel Type",
+        "power": "Power",
+        "inverterType": "Inverter Type",
+        "hasBattery": "Battery Storage",
+        "batteryCapacity": "Battery Capacity"
+      },
+      "terms": "I accept the Terms and Conditions and the Privacy Policy",
+      "notSpecified": "Not specified"
+    },
+    "validationConfirm": {
+      "required": "This field is required",
+      "min": "Value must be greater than {min}",
+      "max": "Value must be less than {max}",
+      "termsRequired": "You must accept the terms"
+    },
+    "general": {
+      "step": "Step",
+      "of": "of",
+      "yes": "Yes",
+      "no": "No"
+    },
+
+    "complete_energy_solution": "Complete Energy Solution",
+    "complete_energy_solution_desc": "Our integrated system combines solar power, energy storage and smart home technology for maximum efficiency and energy independence.",
+    "solar_power": "Solar Power",
+    "storage": "Storage",
+    "smart_home": "Smart Home",
+    
+    "integrated_system": "Fully integrated system",
+    "smart_energy_management": "Smart energy management",
+    "real_time_monitoring": "Real-time monitoring",
+    "remote_control": "Remote control via app",
+    "energy_efficiency": "Maximum energy efficiency",
+    "scalable_solution": "Scalable solution",
+    "electrical_safety": "Guaranteed electrical safety",
+    "certified_technicians": "Certified technicians",
+    "future_proof_system": "Future-proof system",
+    "modular_design": "Modular design for easy expansions at any time"
 
   }
 

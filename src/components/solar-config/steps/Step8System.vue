@@ -7,8 +7,8 @@
           <v-select
             v-model="localFormData.solarPanelType"
             :items="solarPanelTypes"
-            label="Solarmodul-Typ*"
-            :rules="[v => !!v || 'Bitte auswählen']"
+            :label="$t('solarPanelSection.panelType.label')"
+            :rules="[v => !!v || $t('solarPanelSection.panelType.validation')]"
             prepend-icon="mdi-solar-panel-large"
             density="comfortable"
             class="mb-4"
@@ -20,22 +20,22 @@
           <!-- Puissance -->
           <v-text-field
             v-model.number="localFormData.power"
-            label="Gewünschte Leistung (kW)*"
+            :label="$t('solarPanelSection.power.label')"
             :rules="powerRules"
             type="number"
             prepend-icon="mdi-flash"
             density="comfortable"
             suffix="kW"
             class="mb-4"
-            @blur="updateAndValidate"
+            @input="updateAndValidate"
           ></v-text-field>
 
           <!-- Type d'onduleur -->
           <v-select
             v-model="localFormData.inverterType"
             :items="inverterTypes"
-            label="Wechselrichter-Typ*"
-            :rules="[v => !!v || 'Bitte auswählen']"
+            :label="$t('solarPanelSection.inverterType.label')"
+            :rules="[v => !!v || $t('solarPanelSection.inverterType.validation')]"
             prepend-icon="mdi-power-plug"
             density="comfortable"
             class="mb-4"
@@ -47,7 +47,7 @@
           <!-- Batterie -->
           <v-checkbox
             v-model="localFormData.hasBattery"
-            label="Batteriespeicher gewünscht"
+            :label="$t('solarPanelSection.battery.label')"
             color="primary"
             class="mt-2"
             @update:modelValue="handleBatteryChange"
@@ -56,13 +56,13 @@
           <v-text-field
             v-if="localFormData.hasBattery"
             v-model.number="localFormData.batteryCapacity"
-            label="Batteriekapazität (kWh)"
+            :label="$t('solarPanelSection.battery.capacity.label')"
             :rules="batteryRules"
             type="number"
             prepend-icon="mdi-battery"
             density="comfortable"
             suffix="kWh"
-            @blur="updateAndValidate"
+            @input="updateAndValidate"
           ></v-text-field>
         </v-form>
       </v-card-text>
@@ -72,6 +72,10 @@
 
 <script setup>
 import { ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+const emit = defineEmits(['update:formData', 'validate'])
 
 const props = defineProps({
   formData: {
@@ -85,36 +89,38 @@ const props = defineProps({
       batteryCapacity: ''
     })
   }
-});
+})
 
-const emit = defineEmits(['update:formData', 'validate']);
+const localFormData = ref({...props.formData})
+const valid = ref(false)
+const form = ref(null)
 
-const localFormData = ref({ ...props.formData });
-const valid = ref(false);
-
+// Options pour les sélecteurs
 const solarPanelTypes = [
-  { value: 'monocrystalline', text: 'Monokristallin (hoher Wirkungsgrad)' },
-  { value: 'polycrystalline', text: 'Polykristallin (gutes Preis-Leistungs-Verhältnis)' },
-  { value: 'thin-film', text: 'Dünnschicht (leicht und flexibel)' }
-];
+  { value: 'monocrystalline', text: t('solarPanelSection.panelType.options.monocrystalline') },
+  { value: 'polycrystalline', text: t('solarPanelSection.panelType.options.polycrystalline') },
+  { value: 'thin-film', text: t('solarPanelSection.panelType.options.thinFilm') }
+]
 
 const inverterTypes = [
-  { value: 'string', text: 'String-Wechselrichter (kostengünstig)' },
-  { value: 'micro', text: 'Micro-Wechselrichter (moduloptimiert)' },
-  { value: 'hybrid', text: 'Hybrid-Wechselrichter (batteriefähig)' }
-];
+  { value: 'string', text: t('solarPanelSection.inverterType.options.string') },
+  { value: 'micro', text: t('solarPanelSection.inverterType.options.micro') },
+  { value: 'hybrid', text: t('solarPanelSection.inverterType.options.hybrid') }
+]
 
+// Règles de validation
 const powerRules = [
-  v => !!v || 'Leistung ist erforderlich',
-  v => (v >= 1) || 'Mindestens 1 kW',
-  v => (v <= 100) || 'Maximal 100 kW'
-];
+  v => !!v || t('solarPanelSection.power.validation.required'),
+  v => (v >= 1) || t('solarPanelSection.power.validation.min'),
+  v => (v <= 100) || t('solarPanelSection.power.validation.max')
+]
 
 const batteryRules = [
-  v => !localFormData.value.hasBattery || !!v || 'Kapazität erforderlich',
-  v => !localFormData.value.hasBattery || (v >= 1) || 'Mindestens 1 kWh'
-];
+  v => !localFormData.value.hasBattery || !!v || t('solarPanelSection.battery.capacity.validation.required'),
+  v => !localFormData.value.hasBattery || (v >= 1) || t('solarPanelSection.battery.capacity.validation.min')
+]
 
+// Gestion de la batterie
 const handleBatteryChange = (value) => {
   if (!value) {
     localFormData.value.batteryCapacity = '';
@@ -122,6 +128,7 @@ const handleBatteryChange = (value) => {
   updateAndValidate();
 };
 
+// Mise à jour et validation
 const updateAndValidate = () => {
   emit('update:formData', { 
     ...localFormData.value,
@@ -129,29 +136,16 @@ const updateAndValidate = () => {
     batteryCapacity: localFormData.value.hasBattery ? Number(localFormData.value.batteryCapacity) : ''
   });
   
-  validateForm();
+  form.value?.validate().then(({ valid: isValid }) => {
+    emit('validate', isValid);
+  });
 };
 
-const validateForm = () => {
-  let isValid = !!localFormData.value.solarPanelType && 
-               !!localFormData.value.power && 
-               !!localFormData.value.inverterType;
-  
-  if (localFormData.value.hasBattery) {
-    isValid = isValid && !!localFormData.value.batteryCapacity;
-  }
-  
-  valid.value = isValid;
-  emit('validate', isValid);
-};
-
+// Watch pour les changements externes
 watch(() => props.formData, (newVal) => {
   localFormData.value = { ...newVal };
 }, { deep: true });
 
-validateForm();
+// Validation initiale
+updateAndValidate();
 </script>
-
-<style scoped>
-/* Styles spécifiques si nécessaire */
-</style>

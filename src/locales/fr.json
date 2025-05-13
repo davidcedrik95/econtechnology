@@ -244,34 +244,50 @@
       "imageAlt": "Technologie industrielle"
     },
     "services": {
-      "title": "Nos Services",
-      "list": [
-        {
-          "title": "Génie Mécanique",
-          "description": "Conception et fabrication de machines et systèmes sur mesure"
-        },
-        {
-          "title": "Automatisation",
-          "description": "Solutions d'automatisation de pointe pour des processus de production efficaces"
-        },
-        {
-          "title": "Technologie de Commande",
-          "description": "Technologie de commande et de régulation personnalisée pour systèmes complexes"
-        },
-        {
-          "title": "Construction d'Installations",
-          "description": "Planification et réalisation d'installations industrielles complètes"
-        },
-        {
-          "title": "Maintenance",
-          "description": "Maintenance et optimisation des systèmes industriels existants"
-        },
-        {
-          "title": "Gestion de Projet",
-          "description": "Supervision complète de vos projets industriels de la planification à la mise en œuvre"
-        }
-      ]
+  "title": "Nos Services",
+  "list": [
+    {
+      "title": "Génie Mécanique",
+      "description": "Conception et fabrication de machines et systèmes sur mesure"
     },
+    {
+      "title": "Automatisation",
+      "description": "Solutions d'automatisation de pointe pour des processus de production efficaces"
+    },
+    {
+      "title": "Technologie de Commande",
+      "description": "Technologie de contrôle et de régulation personnalisée pour systèmes complexes"
+    },
+    {
+      "title": "Construction d'Installations",
+      "description": "Planification et réalisation d'installations industrielles complètes"
+    },
+    {
+      "title": "Maintenance",
+      "description": "Maintenance et optimisation des systèmes industriels existants"
+    },
+    {
+      "title": "Gestion de Projet",
+      "description": "Accompagnement complet de vos projets industriels de la planification à la réalisation"
+    },
+    {
+      "title": "Installation Électrique",
+      "description": "Installation professionnelle de systèmes électriques pour l'industrie et le commerce"
+    },
+    {
+      "title": "Gestion de l'Énergie",
+      "description": "Utilisation efficace de l'énergie et concepts d'approvisionnement énergétique durable"
+    },
+    {
+      "title": "Technologie de Sécurité",
+      "description": "Systèmes modernes de sécurité et de protection pour les personnes et les installations"
+    },
+    {
+      "title": "Numérisation",
+      "description": "Solutions de numérisation tournées vers l'avenir pour l'industrie 4.0"
+    }
+  ]
+},
     "technologies": {
   "title": "Expertise Technologique",
   "list": [
@@ -312,6 +328,231 @@
       "subtitle": "Contactez-nous pour une consultation sans engagement.",
       "button": "Nous contacter"
     }
-  }
+  },
+  "form": {
+    "name": {
+      "label": "Votre nom*",
+      "errors": {
+        "required": "Le nom est requis",
+        "minLength": "Au moins 2 caractères"
+      }
+    },
+    "email": {
+      "label": "Votre adresse e-mail*",
+      "errors": {
+        "required": "L'e-mail est requis",
+        "invalid": "Adresse e-mail valide requise"
+      }
+    },
+    "phone": {
+      "label": "Votre numéro de téléphone*",
+      "errors": {
+        "required": "Le téléphone est requis",
+        "invalid": "Numéro de téléphone valide requis"
+      }
+    },
+    "address": "Adresse d'installation*",
+    "postalCode": "Code postal*",
+    "city": "Ville*",
+    "addressRequired": "L'adresse est requise",
+    "addressMin": "L'adresse doit comporter au moins 5 caractères",
+    "postalCodeRequired": "Le code postal est requis",
+    "postalCodeValid": "Le code postal doit être valide",
+    "cityRequired": "La ville est requise",
+    "cityMin": "La ville doit comporter au moins 2 caractères"
+  },
+  "modal": {
+    "close": "Fermer",
+    "acceptTermsError": "Veuillez accepter les conditions générales",
+    "successMessage": "Merci ! Votre configuration a bien été envoyée.",
+    "errorMessage": "Erreur lors de l'envoi : {message}",
+    "unknownError": "Erreur inconnue"
+  },
+  "steps": {
+    "personalInfo": "Informations personnelles",
+    "location": "Localisation",
+    "building": "Bâtiment",
+    "roof": "Toit",  
+    "household": "Ménage",
+    "consumption": "Consommation",
+    "ownership": "Propriété",
+    "system": "Système",
+    "confirmation": "Confirmation"
+  },
+  "roofForm": {
+    "shape": {
+      "label": "Forme du toit",
+      "options": {
+        "flat": "Toit plat",
+        "gable": "Toit à deux pans",
+        "hipped": "Toit en croupe",
+        "shed": "Toit en appentis",
+        "mansard": "Toit mansardé",
+        "other": "Autre"
+      }
+    },
+    "area": {
+      "label": "Surface du toit (m²)"
+    }
+  },
+  "validation": {
+    "required": "Ce champ est obligatoire",
+    "min": "La valeur doit être supérieure à {min}",
+    "max": "La valeur doit être inférieure à {max}"
+  },
+  
+  "buttons": {
+    "back": "Retour",
+    "cancel": "Annuler",
+    "next": "Suivant",
+    "submit": "Envoyer"
+  },
+  "buildingTypes": {
+    "Reihenhaus": "Maison mitoyenne",
+    "Doppelhaushälfte": "Maison jumelée",
+    "Einfamilienhaus": "Maison individuelle",
+    "Gewerbe": "Bâtiment commercial",
+    "Mehrfamilienhaus": "Immeuble résidentiel",
+    "Anderes": "Autre",
+    "error": "Veuillez sélectionner un type de bâtiment"
+  },
+  "householdSize": {
+    "title": "Taille du foyer",
+    "options": {
+      "1-2": "1-2 personnes",
+      "3-4": "3-4 personnes",
+      "5+": "5 et plus"
+    },
+    "error": "Veuillez sélectionner le nombre de personnes"
+  },
+  "electricityUsage": {
+    "timeLabel": "Période de consommation principale*",
+    "timeOptions": {
+      "morning": "Principalement le matin",
+      "day": "Principalement la journée",
+      "evening": "Principalement le soir",
+      "uniform": "Répartition uniforme"
+    },
+    "timeError": "Veuillez sélectionner une période",
+    "consumptionLabel": "Consommation actuelle (optionnelle)",
+    "consumptionSuffix": "kWh/an",
+    "consumptionError": "La consommation doit être entre 500 et 50 000 kWh"
+  },
+  "ownerSection": {
+    "title": "Propriétaire ou locataire",
+    "ownerLabel": "Oui, je suis le propriétaire",
+    "tenantLabel": "Non, je suis locataire ou preneur",
+    "ownerName": "Nom du propriétaire*",
+    "ownerContact": "Coordonnées*",
+    "validation": {
+      "requiredOption": "Veuillez sélectionner une option",
+      "nameRequired": "Le nom est requis",
+      "contactRequired": "Les coordonnées sont requises"
+    }
+  },
+  "solarPanelSection": {
+    "panelType": {
+      "label": "Type de panneau solaire*",
+      "options": {
+        "monocrystalline": "Monocristallin (haut rendement)",
+        "polycrystalline": "Polycristallin (bon rapport qualité-prix)",
+        "thinFilm": "Couche mince (léger et flexible)"
+      },
+      "validation": "Veuillez sélectionner"
+    },
+    "power": {
+      "label": "Puissance souhaitée (kW)*",
+      "validation": {
+        "required": "La puissance est requise",
+        "min": "Minimum 1 kW",
+        "max": "Maximum 100 kW"
+      }
+    },
+    "inverterType": {
+      "label": "Type d'onduleur*",
+      "options": {
+        "string": "Onduleur string (économique)",
+        "micro": "Micro-onduleur (optimisé par module)",
+        "hybrid": "Onduleur hybride (compatible batterie)"
+      },
+      "validation": "Veuillez sélectionner"
+    },
+    "battery": {
+      "label": "Batterie de stockage souhaitée",
+      "capacity": {
+        "label": "Capacité de la batterie (kWh)",
+        "validation": {
+          "required": "Capacité requise",
+          "min": "Minimum 1 kWh"
+        }
+      }
+    }
+  },
+
+ "confirmation": {
+      "title": "Veuillez vérifier vos informations avant de soumettre",
+      "sections": {
+        "personal_info": "Informations personnelles",
+        "location_info": "Informations sur l'emplacement",
+        "building_info": "Informations sur le bâtiment",
+        "roof_info": "Informations sur le toit",
+        "household_info": "Informations sur le foyer",
+        "electricity_usage": "Utilisation de l'électricité",
+        "ownership": "Propriété",
+        "system_config": "Configuration du système"
+      },
+      "fields": {
+        "name": "Nom",
+        "email": "E-mail",
+        "phone": "Téléphone",
+        "address": "Adresse",
+        "postalCode": "Code postal",
+        "city": "Ville",
+        "buildingType": "Type de bâtiment",
+        "roofShape": "Forme du toit",
+        "roofArea": "Surface du toit",
+        "householdSize": "Nombre de personnes dans le foyer",
+        "electricityUsageTime": "Période de consommation principale",
+        "currentConsumption": "Consommation actuelle",
+        "isOwner": "Propriétaire",
+        "ownerName": "Nom du propriétaire",
+        "ownerContact": "Contact du propriétaire",
+        "solarPanelType": "Type de panneau solaire",
+        "power": "Puissance",
+        "inverterType": "Type d'onduleur",
+        "hasBattery": "Stockage par batterie",
+        "batteryCapacity": "Capacité de la batterie"
+      },
+      "terms": "J'accepte les conditions générales et la politique de confidentialité",
+      "notSpecified": "Non spécifié"
+    },
+    "validationConfirm": {
+      "required": "Ce champ est requis",
+      "min": "La valeur doit être supérieure à {min}",
+      "max": "La valeur doit être inférieure à {max}",
+      "termsRequired": "Vous devez accepter les conditions"
+    },
+    "general": {
+      "step": "Étape",
+      "of": "sur",
+      "yes": "Oui",
+      "no": "Non"
+    },
+
+    "complete_energy_solution": "Solution Énergétique Complète",
+    "complete_energy_solution_desc": "Notre système intégré combine énergie solaire, stockage et technologie domotique pour une efficacité maximale et une indépendance énergétique.",
+    "solar_power": "Énergie Solaire",
+    "storage": "Stockage",
+    "smart_home": "Maison Connectée",
+    "integrated_system": "Système entièrement intégré",
+    "smart_energy_management": "Gestion intelligente de l'énergie",
+    "real_time_monitoring": "Surveillance en temps réel",
+    "remote_control": "Contrôle à distance via application",
+    "energy_efficiency": "Efficacité énergétique maximale",
+    "scalable_solution": "Solution évolutive",
+    "electrical_safety": "Sécurité électrique garantie",
+    "certified_technicians": "Techniciens certifiés",
+    "future_proof_system": "Système évolutif",
+    "modular_design": "Conception modulaire permettant des extensions faciles à tout moment"
 
   }

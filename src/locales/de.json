@@ -270,13 +270,29 @@
         {
           "title": "Projektmanagement",
           "description": "Umfassende Betreuung Ihrer Industrieprojekte von der Planung bis zur Umsetzung"
+        },
+        {
+          "title": "Elektroinstallation",
+          "description": "Fachgerechte Installation elektrischer Anlagen für Industrie und Gewerbe"
+        },
+        {
+          "title": "Energiemanagement",
+          "description": "Effiziente Energienutzung und nachhaltige Energieversorgungskonzepte"
+        },
+        {
+          "title": "Sicherheitstechnik",
+          "description": "Moderne Sicherheits- und Schutzsysteme für Personen und Anlagen"
+        },
+        {
+          "title": "Digitalisierung",
+          "description": "Zukunftsorientierte Digitalisierungslösungen für die Industrie 4.0"
         }
       ]
     },
     "technologies": {
-  "title": "Technologiekompetenz",
-  "list": [
-    {
+    "title": "Technologiekompetenz",
+    "list": [
+      {
       "name": "Industrie 4.0",
       "description": "Wir implementieren intelligente, vernetzte Systeme für die Fabrik der Zukunft.",
       "features": [
@@ -313,7 +329,234 @@
       "subtitle": "Kontaktieren Sie uns für ein unverbindliches Beratungsgespräch.",
       "button": "Kontakt aufnehmen"
     }
-  }
-    
+  },
+  "form": {
+    "name": {
+      "label": "Ihr Name*",
+      "errors": {
+        "required": "Name ist erforderlich",
+        "minLength": "Mindestens 2 Zeichen"
+      }
+    },
+    "email": {
+      "label": "Ihre E-Mail-Adresse*",
+      "errors": {
+        "required": "E-Mail ist erforderlich",
+        "invalid": "Gültige E-Mail benötigt"
+      }
+    },
+    "phone": {
+      "label": "Ihre Telefonnummer*",
+      "errors": {
+        "required": "Telefon ist erforderlich",
+        "invalid": "Gültige Telefonnummer benötigt"
+      }
+    },
+    "address": "Installationsadresse*",
+    "postalCode": "Postleitzahl*",
+    "city": "Ort*",
+    "addressRequired": "Adresse ist erforderlich",
+    "addressMin": "Adresse muss mindestens 5 Zeichen haben",
+    "postalCodeRequired": "Postleitzahl ist erforderlich",
+    "postalCodeValid": "Postleitzahl muss gültig sein",
+    "cityRequired": "Ort ist erforderlich",
+    "cityMin": "Ort muss mindestens 2 Zeichen haben"
+  },
+  "modal": {
+    "close": "Schließen",
+    "acceptTermsError": "Bitte akzeptieren Sie die AGB",
+    "successMessage": "Vielen Dank! Ihre Konfiguration wurde erfolgreich versendet.",
+    "errorMessage": "Fehler beim Versenden: {message}",
+    "unknownError": "Unbekannter Fehler"
+  },
+  "steps": {
+    "personalInfo": "Persönliche Informationen",
+    "location": "Standort",
+    "building": "Gebäude",
+    "roof": "Dach",
+    "household": "Haushalt",
+    "consumption": "Verbrauch",
+    "ownership": "Eigentum",
+    "system": "System",
+    "confirmation": "Bestätigung"
+  },
+  "roofForm": {
+    "shape": {
+      "label": "Dachform",
+      "options": {
+        "flat": "Flachdach",
+        "gable": "Satteldach",
+        "hipped": "Walmdach",
+        "shed": "Pultdach",
+        "mansard": "Mansardendach",
+        "other": "Andere"
+      }
+    },
+    "area": {
+      "label": "Dachfläche (m²)"
+    }
+  },
+ 
+  "buttons": {
+    "back": "Zurück",
+    "cancel": "Abbrechen",
+    "next": "Weiter",
+    "submit": "Absenden"
+  },
+   "buildingTypes": {
+    "Reihenhaus": "Reihenhaus",
+    "Doppelhaushälfte": "Doppelhaushälfte",
+    "Einfamilienhaus": "Einfamilienhaus",
+    "Gewerbe": "Gewerbe",
+    "Mehrfamilienhaus": "Mehrfamilienhaus",
+    "Anderes": "Anderes",
+    "error": "Bitte wählen Sie einen Gebäudetyp aus"
+  },
+  "householdSize": {
+    "title": "Haushaltsgröße",
+    "options": {
+      "1-2": "1-2 Personen",
+      "3-4": "3-4 Personen",
+      "5+": "5 und mehr"
+    },
+    "error": "Bitte wählen Sie die Anzahl der Personen aus"
+  },
+  "electricityUsage": {
+    "timeLabel": "Hauptstromverbrauchszeit*",
+    "timeOptions": {
+      "morning": "Vorwiegend morgens",
+      "day": "Vorwiegend tagsüber",
+      "evening": "Vorwiegend abends",
+      "uniform": "Gleichmäßig verteilt"
+    },
+    "timeError": "Bitte wählen Sie eine Zeit aus",
+    "consumptionLabel": "Aktueller Stromverbrauch (optional)",
+    "consumptionSuffix": "kWh/Jahr",
+    "consumptionError": "Verbrauch sollte zwischen 500 und 50.000 kWh liegen"
+  },
+   "ownerSection": {
+    "title": "Eigentümer oder Mieter",
+    "ownerLabel": "Ja, ich bin der Eigentümer",
+    "tenantLabel": "Nein, ich bin Mieter oder Pächter",
+    "ownerName": "Name des Eigentümers*",
+    "ownerContact": "Kontaktinformationen*",
+    "validation": {
+      "requiredOption": "Bitte wählen Sie eine Option",
+      "nameRequired": "Name ist erforderlich",
+      "contactRequired": "Kontakt ist erforderlich"
+    }
+  },
+  "solarPanelSection": {
+    "panelType": {
+      "label": "Solarmodul-Typ*",
+      "options": {
+        "monocrystalline": "Monokristallin (hoher Wirkungsgrad)",
+        "polycrystalline": "Polykristallin (gutes Preis-Leistungs-Verhältnis)",
+        "thinFilm": "Dünnschicht (leicht und flexibel)"
+      },
+      "validation": "Bitte auswählen"
+    },
+    "power": {
+      "label": "Gewünschte Leistung (kW)*",
+      "validation": {
+        "required": "Leistung ist erforderlich",
+        "min": "Mindestens 1 kW",
+        "max": "Maximal 100 kW"
+      }
+    },
+    "inverterType": {
+      "label": "Wechselrichter-Typ*",
+      "options": {
+        "string": "String-Wechselrichter (kostengünstig)",
+        "micro": "Micro-Wechselrichter (moduloptimiert)",
+        "hybrid": "Hybrid-Wechselrichter (batteriefähig)"
+      },
+      "validation": "Bitte auswählen"
+    },
+    "battery": {
+      "label": "Batteriespeicher gewünscht",
+      "capacity": {
+        "label": "Batteriekapazität (kWh)",
+        "validation": {
+          "required": "Kapazität erforderlich",
+          "min": "Mindestens 1 kWh"
+        }
+      }
+    }
+  },
+
+ "confirmation": {
+    "title": "Bitte überprüfen Sie Ihre Angaben vor dem Absenden",
+    "sections": {
+      "personal_info": "Persönliche Informationen",
+      "location_info": "Standortinformationen",
+      "building_info": "Gebäudeinformationen",
+      "roof_info": "Dachinformationen",
+      "household_info": "Haushaltsinformationen",
+      "electricity_usage": "Stromverbrauchsverhalten",
+      "ownership": "Eigentumsverhältnisse",
+      "system_config": "Systemkonfiguration"
+    },
+    "fields": {
+      "name": "Name",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "address": "Adresse",
+      "postalCode": "Postleitzahl",
+      "city": "Ort",
+      "buildingType": "Gebäudetyp",
+      "roofShape": "Dachform",
+      "roofArea": "Dachfläche",
+      "householdSize": "Personen im Haushalt",
+      "electricityUsageTime": "Hauptverbrauchszeit",
+      "currentConsumption": "Aktueller Verbrauch",
+      "isOwner": "Eigentümer",
+      "ownerName": "Eigentümer Name",
+      "ownerContact": "Eigentümer Kontakt",
+      "solarPanelType": "Solarmodul-Typ",
+      "power": "Leistung",
+      "inverterType": "Wechselrichter-Typ",
+      "hasBattery": "Batteriespeicher",
+      "batteryCapacity": "Batteriekapazität"
+    },
+    "terms": "Ich akzeptiere die Allgemeinen Geschäftsbedingungen und die Datenschutzbestimmungen",
+    "notSpecified": "Nicht angegeben"
+  },
+
+  "validationConfirm": {
+    "required": "Dieses Feld ist erforderlich",
+    "min": "Wert muss größer sein als {min}",
+    "max": "Wert muss kleiner sein als {max}",
+    "termsRequired": "Sie müssen die Bedingungen akzeptieren"
+  },
+  
+  "general": {
+    "step": "Schritt",
+    "of": "von",
+    "yes": "Ja",
+    "no": "Nein"
+  },
+  
+  "validation": {
+    "required": "Dieses Feld ist erforderlich",
+    "min": "Wert muss größer sein als {min}",
+    "max": "Wert muss kleiner sein als {max}"
+  },
+
+  "complete_energy_solution": "Komplette Energielösung",
+  "complete_energy_solution_desc": "Unser integriertes System kombiniert Solarenergie, Energiespeicher und Smart-Home-Technologie für maximale Effizienz und Energieunabhängigkeit.",
+  "solar_power": "Solarstrom",
+  "storage": "Speicher",
+  "smart_home": "Smart Home",
+  "integrated_system": "Vollständig integriertes System",
+  "smart_energy_management": "Intelligentes Energiemanagement",
+  "real_time_monitoring": "Echtzeit-Monitoring",
+  "remote_control": "Fernsteuerung per App",
+  "energy_efficiency": "Maximale Energieeffizienz",
+  "scalable_solution": "Skalierbare Lösung",
+  "electrical_safety": "Geprüfte Elektrosicherheit",
+  "certified_technicians": "Zertifizierte Techniker",
+  "future_proof_system": "Zukunftssicheres System",
+  "modular_design": "Modulares Design für einfache Erweiterungen jederzeit"
 
   }

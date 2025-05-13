@@ -42,6 +42,29 @@
               </div>
               <h3>{{ $t(service.title) }}</h3>
               <p>{{ $t(service.description) }}</p>
+              
+              <!-- Additional content for specific cards -->
+              <div class="additional-content" v-if="service.title === 'elektroinstallation'">
+                <div class="mini-features">
+                  <div class="mini-feature">
+                    <v-icon icon="mdi-lightning-bolt" size="24" />
+                    <span>{{ $t('electrical_safety') }}</span>
+                  </div>
+                  <div class="mini-feature">
+                    <v-icon icon="mdi-certificate" size="24" />
+                    <span>{{ $t('certified_technicians') }}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="additional-content" v-if="service.title === 'erweiterbarkeit'">
+                <div class="compatibility-badge">
+                  <v-icon icon="mdi-connection" color="success" />
+                  <span>{{ $t('future_proof_system') }}</span>
+                </div>
+                <p class="small-text">{{ $t('modular_design') }}</p>
+              </div>
+              
               <button 
                 v-if="service.title === 'solardach'"
                 class="service-button pulse-animation"
@@ -109,6 +132,33 @@
         </div>
       </div>
     </div>
+    
+    <!-- Extended Service Card -->
+    <div class="extended-service-card">
+      <div class="extended-card-content">
+        <div class="extended-card-text">
+          <h3>{{ $t('complete_energy_solution') }}</h3>
+          <p>{{ $t('complete_energy_solution_desc') }}</p>
+          
+          <ul class="feature-list">
+            <li v-for="(feature, index) in energyFeatures" :key="index">
+              <v-icon icon="mdi-check-circle" color="success" />
+              {{ $t(feature) }}
+            </li>
+          </ul>
+        </div>
+        
+        <div class="extended-card-image">
+          <img src="/images/energy-system.png" alt="Complete Energy System" />
+        </div>
+      </div>
+      
+      <div class="extended-card-footer">
+        <button class="consultation-button" @click="openConsultationModal" style="color: black;">
+          {{ $t('free_consultation') }}
+        </button>
+      </div>
+    </div>
 
     <!-- Animated Solar Rays -->
     <div class="solar-rays">
@@ -131,6 +181,10 @@ const hoveredCard = ref(null);
 
 const openSolarModal = () => {
   modalStore.openSolarModal();
+};
+
+const openConsultationModal = () => {
+  modalStore.openConsultationModal();
 };
 
 const hoverCard = (index) => {
@@ -192,6 +246,17 @@ onMounted(() => {
       }
     });
   }
+
+  // Parallax effect for extended card image
+  const parallaxImage = document.querySelector('.parallax-image');
+  if (parallaxImage) {
+    const parallaxValue = parseFloat(parallaxImage.getAttribute('data-parallax')) || 0.1;
+    
+    window.addEventListener('scroll', () => {
+      const scrollPosition = window.pageYOffset;
+      parallaxImage.style.transform = `translateY(${scrollPosition * parallaxValue}px)`;
+    });
+  }
 });
 
 const services = [
@@ -220,6 +285,15 @@ const performanceItems = [
   'individuelle_planung',
   'optimale_energienutzung',
   'wartung_service',
+];
+
+const energyFeatures = [
+  'integrated_system',
+  'smart_energy_management',
+  'real_time_monitoring',
+  'remote_control',
+  'energy_efficiency',
+  'scalable_solution'
 ];
 </script>
 
@@ -488,6 +562,50 @@ const performanceItems = [
   margin-bottom: 1.5rem;
 }
 
+/* Additional Content Styles */
+.additional-content {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(0, 168, 107, 0.2);
+}
+
+.mini-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.mini-feature {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #555;
+  background: rgba(0, 168, 107, 0.05);
+  padding: 6px 10px;
+  border-radius: 20px;
+}
+
+.compatibility-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 168, 107, 0.1);
+  padding: 8px 12px;
+  border-radius: 20px;
+  margin: 10px 0;
+  font-size: 0.9rem;
+}
+
+.small-text {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
 .service-button {
   padding: 12px 24px;
   background-color: white;
@@ -521,6 +639,129 @@ const performanceItems = [
   100% {
     box-shadow: 0 0 0 0 rgba(0, 168, 107, 0);
   }
+}
+
+/* Extended Service Card */
+.extended-service-card {
+  grid-column: 1 / -1;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-top: 4px solid var(--accent-color);
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s forwards;
+  animation-delay: 0.4s;
+}
+
+.extended-service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.extended-card-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 300px;
+}
+
+.extended-card-text {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.extended-card-text h3 {
+  font-size: 1.6rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.extended-card-text p {
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-list li {
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: #555;
+  transition: all 0.3s ease;
+}
+
+.feature-list li:hover {
+  color: var(--primary-color);
+}
+
+.extended-card-image {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.extended-card-image img {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.extended-card-footer {
+  padding: 20px 40px;
+  background: rgba(0, 168, 107, 0.05);
+  text-align: center;
+}
+
+.consultation-button {
+  padding: 15px 30px;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px rgba(0, 168, 107, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.consultation-button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255,255,255,0.1);
+  transform: rotate(30deg);
+  transition: all 0.3s ease;
+}
+
+.consultation-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 168, 107, 0.4);
+}
+
+.consultation-button:hover::after {
+  left: 100%;
 }
 
 /* Sidebar */
@@ -728,6 +969,15 @@ const performanceItems = [
   .sidebar {
     position: static;
   }
+  
+  .extended-card-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .extended-card-image {
+    height: 300px;
+    order: -1;
+  }
 }
 
 @media (max-width: 768px) {
@@ -736,11 +986,15 @@ const performanceItems = [
   }
   
   .services-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
   
   .section-title {
     font-size: 2rem;
+  }
+  
+  .feature-list li {
+    font-size: 0.9rem;
   }
 }
 
@@ -755,6 +1009,18 @@ const performanceItems = [
   
   .service-card, .sidebar-card {
     padding: 20px;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .extended-card-text {
+    padding: 25px;
+  }
+  
+  .feature-list li {
+    margin-bottom: 0.5rem;
   }
 }
 </style>

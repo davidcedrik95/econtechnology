@@ -11,6 +11,9 @@
 
 <script setup>
 import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const props = defineProps({
   currentStep: { 
@@ -20,20 +23,20 @@ const props = defineProps({
   }
 });
 
-const stepData = {
-  1: { icon: 'mdi-account', title: 'Persönliche Informationen' },
-  2: { icon: 'mdi-map-marker', title: 'Standortinformationen' },
-  3: { icon: 'mdi-home', title: 'Gebäudeinformationen' },
-  4: { icon: 'mdi-roofing', title: 'Dachinformationen' },
-  5: { icon: 'mdi-account-group', title: 'Haushaltsinformationen' },
-  6: { icon: 'mdi-chart-line', title: 'Stromverbrauchsverhalten' },
-  7: { icon: 'mdi-key', title: 'Eigentumsverhältnisse' },
-  8: { icon: 'mdi-solar-power', title: 'Systemkonfiguration' },
-  9: { icon: 'mdi-check', title: 'Bestätigung' }
-};
+const stepData = computed(() => ({
+  1: { icon: 'mdi-account', title: t('steps.personalInfo') },
+  2: { icon: 'mdi-map-marker', title: t('steps.location') },
+  3: { icon: 'mdi-home', title: t('steps.building') },
+  4: { icon: 'mdi-roofing', title: t('steps.roof') },
+  5: { icon: 'mdi-account-group', title: t('steps.household') },
+  6: { icon: 'mdi-chart-line', title: t('steps.consumption') },
+  7: { icon: 'mdi-key', title: t('steps.ownership') },
+  8: { icon: 'mdi-solar-power', title: t('steps.system') },
+  9: { icon: 'mdi-check', title: t('steps.confirmation') }
+}));
 
-const currentIcon = computed(() => stepData[props.currentStep]?.icon || '');
-const currentTitle = computed(() => stepData[props.currentStep]?.title || '');
+const currentIcon = computed(() => stepData.value[props.currentStep]?.icon || '');
+const currentTitle = computed(() => stepData.value[props.currentStep]?.title || '');
 </script>
 
 <style scoped>

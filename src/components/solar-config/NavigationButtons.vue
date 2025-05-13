@@ -9,7 +9,7 @@
         :disabled="loading"
       >
         <v-icon left>mdi-arrow-left</v-icon>
-        Zurück
+        {{ $t('buttons.back') }}
       </v-btn>
       <v-btn
         v-else
@@ -19,7 +19,7 @@
         :disabled="loading"
       >
         <v-icon left>mdi-close</v-icon>
-        Abbrechen
+        {{ $t('buttons.cancel') }}
       </v-btn>
     </v-col>
     
@@ -31,7 +31,7 @@
         :disabled="!isValid || loading"
         :loading="loading"
       >
-        Weiter
+        {{ $t('buttons.next') }}
         <v-icon right>mdi-arrow-right</v-icon>
       </v-btn>
       
@@ -42,7 +42,7 @@
         :disabled="!isValid || loading"
         :loading="loading"
       >
-        Absenden
+        {{ $t('buttons.submit') }}
         <v-icon right>mdi-check</v-icon>
       </v-btn>
     </v-col>
@@ -50,6 +50,9 @@
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
+
 defineProps({
   step: { type: Number, required: true },
   maxStep: { type: Number, required: true },

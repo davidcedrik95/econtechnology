@@ -6,17 +6,17 @@
           <!-- Propriétaire ou locataire -->
           <v-radio-group
             v-model="localFormData.isOwner"
-            :rules="[v => v !== null || 'Bitte wählen Sie eine Option']"
+            :rules="[v => v !== null || $t('ownerSection.validation.requiredOption')]"
             class="mb-4"
             @update:modelValue="handleOwnerChange"
           >
             <v-radio 
-              label="Ja, ich bin der Eigentümer" 
+              :label="$t('ownerSection.ownerLabel')" 
               :value="true" 
               color="primary"
             ></v-radio>
             <v-radio 
-              label="Nein, ich bin Mieter oder Pächter" 
+              :label="$t('ownerSection.tenantLabel')" 
               :value="false" 
               color="primary"
             ></v-radio>
@@ -26,22 +26,24 @@
           <template v-if="localFormData.isOwner === false">
             <v-text-field
               v-model="localFormData.ownerName"
-              label="Name des Eigentümers*"
+              :label="$t('ownerSection.ownerName')"
               outlined
               density="compact"
               prepend-icon="mdi-account"
               :rules="ownerNameRules"
               class="mb-4"
+              @input="validateForm"
               @blur="updateParentData"
             ></v-text-field>
             
             <v-text-field
               v-model="localFormData.ownerContact"
-              label="Kontaktinformationen*"
+              :label="$t('ownerSection.ownerContact')"
               outlined
               density="compact"
               prepend-icon="mdi-email"
               :rules="ownerContactRules"
+              @input="validateForm"
               @blur="updateParentData"
             ></v-text-field>
           </template>
@@ -70,17 +72,17 @@ const emit = defineEmits(['update:formData', 'validate']);
 
 const localFormData = ref({ ...props.formData });
 const valid = ref(false);
+const form = ref(null);
 
 const ownerNameRules = [
-  v => localFormData.value.isOwner !== false || !!v || 'Name ist erforderlich'
+  v => localFormData.value.isOwner !== false || (v && v.trim()) || $t('ownerSection.validation.nameRequired')
 ];
 
 const ownerContactRules = [
-  v => localFormData.value.isOwner !== false || !!v || 'Kontakt ist erforderlich'
+  v => localFormData.value.isOwner !== false || (v && v.trim()) || $t('ownerSection.validation.contactRequired')
 ];
 
 const handleOwnerChange = (value) => {
-  // Réinitialiser les champs si on passe à "propriétaire"
   if (value === true) {
     localFormData.value.ownerName = '';
     localFormData.value.ownerContact = '';
@@ -102,23 +104,29 @@ const validateForm = () => {
   
   if (localFormData.value.isOwner === false) {
     isValid = isValid && 
-              !!localFormData.value.ownerName && 
-              !!localFormData.value.ownerContact;
+              localFormData.value.ownerName?.trim() && 
+              localFormData.value.ownerContact?.trim();
   }
   
   valid.value = isValid;
   emit('validate', isValid);
 };
 
+// Watch for changes in form data
 watch(() => props.formData, (newVal) => {
   localFormData.value = { ...newVal };
 }, { deep: true });
 
+// Watch for changes in conditional fields
+watch(() => [localFormData.value.ownerName, localFormData.value.ownerContact], () => {
+  validateForm();
+}, { deep: true });
+
+// Initial validation
 validateForm();
 </script>
 
 <style scoped>
-/* Styles spécifiques */
 .v-radio-group {
   margin-top: 0;
 }
